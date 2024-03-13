@@ -7,9 +7,10 @@ const fetch = require("node-fetch");
 // This example query will only return 1 product with its id field.
 // To learn more about what data can be fetched from Datahub API see the Datahub API Instructions document and the attached GraphQL schema.
 const query = `query {
-  product(limit: 1) {
+  product(limit: 10) {
     id
   }
+}
 `;
 
 (async () => {
