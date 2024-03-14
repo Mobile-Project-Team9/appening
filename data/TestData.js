@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 
-export default function Test() {
+export default function TestVisitFinland() {
   const [queryResult, setQueryResult] = useState(null);
 
   useEffect(() => {
@@ -64,3 +64,4 @@ export default function Test() {
     </View>
   );
 }
+
