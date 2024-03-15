@@ -14,7 +14,7 @@ const fetch = require("node-fetch");
 `; */
 
 const query = `query {
-    product {
+    product(limit: 3) {
         id
         webshopUrlPrimary
         urlPrimary
