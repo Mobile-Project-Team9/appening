@@ -1,8 +1,11 @@
 /* API stuff here or elsewhere? */
+import { useContext, useState } from "react";
 import { Text } from "react-native";
+import { QueryContext } from "./Contexts";
 
 export default function () {
     const fetch = require("node-fetch");
+    const {queryResult} = useContext(QueryContext)
     
     // This is the GraphQL query you use to fetch the data from the Datahub API.
     // You can freely add or remove any of available fields from the query to get exactly the data you need from the API.
@@ -45,6 +48,7 @@ export default function () {
     }`;
     
     (async () => {
+        const {setQueryResult} = useContext(QueryContext)
         const authBody = new URLSearchParams();
         authBody.append("grant_type", "password");
         authBody.append("client_id", "datahub-api");
@@ -80,7 +84,7 @@ export default function () {
             }
         );
     
-        const queryResult = await res.json();
+        await setQueryResult(res.json())
         // console.log(JSON.stringify(queryResult, null, 2));
     })();
     

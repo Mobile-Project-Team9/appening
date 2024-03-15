@@ -1,5 +1,5 @@
-import { useContext } from "react";
+import { createContext } from "react";
 
-const QueryContext = useContext()
+const QueryContext = createContext()
 
-export { Querycontext }
+export { QueryContext }

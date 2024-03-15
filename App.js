@@ -5,15 +5,19 @@ import TestVisitFinland from './data/TestData';
 import TestDataAtlas from './data/TestDataAtlas';
 
 import Api from "./data/Api";
+import { useContext, useState } from 'react';
+import { QueryContext } from './data/Contexts';
 
 // const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
 
 export default function App() {
-
+  const [queryResult, setQueryResult] = useState([])
 
   return (
-    <View style={styles.container}>
-      <Api/>
-    </View>
+    <QueryContext.Provider value={{queryResult, setQueryResult}}>
+      <View style={styles.container}>
+        <Api/>
+      </View>
+    </QueryContext.Provider>
   );
 }
