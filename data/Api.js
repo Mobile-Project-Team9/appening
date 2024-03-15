@@ -6,12 +6,41 @@ const fetch = require("node-fetch");
 // You can freely add or remove any of available fields from the query to get exactly the data you need from the API.
 // This example query will only return 1 product with its id field.
 // To learn more about what data can be fetched from Datahub API see the Datahub API Instructions document and the attached GraphQL schema.
-const query = `query {
+/* const query = `query {
   product(limit: 10) {
     id
   }
 }
-`;
+`; */
+
+const query = `query {
+    product {
+        id
+        webshopUrlPrimary
+        urlPrimary
+        type
+        duration
+        durationType
+        company {
+            businessName
+        }
+        openingHours {
+            open
+            openFrom
+            openTo
+            weekday
+        }
+        postalAddresses {
+            location
+            postalCode
+            streetName
+            city
+        }
+        productAvailableMonths {
+            month
+        }
+    }
+}`;
 
 (async () => {
     const authBody = new URLSearchParams();
