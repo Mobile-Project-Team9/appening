@@ -16,7 +16,7 @@ export default function App() {
   return (
     <QueryContext.Provider value={{queryResult, setQueryResult}}>
       <View style={styles.container}>
-        <Api/>
+        <TestDataAtlas/>
       </View>
     </QueryContext.Provider>
   );
