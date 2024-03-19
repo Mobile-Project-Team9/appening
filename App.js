@@ -3,18 +3,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import styles from './styles/style';
 
 import TestDataAtlas from './data/TestDataAtlas';
+import { QueryContext } from './data/Contexts';
 
 
-// const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
+
 
 export default function App() {
   
 
   return (
-   
+   <QueryContext.Provider>
       <View style={styles.container}>
-        <TestDataAtlas/>
+        <Api/>
       </View>
-  
+   </QueryContext.Provider>
   );
 }
