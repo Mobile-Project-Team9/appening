@@ -4,6 +4,7 @@ import styles from './styles/style';
 
 import TestDataAtlas from './data/TestDataAtlas';
 import { QueryContext } from './data/Contexts';
+import Home from './screens/Home';
 
 
 
@@ -14,7 +15,7 @@ export default function App() {
   return (
    <QueryContext.Provider>
       <View style={styles.container}>
-        <Api/>
+        <Home/>
       </View>
    </QueryContext.Provider>
   );

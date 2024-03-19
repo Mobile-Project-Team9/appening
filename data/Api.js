@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native'
 
 const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
 
-export default function TestDataAtlas() {
+export default function Api() {
   const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ export default function TestDataAtlas() {
     fetch(URL)
       .then(response => response.json())
       .then ((json) => {
-        console.log(json[0]);
+        console.log(json);
         setTitle((json[0].title));
         setError(null);
         setIsLoading(false);
