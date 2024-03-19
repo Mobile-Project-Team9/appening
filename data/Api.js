@@ -13,7 +13,7 @@ export default function TestDataAtlas() {
     fetch(URL)
       .then(response => response.json())
       .then ((json) => {
-        console.log(json[0]);
+        console.log(json);
         setTitle((json[0].title));
         setError(null);
         setIsLoading(false);
