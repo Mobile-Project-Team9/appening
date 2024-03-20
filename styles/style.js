@@ -14,12 +14,7 @@ export default styles = StyleSheet.create({
       color: "#fff" // You can change later
     },
     Navi: {
-      initialRouteName: "Home",
-      activeColor: "#f0edf6",
-      inactiveColor: "#3e2465",
-      
-      
-      
+    
     },
 
     footer: {
