@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { NavigationContainer } from '@react-navigation/native';
 
 
+
 import { QueryContext } from './data/Contexts';
 import Home from './screens/Home';
 import List from './screens/List';
@@ -26,6 +27,7 @@ export default function App() {
       <QueryContext.Provider value={contextValue}>
         <PaperProvider theme={MD3LightTheme}>
             <MyTabs/>
+            <Home />
         </PaperProvider>
       </QueryContext.Provider>
    </NavigationContainer>
@@ -45,5 +47,6 @@ function MyTabs() {
       <Tab.Screen name="user" component={User} />
       <Tab.Screen name="Setting" component={Settings} />
     </Tab.Navigator>
+
   );
 }
