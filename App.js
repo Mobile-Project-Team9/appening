@@ -1,6 +1,5 @@
 
 import { MD3LightTheme, PaperProvider } from 'react-native-paper';
-import styles from './styles/style';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -11,7 +10,7 @@ import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
 import Settings from './screens/Settings';
-import style from './styles/style';
+
 
 
 
