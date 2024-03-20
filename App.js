@@ -27,7 +27,7 @@ export default function App() {
       <QueryContext.Provider value={contextValue}>
         <PaperProvider theme={MD3LightTheme}>
             <MyTabs/>
-            <Home />
+            
         </PaperProvider>
       </QueryContext.Provider>
    </NavigationContainer>
