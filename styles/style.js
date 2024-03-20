@@ -26,6 +26,18 @@ export default styles = StyleSheet.create({
       maxHeight: 120,
       borderTopStartRadius: 10,
       borderTopEndRadius: 10
-    }
+    },
+    label: {
+      
+      
+      borderRadius: 10,
+      alignItems: 'center',
+      borderWidth: 1,
+      marginVertical: 60,
+      paddingVertical: 12,
+      backgroundColor:'#70a0ff',
+      textAlign:'center'
+      
+   },
     
   });
