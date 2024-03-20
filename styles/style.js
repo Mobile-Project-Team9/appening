@@ -30,7 +30,7 @@ export default styles = StyleSheet.create({
     label: {
       
       
-      borderRadius: 10,
+      borderRadius: 20,
       alignItems: 'center',
       borderWidth: 1,
       marginVertical: 60,
@@ -39,5 +39,15 @@ export default styles = StyleSheet.create({
       textAlign:'center'
       
    },
+   label2: {
+    borderRadius: 20,
+    alignItems: 'center',
+    borderWidth: 1,
+    marginVertical: 60,
+    paddingVertical: 12,
+    backgroundColor:'#70a0ff',
+    textAlign:'center'
+    
+ },
     
   });
