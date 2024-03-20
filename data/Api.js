@@ -15,13 +15,10 @@ export default function Api() {
     fetch(URL)
       .then(response => response.json())
       .then ((json) => {
-        json.forEach((i) => {
-          setItem(json[i].title);
-          //setCategories([...categories, item]);
-          console.log(item);
-        })
-        //setTitle(categories[0].title)
-        //console.log(categories);
+        setCategories(json[0].Categories);
+        //console.log(item);
+        setTitle(categories[0].title)
+        console.log(categories);
         setError(null);
         setIsLoading(false);
       },(error) => {
