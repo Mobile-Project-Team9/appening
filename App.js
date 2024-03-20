@@ -40,7 +40,7 @@ function MyTabs() {
     <Tab.Navigator  initialRouteName="Home"
     activeColor="#000000" 
     inactiveColor="#f1f3f3"
-    barStyle={{ backgroundColor: '#44546f' }}>
+    barStyle={{ backgroundColor: '#70a0ff' }}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="List" component={List} />
       <Tab.Screen name="user" component={User} />
