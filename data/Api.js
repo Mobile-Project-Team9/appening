@@ -1,94 +1,68 @@
-/* API stuff here or elsewhere? */
-import { useContext, useState } from "react";
-import { Text } from "react-native";
-import { QueryContext } from "./Contexts";
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native';
 
-export default function () {
-    const fetch = require("node-fetch");
-    const {queryResult} = useContext(QueryContext)
-    
-    // This is the GraphQL query you use to fetch the data from the Datahub API.
-    // You can freely add or remove any of available fields from the query to get exactly the data you need from the API.
-    // This example query will only return 1 product with its id field.
-    // To learn more about what data can be fetched from Datahub API see the Datahub API Instructions document and the attached GraphQL schema.
-    /* const query = `query {
-      product(limit: 10) {
-        id
-      }
-    }
-    `; */
-    
-    const query = `query {
-        product(limit: 3) {
-            id
-            webshopUrlPrimary
-            urlPrimary
-            type
-            duration
-            durationType
-            company {
-                businessName
-            }
-            openingHours {
-                open
-                openFrom
-                openTo
-                weekday
-            }
-            postalAddresses {
-                location
-                postalCode
-                streetName
-                city
-            }
-            productAvailableMonths {
-                month
-            }
-        }
-    }`;
-    
-    (async () => {
-        const {setQueryResult} = useContext(QueryContext)
-        const authBody = new URLSearchParams();
-        authBody.append("grant_type", "password");
-        authBody.append("client_id", "datahub-api");
-        // This value should be the client secret you received in an email from datahub when you registered
-        authBody.append("client_secret", "ed7cd94f-727e-4cf7-879c-1c26f798bcc0");
-        // This value should be the email you used to register to Datahub as API user
-        authBody.append("username", "n2huee00@students.oamk.fi");
-        // This value should be the password for the API user
-        authBody.append("password", "MobileProject130324");
-    
-        const authRes = await fetch(
-            "https://iam-datahub.visitfinland.com/auth/realms/Datahub/protocol/openid-connect/token",
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: authBody,
-            }
-        );
-    
-        const accessToken = (await authRes.json()).access_token;
-    
-        const res = await fetch(
-            "https://api-datahub.visitfinland.com/graphql/v1/graphql",
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    query,
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            }
-        );
-    
-        await setQueryResult(res.json())
-        // console.log(JSON.stringify(queryResult, null, 2));
-    })();
-    
-        return (
-            <Text>{JSON.stringify(queryResult, null, 2)}</Text>
-        );
-    }
+const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
+
+export default function Api() {
+  const [title, setTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [refresh, setRefresh] = useState();
+  const [categories, setCategories] = useState([])
+  const [item, setItem] = useState([])
+  
+  useEffect(()=> {
+    fetch(URL)
+      .then(response => response.json())
+      .then ((json) => {
+        json.forEach((i) => {
+          setItem(json[i].title);
+          //setCategories([...categories, item]);
+          console.log(item);
+        })
+        //setTitle(categories[0].title)
+        //console.log(categories);
+        setError(null);
+        setIsLoading(false);
+      },(error) => {
+        setError("Error retrieving activity!");
+        setIsLoading(false);
+        console.log(error);
+      })
+  },[refresh])
+
+
+
+
+  if (isLoading) {
+    return <View style={styles.container}><ActivityIndicator size="large"/></View>
+  } else if (error) {
+    return <View style={styles.container}><Text>{error}</Text></View>
+  } else {
+    return (
+      <View style={styles.container}>
+          <Text style={styles.heading}>{title}</Text>
+        </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 50,
+    marginLeft: 20,
+    marginRight: 20
+  },
+  heading: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginBottom: 20,
+  },  
+  activity: {
+    marginBottom: 10,
+  }
+});
