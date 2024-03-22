@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 
 const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
 
 export default function Api() {
-  const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState();
-  const [categories, setCategories] = useState([])
-  const [item, setItem] = useState([])
+  const [titles, setTitles] = useState([]);
+  const [categories, setCategories] = useState([]);
   
   useEffect(()=> {
+    let tmpTitles = [...titles];
+    let tmpCategories = [...categories];
     fetch(URL)
       .then(response => response.json())
       .then ((json) => {
-        setCategories(json[0].Categories);
-        //console.log(item);
-        setTitle(categories[0].title)
-        console.log(categories);
+        let jsonLength = Object.keys(json).length;
+        for (let i = 0; i < jsonLength; i++) {
+          if (!tmpTitles.includes(json[i].title)) {
+            tmpTitles.push(json[i].title)
+          }
+          if (!tmpCategories.includes(json[i].Categories[0].title)) {
+            tmpCategories.push(json[i].Categories[0].title)
+          }
+        }
+        setTitles(tmpTitles);
+        setCategories(tmpCategories);
         setError(null);
         setIsLoading(false);
       },(error) => {
@@ -28,9 +36,6 @@ export default function Api() {
       })
   },[refresh])
 
-
-
-
   if (isLoading) {
     return <View style={styles.container}><ActivityIndicator size="large"/></View>
   } else if (error) {
@@ -38,8 +43,17 @@ export default function Api() {
   } else {
     return (
       <View style={styles.container}>
-          <Text style={styles.heading}>{title}</Text>
-        </View>
+        <ScrollView>
+          <Text style={styles.heading}>Kohteet</Text>
+          {titles.map((item, index) => (
+            <Text key={index}>{item}</Text>
+          ))}
+          <Text style={styles.heading}>Kategoriat</Text>
+          {categories.map((item, index) => (
+            <Text key={index}>{item}</Text>
+          ))}
+        </ScrollView>
+      </View>
     );
   }
 }
