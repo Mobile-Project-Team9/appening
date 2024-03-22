@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import styles from '../styles/style';
 
 const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
 
@@ -39,7 +40,7 @@ export default function Api() {
             setTitle(json[i].title);
             setCategory(json[i].Categories[0].title);
             setTag(json[i].Tags[0].title);
-            setTag(tag + json[i].Tags[1].title);
+            setTag(tag + json[i].Tags[1].title); // Might not work?
             setInfo(json[i].content);
             setOpening(json[i].activeTimeStart);
             setClosing(json[i].activeTimeEnd);
@@ -96,25 +97,3 @@ export default function Api() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-    marginLeft: 20,
-    marginRight: 20
-  },
-
-  heading: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginBottom: 20,
-  },
-
-  activity: {
-    marginBottom: 10,
-  }
-});
