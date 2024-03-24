@@ -30,12 +30,16 @@ export default function Api() {
   const [mediaDescription, setMediaDescription] = useState("");
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
+
+  const [json, setJson] = useState([]);
+  const [event, setEvent] = useState([]);
   
   useEffect(()=> {
     fetch(URL)
         .then(response => response.json())
         .then ((json) => {
-            let i = 0;
+          // A loop here that goes through json length
+          let i = 0;
             setId(json[i].id);
             setTitle(json[i].title);
             setCategory(json[i].Categories[0].title);
@@ -57,6 +61,12 @@ export default function Api() {
             setMediaIconPathThumbnailPath(json[i].Media[0].thumbnailPath);
             // setDateStart(json[i].meta.eventDates.startDate); Goes into an ending loop of loading if json doesn't have certain path
             // setDateEnd(json[i].meta.eventDates.endDate);
+            setEvent([{id: id, title: title, category: category, tag: tag, info: info, opening: opening, closing: closing,
+              categoryId: categoryId, categoryIcon: categoryIcon, categoryColour: categoryColour, getLat: geoLat, getLon: geoLon, 
+              address: address, postalCode: postalCode, mediaIcon: mediaIcon, mediaIconPath: mediaIconPath,
+              mediaDescription: mediaDescription, MediaIconPathThumbnailPath: MediaIconPathThumbnailPath}]);
+              // Push event into json array here. Return json filtered json in return once it works
+            console.log(event);
             setError(null);
             setIsLoading(false);
         }, (error) => {
@@ -97,3 +107,73 @@ export default function Api() {
     );
   }
 }
+
+ /*  useEffect(()=> {
+    let tmpTitles = [...titles];
+    let tmpCategories = [...categories];
+    fetch(URL)
+      .then(response => response.json())
+      .then ((json) => {
+        let jsonLength = Object.keys(json).length;
+        for (let i = 0; i < jsonLength; i++) {
+          if (!tmpTitles.includes(json[i].title)) {
+            tmpTitles.push(json[i].title)
+          }
+          if (!tmpCategories.includes(json[i].Categories[0].title)) {
+            tmpCategories.push(json[i].Categories[0].title)
+          }
+        }
+        setTitles(tmpTitles);
+        setCategories(tmpCategories);
+        setError(null);
+        setIsLoading(false);
+      },(error) => {
+        setError("Error retrieving activity!");
+        setIsLoading(false);
+        console.log(error);
+      })
+  },[refresh])
+
+  if (isLoading) {
+    return <View style={styles.container}><ActivityIndicator size="large"/></View>
+  } else if (error) {
+    return <View style={styles.container}><Text>{error}</Text></View>
+  } else {
+    return (
+      <View style={styles.container}>
+        <ScrollView>
+          <Text style={styles.heading}>Kohteet</Text>
+          {titles.map((item, index) => (
+            <Text key={index}>{item}</Text>
+          ))}
+          <Text style={styles.heading}>Kategoriat</Text>
+          {categories.map((item, index) => (
+            <Text key={index}>{item}</Text>
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
+}
+
+setId(json[i].id);
+setTitle(json[i].title);
+setCategory(json[i].Categories[0].title);
+setTag(json[i].Tags[0].title);
+setTag(tag + json[i].Tags[1].title); // Might not work?
+setInfo(json[i].content);
+setOpening(json[i].activeTimeStart);
+setClosing(json[i].activeTimeEnd);
+setCategoryId(json[i].Categories[0].id);
+setCategoryIcon(json[i].Categories[0].icon);
+setCategoryColour(json[i].Categories[0].color);
+setGeoLat(json[i].geo.coordinates[0]);
+setGeoLon(json[i].geo.coordinates[1]);
+setAddress(json[i].meta.streetAddress);
+setPostalCode(json[i].meta.postalCode);
+setMediaIcon(json[i].Media[0].title);
+setMediaIconPath(json[i].Media[0].path);
+setMediaDescription(json[i].Media[0].description);
+setMediaIconPathThumbnailPath(json[i].Media[0].thumbnailPath);
+// setDateStart(json[i].meta.eventDates.startDate); Goes into an ending loop of loading if json doesn't have certain path
+// setDateEnd(json[i].meta.eventDates.endDate); */
