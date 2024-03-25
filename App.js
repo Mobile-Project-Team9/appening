@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import styles from './styles/style';
-
-
-import Api from "./data/Api";
-import { useContext, useState } from 'react';
+import { MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import { QueryContext } from './data/Contexts';
+import Home from './screens/Home';
+import List from './screens/List';
+import User from './screens/User';
+import { useState } from "react";
 
 export default function App() {
-  const [queryResult, setQueryResult] = useState([])
+  const [json, setJson] = useState([]);
+
+  const contextValue = {
+    // Fill?
+  };
 
   return (
-    <QueryContext.Provider value={{queryResult, setQueryResult}}>
-      <View style={styles.container}>
-        <Api/>
-      </View>
-    </QueryContext.Provider>
+    <NavigationContainer>
+      <QueryContext.Provider value={{ json, setJson }}>
+        <PaperProvider theme={MD3LightTheme}>
+            <MyTabs/>
+        </PaperProvider>
+      </QueryContext.Provider>
+   </NavigationContainer>
   );
 }
+
+const Tab = createMaterialBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator  initialRouteName="Home"
+    activeColor="#000000" // Change later
+    inactiveColor="#f1f3f3" // Change later
+    /* Change later */ barStyle={{ backgroundColor: '#70a0ff' }}>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="List" component={List} />
+      <Tab.Screen name="user" component={User} />
+    </Tab.Navigator>
+  );
+}
+ 

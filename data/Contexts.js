@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const QueryContext = createContext()
+const QueryContext = createContext([])
 
-export { QueryContext }
+export { QueryContext };
