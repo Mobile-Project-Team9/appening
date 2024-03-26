@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import styles from '../styles/style';
+import { useState, useEffect, useContext } from 'react';
 import { QueryContext } from './Contexts';
 
 const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
@@ -42,9 +40,10 @@ export default function Api() {
     fetch(URL)
         .then(response => response.json())
         .then ((json) => {
-          // A loop here that goes through json length
+          // A loop here that goes through the open json
           let jsonLength = Object.keys(json).length;
           for (i = i; i < jsonLength; i++) {
+            // Adds values to variables
             setId(json[i].id);
             setTitle(json[i].title);
             setCategory(json[i].Categories[0].title);
@@ -77,13 +76,14 @@ export default function Api() {
   },[refresh])
 
   useEffect(() => {
+    // Add variables into an array
     setEvent([{id: id, title: title, category: category, tag: tag, info: info, opening: opening, closing: closing,
       categoryId: categoryId, categoryIcon: categoryIcon, categoryColour: categoryColour, getLat: geoLat, getLon: geoLon, 
       address: address, postalCode: postalCode, mediaIcon: mediaIcon, mediaIconPath: mediaIconPath,
       mediaDescription: mediaDescription, mediaIconPathThumbnailPath: mediaIconPathThumbnailPath}]);
-      // Push event into json array here. Return json filtered json in return once it works
       console.log(event);
+      // Push event into another array here called json. Return filtered json in return once it works
       json.push(prev => [...prev, {event}]);
-      console.log(event);
+      console.log(json);
   }, [i]);
 }

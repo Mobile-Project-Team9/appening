@@ -10,6 +10,7 @@ export default function List() {
   const {json} = useContext(QueryContext);
   let i = 0;
 
+  // This is the item which flatlist goes through
   function Item({ json }){
     console.log("Json: " + json);
     
@@ -48,6 +49,7 @@ export default function List() {
   return (
     <View>
       <Text>List</Text>
+      {/* Flatlist should go through the json and make a card with a list for each event */}
       <FlatList data={json} renderItem={({ item }) => <Item json={item}/> }/>  
     </View>
   )

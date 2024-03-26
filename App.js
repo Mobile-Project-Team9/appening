@@ -8,14 +8,12 @@ import User from './screens/User';
 import { useState } from "react";
 
 export default function App() {
+  // This is the array that will contain other arrays inside of it. So a json that includes events
   const [json, setJson] = useState([]);
-
-  const contextValue = {
-    // Fill?
-  };
 
   return (
     <NavigationContainer>
+      {/* Values given to provider */}
       <QueryContext.Provider value={{ json, setJson }}>
         <PaperProvider theme={MD3LightTheme}>
             <MyTabs/>
