@@ -31,7 +31,7 @@ let locations = [{
       65.02117817080591,
       25.46183242848834
     ]
-  }
+  }, "title": "Amerikanjalopähkinä"
 }, {
   "id": 9,
   "type": "Point",
@@ -47,7 +47,7 @@ let locations = [{
       65.0208886133949,
       25.46155877823356
     ]
-  }
+  },"title": "Muraali Kuusisaaressa"
 }, {
   "id": 12,
   "type": "Point",
@@ -63,7 +63,8 @@ let locations = [{
       65.02090589788989,
       25.460933442460377
     ]
-  }
+  },
+  "title": "Muraali Kuusisaaressa"
 }];
 
 const INITIAL_LATITUDE = 65.0800;
@@ -119,7 +120,7 @@ export default function Home() {
           {locations.map((location) => (
             <Marker
               key={location.id}
-              title={`${location.id}. location`}
+              title={location.title}
               coordinate={{
                 latitude: location.geo.coordinates[0],
                 longitude: location.geo.coordinates[1]
