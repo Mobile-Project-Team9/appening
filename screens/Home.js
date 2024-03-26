@@ -1,18 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
+import Api from '../data/ApiFullJson';
+import { QueryContext } from '../data/Contexts';
+import FetchData from '../data/ApiFullJson';
 
 const INITIAL_LATITUDE = 65.0800;
 const INITIAL_LONGITUDE = 25.4800;
 const INITIAL_LATITUDE_DELTA = 0.0922;
 const INITIAL_LONGITUDE_DELTA = 0.0421;
 
+//const URL = "https://opendata.zoneatlas.com/oulu/objects.json";
+
 export default function Home() {
   const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
   const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingContext, setIsLoadingContext] = useState(true);
+
+  const contextValue = useContext(QueryContext);
+
+
+  const [markers, setMarkers] = useState([])
+
+  
+
+
+  useEffect(() => {
+    // Set isLoading to false when data is fetched and saved to contextValue
+    if (contextValue && Object.keys(contextValue).length > 0) {
+      setIsLoadingContext(false);
+      console.log('loged from useEffect after check that context value is not empty: '+contextValue[0])
+    }
+  }, [contextValue]);
+ 
 
   useEffect(() => {
     (async () => {
@@ -36,14 +59,25 @@ export default function Home() {
     })();
   }, [])
 
-  if (isLoading) {
+  if (isLoadingContext){
+    return <View style={styles.container}>
+    <Text>Retrieving data...</Text>
+    </View>
+  }
+
+  else if (isLoading) {
     return <View style={styles.container}>
       <Text>Retrieving location...</Text>
       </View>
   }
+
+
   else {
+    console.log('log from Home.js'+ contextValue)
     return (
+      
       <View style={styles.container}>
+        
         <MapView 
           style={styles.map}
           initialRegion={{
