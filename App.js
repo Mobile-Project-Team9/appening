@@ -5,17 +5,23 @@ import { QueryContext } from './data/Contexts';
 import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
+import FetchData from './data/ApiFullJson';
+import { useState } from 'react';
+
 
 export default function App() {
-  const contextValue = {
-    // Fill?
-  };
+  // const contextValue = {
+  //   // Fill?
+  // };
+
+  const [contextValue, setContextValue] = useState({});
 
   return (
     <NavigationContainer>
-      <QueryContext.Provider value={contextValue}>
+      <QueryContext.Provider value={{contextValue, setContextValue}}>
         <PaperProvider theme={MD3LightTheme}>
             <MyTabs/>
+            <FetchData />
         </PaperProvider>
       </QueryContext.Provider>
    </NavigationContainer>
