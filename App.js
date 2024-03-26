@@ -5,6 +5,8 @@ import { QueryContext } from './data/Contexts';
 import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
+import { styles, colors } from './styles/style';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   const contextValue = {
@@ -27,12 +29,26 @@ const Tab = createMaterialBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator  initialRouteName="Home"
-    activeColor="#000000" // Change later
-    inactiveColor="#f1f3f3" // Change later
-    /* Change later */ barStyle={{ backgroundColor: '#70a0ff' }}>
+      // Still missing colour for focused icons' background color
+      activeColor= {colors.offBlue} // Change these if values are not final
+      inactiveColor= {colors.white} // Change these if values are not final
+      barStyle={{ backgroundColor: colors.mainColor }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = focused ? 'map' : 'map-outline';
+          } else if (route.name === 'List') {
+            iconName = focused ? 'view-list' : 'view-list-outline';
+          } else if (route.name === "User") {
+            iconName = focused ? "account" : "account-outline";
+          }
+          return <MaterialCommunityIcons name={iconName} size={23} color={color}/>;
+        }
+      })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="List" component={List} />
-      <Tab.Screen name="user" component={User} />
+      <Tab.Screen name="User" component={User} />
     </Tab.Navigator>
   );
 }
