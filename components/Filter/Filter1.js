@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Header() {
+export default function Filter1() {
   return (
     <View>
-      <Text>Header</Text>
+      <Text>Filter1</Text>
     </View>
   )
 }

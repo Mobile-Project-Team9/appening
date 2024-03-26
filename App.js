@@ -36,3 +36,4 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+ 
