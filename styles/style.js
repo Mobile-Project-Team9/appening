@@ -1,12 +1,26 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
-export default styles = StyleSheet.create({
+const colors = {
+  mainColor: "#001E96",
+  secondaryColor: "#E10069",
+  offBlue: "#6878B5",
+  white: "#ffffff"
+}
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', // Change later
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  search: {
+    zIndex: 1,
+    position: "absolute",
+    top: 400
+  }, 
 
   text: {
     fontSize: 16,
@@ -22,7 +36,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#ff8090', // You can change later
+    backgroundColor: "#E10069", // You can change later
     padding: 10,
     maxHeight: 120,
     borderTopStartRadius: 10,
@@ -32,21 +46,10 @@ export default styles = StyleSheet.create({
   label: {
     borderRadius: 20,
     alignItems: 'center',
-    borderWidth: 1,
-    marginVertical: 60,
-    paddingVertical: 12,
-    backgroundColor:'#70a0ff', // Change later
-    textAlign:'center'  
-  },
-
-  label2: {
-    borderRadius: 20,
-    alignItems: 'center',
-    borderWidth: 1,
-    marginVertical: 60,
-    paddingVertical: 12,
-    backgroundColor:'#70a0ff', // Change later
-    textAlign:'center'
+    padding: 10,
+    margin: 20,
+    backgroundColor: "#E10069",
+    textAlign: 'center'
   },
 
   heading: {
@@ -57,5 +60,20 @@ export default styles = StyleSheet.create({
 
   activity: {
     marginBottom: 10,
+  },
+
+  container: {
+    padding: Constants.statusBarHeight,
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  map: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get
   }
 });
+
+export { styles, colors };
