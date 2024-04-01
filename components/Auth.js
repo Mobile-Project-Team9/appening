@@ -24,3 +24,25 @@ export const signUp = async(nickname, email, password) =>{
 
     })
 }
+export const signIn = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+        console.log("Logged in successfully.");
+    })
+    .catch((error) => {
+        console.log("Login failed." + error.message);
+        Alert.alert("Login failed." + error.message);
+
+    })
+}
+export const logout = async () => {
+    await signOut(auth)
+    .then(() => {
+        console.log("Logged out successfully.");
+    })
+    .catch((error) => {
+        console.log("Logout failed." + error.message);
+        Alert.alert("Logout failed." + error.message);
+
+    })
+}
