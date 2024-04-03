@@ -9,12 +9,13 @@ const colors = {
 }
 
 const styles = StyleSheet.create({
+
+  //Home-screen
+
   container: {
     paddingTop: Constants.statusBarHeight + 5,
     flex: 1,
     backgroundColor: '#fff',
-    /* alignItems: 'center',
-    justifyContent: 'center', */
   },
 
   search: {
@@ -86,6 +87,8 @@ const styles = StyleSheet.create({
     fontSize:15,
 
   },
+
+  // ??
 
   con: {
     
