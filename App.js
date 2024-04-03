@@ -5,7 +5,7 @@ import { QueryContext } from './data/Contexts';
 import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
-import { styles, colors } from './styles/style';
+import { colors } from './styles/style';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {

@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
     height: Dimensions.get
   },
   con: {
-    flex: 1,
-    backgroundColor: 'white',
+    
+    backgroundColor: '#6878B5',
     marginTop: 20,
-    marginLeft: 20
+    
   },
   todosContainer: {
     flexShrink: 1,
