@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
 
   map: {
     width: '100%',
-    height: '100%',
+    height: '110%',
+    marginTop: -145,
   },
   modalContainer: {
     flex: 1,
@@ -169,14 +170,19 @@ const styles = StyleSheet.create({
 
   searchbar: {
     backgroundColor: colors.mainColor,
+    zIndex: 1,
   },
 
   //FilterMenu-component
 
+  filterMenuContainer: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+
   filterMenu: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#696969a8',
   },
 
   filterMenuContent: {
@@ -194,7 +200,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
-
+    zIndex: 1,
   },
 
   hideMenuButton: {
@@ -210,6 +216,14 @@ const styles = StyleSheet.create({
 
   hideMenuButtonText: {
     color: '#fff'
+  },
+
+  overlayPressable: {
+    flex: 1,
+    backgroundColor: '#696969a8',
+    marginTop: '-9.5%',
+    marginBottom: '22%',
+    
   },
 });
 
