@@ -80,7 +80,7 @@ export default function Register ({navigation}) {
         return (
             <View style= {styles.con}>
                 <View style ={styles.headerItem}>
-                    <Text style ={styles.header}> Todos: Register</Text>
+                    <Text style ={styles.header}>Register</Text>
                 </View>
                 <Text style = {styles.infoText}> Create an account</Text>
                 <TextInput

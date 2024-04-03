@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   con: {
     
     backgroundColor: '#6878B5',
-    marginTop: 20,
+    paddingHorizontal:10,
+    
     
   },
   todosContainer: {
@@ -88,7 +89,16 @@ const styles = StyleSheet.create({
   },
   header: {
     marginTop: 40,
-    fontSize: 30
+    fontSize: 30,
+  
+  },
+  headerItem: {
+     
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginVertical: 5,
+    
+
   },
   subheader: {
     marginTop: 15,
@@ -101,19 +111,25 @@ const styles = StyleSheet.create({
   },
   infoText: {
     marginTop: 5,
+    marginHorizontal:5,
     marginBottom: 5,
+    
     fontSize: 15
   },
   buttonStyle: {
-    width: '90%'
+    width: '50%',
+    marginLeft: 80,
+    borderWidth:1,
+    borderRadius: 10,
+    
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#afafaf',
+    borderColor: '#130404',
     width: '90%',
     borderRadius: 5,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 6,
     marginVertical: 15,
     fontSize: 18
   },
@@ -130,8 +146,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 10,
     minWidth: '65%',
-  }
-  
+  },
   
 
   //FilterMenu-component
