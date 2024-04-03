@@ -8,6 +8,7 @@ import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
 import { styles } from '../styles/style';
 import { locations } from '../data/Locations';
+import fullData from '../data/fullData.json';
 
 
 
@@ -20,6 +21,7 @@ export default function Home() {
   const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
   const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
   const [isLoading, setIsLoading] = useState(true);
+  const [locations, setLocations] = useState([]);
 
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,7 +46,13 @@ export default function Home() {
         setIsLoading(false);
       }
     })();
+    const filteredLocations = fullData.filter(location => (
+      location.title && location.geo && location.geo.coordinates &&
+      location.geo.coordinates.length === 2
+    ));
+    setLocations(fullData)
   }, [])
+
 
   const handleMarkerPress = (shot) => {
     setSelectedShot(shot);
@@ -69,20 +77,32 @@ export default function Home() {
             latitudeDelta: INITIAL_LATITUDE_DELTA,
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
-          
+
         // mapType="satellite"
         >
-          {locations.map((location) => (
-            <Marker
-              key={location.id}
-              title={location.title}
-              coordinate={{
-                latitude: location.geo.coordinates[0],
-                longitude: location.geo.coordinates[1]
-              }}
-              onPress={() => handleMarkerPress(location)}
-            />
-          ))}
+          {locations.map((location) => {
+            // Check if latitude and longitude are valid numbers
+            const latitude = parseFloat(location.geo.coordinates[0]);
+            const longitude = parseFloat(location.geo.coordinates[1]);
+
+            if (isNaN(latitude) || isNaN(longitude)) {
+              // Skip rendering marker if latitude or longitude is NaN
+              return null;
+            }
+
+            // Render marker for valid location
+            return (
+              <Marker
+                key={location.id}
+                title={location.title}
+                coordinate={{
+                  latitude: latitude,
+                  longitude: longitude
+                }}
+                onPress={() => handleMarkerPress(location)}
+              />
+            );
+          })}
         </MapView>
         <Modal
           visible={modalVisible}
@@ -95,7 +115,7 @@ export default function Home() {
                 <Text style={styles.title}>{selectedShot.title}</Text>
                 <Image />
                 <Text style={styles.info}>{selectedShot.content}</Text>
-                
+
                 <Button
                   title="Close"
                   onPress={() => setModalVisible(false)}
