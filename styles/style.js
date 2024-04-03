@@ -9,11 +9,13 @@ const colors = {
 }
 
 const styles = StyleSheet.create({
+
+  //Home-screen
+
   container: {
+    paddingTop: Constants.statusBarHeight + 5,
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   search: {
@@ -62,18 +64,31 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  container: {
-    padding: Constants.statusBarHeight,
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+  modalContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10
+  },
+  title: {
+    fontSize: 20,
+    color: '#001E96',
+  },
+  info: {
+    fontSize:15,
+
   },
 
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get
-  },
+  // ??
 
   con: {
     backgroundColor: '#ffffff',
@@ -149,21 +164,52 @@ const styles = StyleSheet.create({
     minWidth: '65%',
   },
   
+  
+  //Search -component
+
+  searchbar: {
+    backgroundColor: colors.mainColor,
+  },
 
   //FilterMenu-component
 
   filterMenu: {
-    marginTop: 100,
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#696969a8',
+  },
+
+  filterMenuContent: {
+    paddingTop: 35,
+    paddingLeft: 15,
+    height: 300,
+    backgroundColor: '#fff'
   },
 
   filterButton: {
-    width: 20,
-    height: 25,
+    width: 55,
+    height: 55,
     margin: 15,
-    backgroundColor: '#fff',
-    borderColor: '#000',
+    backgroundColor: colors.mainColor,
     alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
 
+  },
+
+  hideMenuButton: {
+    width: 105,
+    height: 55,
+    marginTop: -65,
+    marginLeft: 15,
+    backgroundColor: colors.mainColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+  },
+
+  hideMenuButtonText: {
+    color: '#fff'
   },
 });
 
