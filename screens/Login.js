@@ -56,8 +56,8 @@ export default function Login ({navigation}) {
         return(
         <View style={styles.con}>
             <View style ={styles.headerItem}>
-                <Text style = {styles.header}> Todos: Login </Text>
-                <Pressable style ={styles.logoutIcon} on press ={handlePressLogout} >
+                <Text style = {styles.header}> Login </Text>
+                <Pressable style ={styles.logoutIcon} onPress ={handlePressLogout} >
                     <MaterialIcons name= "logout" size ={24} color='black'/>
                 </Pressable>
             </View>
@@ -70,7 +70,7 @@ export default function Login ({navigation}) {
         return (
             <View style= {styles.con}>
                 <View style ={styles.headerItem}>
-                    <Text style ={styles.header}> Todos: Login</Text>
+                    <Text style ={styles.header}>Login in</Text>
                 </View>
                 <Text style = {styles.infoText}> Login to your account</Text>
                 <TextInput
@@ -91,7 +91,7 @@ export default function Login ({navigation}) {
                 
                 <Pressable style = {styles.buttonStyle}>
                     <Button 
-                    title="Register"
+                    title="Login"
                     onPress={handlePresLogin}>
                     </Button>
                 </Pressable>
