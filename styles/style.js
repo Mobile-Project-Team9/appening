@@ -76,9 +76,10 @@ const styles = StyleSheet.create({
   },
 
   con: {
-    
-    backgroundColor: '#6878B5',
+    backgroundColor: '#ffffff',
     paddingHorizontal:10,
+    
+  
     
     
   },

@@ -12,7 +12,7 @@ export default function User() {
     <View>
      
       <Login/>
-      <Register/>
+      
     </View>
   )
 }
