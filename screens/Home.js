@@ -7,7 +7,7 @@ import * as Location from 'expo-location';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
 import { styles } from '../styles/style';
-import { locations } from '../data/Locations';
+
 import fullData from '../data/fullData.json';
 
 
