@@ -73,7 +73,24 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get
-  }
+  },
+
+
+  //FilterMenu-component
+
+  filterMenu: {
+    marginTop: 100,
+  },
+
+  filterButton: {
+    width: 20,
+    height: 25,
+    margin: 15,
+    backgroundColor: '#fff',
+    borderColor: '#000',
+    alignItems: 'center',
+
+  },
 });
 
 export { styles, colors };
