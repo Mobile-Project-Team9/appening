@@ -79,6 +79,7 @@ export default function Home() {
             latitudeDelta: INITIAL_LATITUDE_DELTA,
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
+          clusterColor = {'#E10069'}
 
         // mapType="satellite"
         >
@@ -101,6 +102,7 @@ export default function Home() {
                   latitude: latitude,
                   longitude: longitude
                 }}
+                pinColor={'#E10069'}
                 onPress={() => handleMarkerPress(location)}
               />
             );
