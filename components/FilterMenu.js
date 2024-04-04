@@ -17,13 +17,16 @@ export default function FilterMenu() {
                 }}
                 transparent={true}
             >
-                <View style={styles.filterMenu}>
-                    <View style={styles.filterMenuContent}>
-                        <Text>This is where filters will be found</Text>
+                <View style={styles.filterMenuContainer}>
+                    <View style={styles.filterMenu}>
+                        <View style={styles.filterMenuContent}>
+                            <Text>This is where filters will be found</Text>
+                        </View>
+                        <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles.hideMenuButtonText}>Close menu</Text>
+                        </Pressable>
                     </View>
-                    <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
-                            <Text style={styles.hideMenuButtonText}>Close menu</Text>
-                    </Pressable>
+                    <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />
                 </View>
             </Modal>
             
