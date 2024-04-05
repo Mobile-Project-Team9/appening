@@ -9,9 +9,7 @@ const colors = {
 }
 
 const styles = StyleSheet.create({
-
   //Home-screen
-
   container: {
     paddingTop: Constants.statusBarHeight + 5,
     flex: 1,
@@ -28,10 +26,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 6,
     color: "#fff" // You can change later
-  },
-
-  Navi: {
-    // Fill?
   },
 
   footer: {
@@ -69,77 +63,77 @@ const styles = StyleSheet.create({
     height: '110%',
     marginTop: -145,
   },
+
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
+
   modalContent: {
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10
   },
+
   title: {
     fontSize: 20,
     color: '#001E96',
   },
+
   info: {
     fontSize:15,
-
   },
 
   // ??
-
   con: {
     backgroundColor: '#ffffff',
-    paddingHorizontal:10,
-    
-  
-    
-    
+    paddingHorizontal: 10,  
   },
+
   todosContainer: {
     flexShrink: 1,
     marginTop: 15,
     marginBottom: 5
   },
+
   header: {
     marginTop: 40,
     fontSize: 30,
-  
   },
-  headerItem: {
-     
+
+  headerItem: {   
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginVertical: 5,
-    
-
   },
+
   subheader: {
     marginTop: 15,
     fontSize: 16,
     fontWeight: 'bold'
   },
+
   newItem: {
     marginVertical: 10,
     alignItems: 'flex-start',
   },
+
   infoText: {
     marginTop: 5,
     marginHorizontal:5,
     marginBottom: 5,
-    
     fontSize: 15
   },
+
   buttonStyle: {
     width: '50%',
     marginLeft: 80,
     borderWidth:1,
     borderRadius: 10,
-    
   },
+
   textInput: {
     borderWidth: 1,
     borderColor: '#130404',
@@ -150,10 +144,12 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     fontSize: 18
   },
+
   todoItem: {
     flexDirection: 'row',
     marginVertical: 10
   },
+
   todoText: {
     borderColor: '#afafaf',
     paddingHorizontal: 8,
@@ -165,16 +161,13 @@ const styles = StyleSheet.create({
     minWidth: '65%',
   },
   
-  
   //Search -component
-
   searchbar: {
     backgroundColor: colors.mainColor,
     zIndex: 1,
   },
 
   //FilterMenu-component
-
   filterMenuContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -225,6 +218,36 @@ const styles = StyleSheet.create({
     marginBottom: '22%',
     
   },
+
+  card: {
+    alignContent: "center",
+    backgroundColor: colors.mainColor,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5
+  },
+
+  cardUnder: {
+    alignContent: "center",
+    backgroundColor: colors.offBlue,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 10
+  },
+
+  cardText: {
+    alignContent: "center",
+    color: colors.white
+  },
+
+  cardIcon: {
+    backgroundColor: colors.secondaryColor
+  },
+
+  cardButton: {
+    backgroundColor: colors.secondaryColor,
+    width: 50
+  }
 });
 
 export { styles, colors };

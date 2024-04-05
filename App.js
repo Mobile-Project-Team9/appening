@@ -7,15 +7,14 @@ import List from './screens/List';
 import User from './screens/User';
 import { colors } from './styles/style';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
 
 export default function App() {
-  const contextValue = {
-    // Fill?
-  };
+  const [json, setJson] = useState([]);
 
   return (
     <NavigationContainer>
-      <QueryContext.Provider value={contextValue}>
+      <QueryContext.Provider value={{ json, setJson }}>
         <PaperProvider theme={MD3LightTheme}>
             <MyTabs/>
         </PaperProvider>
