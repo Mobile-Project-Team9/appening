@@ -8,9 +8,7 @@ const colors = {
   white: "#ffffff"
 }
 
-const fonts = {
 
-}
 
 const styles = StyleSheet.create({
 
@@ -93,6 +91,13 @@ const styles = StyleSheet.create({
   info: {
     fontSize:15,
 
+  },
+
+  image: {
+    
+    height: 200,
+    resizeMode: 'stretch',
+    margin: 10
   },
 
   // ??
