@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, View, Button, Modal, Image } from 'react-native';
 
-import MapView, { Marker } from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import MapView from "react-native-map-clustering";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
+import ShotDescription from '../components/ShotDescription';
 import { styles } from '../styles/style';
-import { locations } from '../data/Locations';
+
+
 import fullData from '../data/fullData.json';
 
 
@@ -77,6 +80,8 @@ export default function Home() {
             latitudeDelta: INITIAL_LATITUDE_DELTA,
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
+          clusterColor = {'#E10069'}
+          showsUserLocation={true}
 
         // mapType="satellite"
         >
@@ -99,12 +104,18 @@ export default function Home() {
                   latitude: latitude,
                   longitude: longitude
                 }}
+                pinColor={'#E10069'}
                 onPress={() => handleMarkerPress(location)}
               />
             );
           })}
         </MapView>
-        <Modal
+        <ShotDescription 
+          visible = {modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+          selectedShot={selectedShot}
+        />
+        {/* <Modal
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
           contentContainerStyle={styles.modalContainer}
@@ -123,7 +134,7 @@ export default function Home() {
               </View>
             )}
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     );
   }
