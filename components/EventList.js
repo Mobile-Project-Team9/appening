@@ -15,11 +15,12 @@ export default function EventList() {
   // This is the item which flatlist goes through
   function Item({ json }){
     const eventName = (json.title);
-    // None of the icons load
+    // None of the icons load, placeholder human icon is active right now
     const eventIcon = 0; //(json.Categories[0].icon);
 
+    // I was thinking this would open and close drawer
     function drawer(){
-      disabled = false; //?
+      disabled = false;
     }
 
     const leftContent = props => <Avatar.Icon {...props} /* Put event category icon here, human is placeholder
@@ -32,6 +33,7 @@ export default function EventList() {
       onPress={drawer()} // Not sure what to add here to make it open a bigger section
       theme={{ colors: { onSurfaceVariant: colors.white }}}/>
 
+    // Opens full info of event
     function openFullEvent(){
       // Fill once full even item page is done
     }
@@ -40,11 +42,8 @@ export default function EventList() {
       <View>
         <ScrollView>
             <Card style={styles.card}>
-              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/>
-            </Card>
-
-            <Card style={styles.cardUnder}>
-              <Card.Content>
+              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/> 
+              <Card.Content style={styles.cardUnder}>
                 <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
                 <Text style={styles.text}>Info: {json.content}</Text>
                 <Button title="Event Page" onPress={openFullEvent()} /* Style doesn't work */ style={styles.cardButton}></Button>
