@@ -230,9 +230,9 @@ const styles = StyleSheet.create({
   cardUnder: {
     alignContent: "center",
     backgroundColor: colors.offBlue,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 10
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    paddingTop: 10
   },
 
   cardText: {
