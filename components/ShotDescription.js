@@ -13,6 +13,10 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
             <ScrollView style={styles.modalContent}>
                 {selectedShot && (
                     <View>
+                        <Button
+                            title="Close"
+                            onPress={onRequestClose}
+                        />
                         <Text style={styles.title}>{selectedShot.title}</Text>
                         {selectedShot && imagePath && ( // Check if selectedShot and imagePath exist
                             
@@ -24,7 +28,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                         )}
 
                         <Button
-                            title="Close"
+                            title="Event page"
                             onPress={onRequestClose}
                         />
                     </View>
