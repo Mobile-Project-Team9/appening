@@ -81,6 +81,7 @@ export default function Home() {
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
           clusterColor = {'#E10069'}
+          showsUserLocation={true}
 
         // mapType="satellite"
         >
