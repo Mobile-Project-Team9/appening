@@ -8,6 +8,10 @@ const colors = {
   white: "#ffffff"
 }
 
+const fonts = {
+
+}
+
 const styles = StyleSheet.create({
   //Home-screen
   container: {
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     margin: 20,
-    backgroundColor: "#E10069",
+    backgroundColor: colors.secondaryColor,
     textAlign: 'center'
   },
 
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
     marginTop: -145,
   },
 
+  //Shotdescription:
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    color: '#001E96',
+    color: colors.mainColor,
   },
 
   info: {
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
   // ??
   con: {
     backgroundColor: '#ffffff',
-    paddingHorizontal: 10,  
+    paddingHorizontal:10,
   },
 
   todosContainer: {
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     minWidth: '65%',
   },
-  
+
   //Search -component
   searchbar: {
     backgroundColor: colors.mainColor,
@@ -216,7 +221,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#696969a8',
     marginTop: '-9.5%',
     marginBottom: '22%',
-    
   },
 
   card: {
@@ -230,9 +234,9 @@ const styles = StyleSheet.create({
   cardUnder: {
     alignContent: "center",
     backgroundColor: colors.offBlue,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    paddingTop: 10
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 10
   },
 
   cardText: {

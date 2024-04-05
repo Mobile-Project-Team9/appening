@@ -13,7 +13,10 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
         {selectedShot && (
           <View>
             <Text style={styles.title}>{selectedShot.title}</Text>
-            <Image />
+            <Image 
+                source={{ uri: selectedShot.Media[0].path }} // Assuming the first image in the Media array is the one you want to display
+                style={styles.image}
+            />
             <Text style={styles.info}>{selectedShot.content}</Text>
             <Button
               title="Close"
