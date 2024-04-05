@@ -7,6 +7,7 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
+import ShotDescription from '../components/ShotDescription';
 import { styles } from '../styles/style';
 
 
@@ -108,7 +109,12 @@ export default function Home() {
             );
           })}
         </MapView>
-        <Modal
+        <ShotDescription 
+          visible = {modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+          selectedShot={selectedShot}
+        />
+        {/* <Modal
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
           contentContainerStyle={styles.modalContainer}
@@ -127,7 +133,7 @@ export default function Home() {
               </View>
             )}
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     );
   }
