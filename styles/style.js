@@ -8,6 +8,10 @@ const colors = {
   white: "#ffffff"
 }
 
+const fonts = {
+
+}
+
 const styles = StyleSheet.create({
 
   //Home-screen
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     margin: 20,
-    backgroundColor: "#E10069",
+    backgroundColor: colors.secondaryColor,
     textAlign: 'center'
   },
 
@@ -69,6 +73,8 @@ const styles = StyleSheet.create({
     height: '110%',
     marginTop: -145,
   },
+
+  //Shotdescription:
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: '#001E96',
+    color: colors.mainColor,
   },
   info: {
     fontSize:15,
