@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, View, Button, Modal, Image } from 'react-native';
 
-import MapView, { Marker } from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import MapView from "react-native-map-clustering";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
+import ShotDescription from '../components/ShotDescription';
 import { styles } from '../styles/style';
-import { locations } from '../data/Locations';
+
+
+import fullData from '../data/fullData.json';
 
 
 
@@ -20,6 +24,7 @@ export default function Home() {
   const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
   const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
   const [isLoading, setIsLoading] = useState(true);
+  const [locations, setLocations] = useState([]);
 
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,7 +49,13 @@ export default function Home() {
         setIsLoading(false);
       }
     })();
+    const filteredLocations = fullData.filter(location => (
+      location.title && location.geo && location.geo.coordinates &&
+      location.geo.coordinates.length === 2
+    ));
+    setLocations(fullData)
   }, [])
+
 
   const handleMarkerPress = (shot) => {
     setSelectedShot(shot);
@@ -69,22 +80,42 @@ export default function Home() {
             latitudeDelta: INITIAL_LATITUDE_DELTA,
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
-          
+          clusterColor = {'#E10069'}
+          showsUserLocation={true}
+
         // mapType="satellite"
         >
-          {locations.map((location) => (
-            <Marker
-              key={location.id}
-              title={location.title}
-              coordinate={{
-                latitude: location.geo.coordinates[0],
-                longitude: location.geo.coordinates[1]
-              }}
-              onPress={() => handleMarkerPress(location)}
-            />
-          ))}
+          {locations.map((location) => {
+            // Check if latitude and longitude are valid numbers
+            const latitude = parseFloat(location.geo.coordinates[0]);
+            const longitude = parseFloat(location.geo.coordinates[1]);
+
+            if (isNaN(latitude) || isNaN(longitude)) {
+              // Skip rendering marker if latitude or longitude is NaN
+              return null;
+            }
+
+            // Render marker for valid location
+            return (
+              <Marker
+                key={location.id}
+                title={location.title}
+                coordinate={{
+                  latitude: latitude,
+                  longitude: longitude
+                }}
+                pinColor={'#E10069'}
+                onPress={() => handleMarkerPress(location)}
+              />
+            );
+          })}
         </MapView>
-        <Modal
+        <ShotDescription 
+          visible = {modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+          selectedShot={selectedShot}
+        />
+        {/* <Modal
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
           contentContainerStyle={styles.modalContainer}
@@ -95,7 +126,7 @@ export default function Home() {
                 <Text style={styles.title}>{selectedShot.title}</Text>
                 <Image />
                 <Text style={styles.info}>{selectedShot.content}</Text>
-                
+
                 <Button
                   title="Close"
                   onPress={() => setModalVisible(false)}
@@ -103,7 +134,7 @@ export default function Home() {
               </View>
             )}
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     );
   }
