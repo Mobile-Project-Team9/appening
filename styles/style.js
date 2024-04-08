@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   filterMenuContent: {
     paddingTop: 35,
     paddingLeft: 15,
-    height: 300,
+    height: '90%',
     backgroundColor: '#fff'
   },
 
