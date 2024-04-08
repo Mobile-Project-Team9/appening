@@ -24,6 +24,12 @@ const styles = StyleSheet.create({
     top: 400
   }, 
 
+  indicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   text: {
     fontSize: 16,
     padding: 6,
