@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
   searchbar: {
     backgroundColor: colors.mainColor,
     zIndex: 1,
+    margin: 10
   },
 
   //FilterMenu-component
@@ -241,7 +242,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offBlue,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    paddingTop: 10
+    paddingTop: 10,
+    display: ""
   },
 
   cardText: {
@@ -251,11 +253,6 @@ const styles = StyleSheet.create({
 
   cardIcon: {
     backgroundColor: colors.secondaryColor
-  },
-
-  cardButton: {
-    backgroundColor: colors.secondaryColor,
-    width: 50
   }
 });
 

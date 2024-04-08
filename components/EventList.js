@@ -20,7 +20,7 @@ export default function EventList() {
 
     // I was thinking this would open and close drawer
     function drawer(){
-      disabled = false;
+      display = 0;
     }
 
     const leftContent = props => <Avatar.Icon {...props} /* Put event category icon here, human is placeholder
@@ -46,7 +46,7 @@ export default function EventList() {
               <Card.Content style={styles.cardUnder}>
                 <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
                 <Text style={styles.text}>Info: {json.content}</Text>
-                <Button title="Event Page" onPress={openFullEvent()} /* Style doesn't work */ style={styles.cardButton}></Button>
+                <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
               </Card.Content>
             </Card>
           </ScrollView>
