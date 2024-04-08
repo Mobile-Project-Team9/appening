@@ -5,6 +5,7 @@ import { Marker } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
+import LoadingIndicator from '../components/LoadingIndicator';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
 import ShotDescription from '../components/ShotDescription';
@@ -53,7 +54,7 @@ export default function Home() {
       location.title && location.geo && location.geo.coordinates &&
       location.geo.coordinates.length === 2
     ));
-    setLocations(fullData)
+    setLocations(filteredLocations)
   }, [])
 
 
@@ -63,9 +64,7 @@ export default function Home() {
   }
 
   if (isLoading) {
-    return <View style={styles.container}>
-      <Text>Retrieving location...</Text>
-    </View>
+    return <LoadingIndicator />
   }
   else {
     return (
