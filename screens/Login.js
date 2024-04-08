@@ -3,7 +3,9 @@ import { View, Text, TextInput, Alert, Button, Pressable } from "react-native";
 import { logout, signIn} from "../components/Auth";
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from '../firebase/Confing';
-import {MaterialIcons} from '@expo/vector-icons/MaterialIcons';
+//import {MaterialIcons} from '@expo/vector-icons/MaterialIcons';
+import { MaterialIcons } from '@expo/vector-icons';
+
 import { styles } from "../styles/style";
 
 
