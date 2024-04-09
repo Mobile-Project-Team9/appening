@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     position: "absolute",
     top: 400
-  }, 
+  },
 
   indicator: {
     flex: 1,
@@ -74,38 +74,54 @@ const styles = StyleSheet.create({
 
   //Shotdescription:
   modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
+    
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    height: '50%', // Make modal occupy half of the screen height
+    width: '100%'
   },
 
   modalContent: {
     backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    
+    height: '50%', 
+    width: '100%', 
   },
 
   title: {
     fontSize: 20,
-    color: colors.mainColor,
+    color: "#fff",
+    backgroundColor:colors.mainColor,
+    padding: 5,
+    alignContent: 'center'
   },
 
   info: {
-    fontSize:15,
+    fontSize: 15,
   },
 
   image: {
-    
-    height: 200,
-    resizeMode: 'stretch',
+
+    height: 150,
+
     margin: 10
+  },
+
+  x: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   },
 
   // ??
   con: {
     backgroundColor: '#ffffff',
-    paddingHorizontal:10,
+    paddingHorizontal: 10,
   },
 
   todosContainer: {
@@ -119,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 
-  headerItem: {   
+  headerItem: {
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginVertical: 5,
@@ -138,7 +154,7 @@ const styles = StyleSheet.create({
 
   infoText: {
     marginTop: 5,
-    marginHorizontal:5,
+    marginHorizontal: 5,
     marginBottom: 5,
     fontSize: 15
   },
@@ -146,7 +162,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     width: '50%',
     marginLeft: 80,
-    borderWidth:1,
+    borderWidth: 1,
     borderRadius: 10,
   },
 

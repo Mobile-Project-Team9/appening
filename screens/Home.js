@@ -114,26 +114,7 @@ export default function Home() {
           onRequestClose={() => setModalVisible(false)}
           selectedShot={selectedShot}
         />
-        {/* <Modal
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-          contentContainerStyle={styles.modalContainer}
-        >
-          <View style={styles.modalContent}>
-            {selectedShot && (
-              <View>
-                <Text style={styles.title}>{selectedShot.title}</Text>
-                <Image />
-                <Text style={styles.info}>{selectedShot.content}</Text>
 
-                <Button
-                  title="Close"
-                  onPress={() => setModalVisible(false)}
-                />
-              </View>
-            )}
-          </View>
-        </Modal> */}
       </View>
     );
   }
