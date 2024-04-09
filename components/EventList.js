@@ -15,18 +15,69 @@ export default function EventList() {
   // This is the item which flatlist goes through
   function Item({ json }){
     const eventName = (json.title);
-    // None of the icons load, placeholder human icon is active right now
-    const eventIcon = 0; //(json.Categories[0].icon);
+    const eventIconPath = (json.Categories[0].title);
+    let eventIcon = "";
+
+    if (eventIconPath == "Puut ja kasvit"){
+      eventIcon = "pine-tree";
+    } else if (eventIconPath == "Taideteos"){
+      eventIcon = "globe-model";
+    } else if (eventIconPath == "Arkkitehtuuri"){
+      eventIcon = "android-studio";
+    } else if (eventIconPath == "Puisto"){
+      eventIcon = "tree";
+    } else if (eventIconPath == "Patsas"){
+      eventIcon = "account";
+    } else if (eventIconPath == "Nähtävyys"){
+      eventIcon = "apple-keyboard-command";
+    } else if (eventIconPath == "Ravintola"){
+      eventIcon = "food";
+    } else if (eventIconPath == "Info"){
+      eventIcon = "information-variant";
+    } else if (eventIconPath == "Historiallinen kohde"){
+      eventIcon = "bank";
+    } else if (eventIconPath == "Tapahtuma"){
+      eventIcon = "account-cash";
+    } else if (eventIconPath == "Tulentekopaikka"){
+      eventIcon = "campfire";
+    } else if (eventIconPath == "Kirkko"){
+      eventIcon = "cross";
+    } else if (eventIconPath == "Kulttuuritalo"){
+      eventIcon = "atom";
+    } else if (eventIconPath == "Näköalatorni"){
+      eventIcon = "binoculars";
+    } else if (eventIconPath == "Kulttuuri"){
+      eventIcon = "atom";
+    } else if (eventIconPath == "Galleria"){
+      eventIcon = "view-gallery";
+    } else if (eventIconPath == "Virtuaalipolku"){
+      eventIcon = "virtual-reality";
+    } else if (eventIconPath == "Reitti"){
+      eventIcon = "apple-safari";
+    } else if (eventIconPath == "Roskakatos"){
+      eventIcon = "trash-can";
+    } else if (eventIconPath == "Retkeilyreitti"){
+      eventIcon = "apple-safari";
+    } else if (eventIconPath == "Kuivakäymälä"){
+      eventIcon = "toilet";
+    } else if (eventIconPath == "Parkkipaikka"){
+      eventIcon = "parking";
+    } else if (eventIconPath == "Liiteri"){
+      eventIcon = "greenhouse";
+    } else if (eventIconPath == "Kirjasto"){
+      eventIcon = "book-open-blank-variant";
+    } else if (eventIconPath == "Laavu"){
+      eventIcon = "bed-empty";
+    } else if (eventIconPath == "Uimaranta"){
+      eventIcon = "swim";
+    }
 
     // I was thinking this would open and close drawer
     function drawer(){
       display = 0;
     }
 
-    const leftContent = props => <Avatar.Icon {...props} /* Put event category icon here, human is placeholder
-      final version will have eventicon */ icon="human"
-      color={colors.white}
-      style={styles.cardIcon}/>
+    const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon}/>
     
     const rightContent = props => <Drawer.CollapsedItem focusedIcon="chevron-up"
       unfocusedIcon="chevron-down"
