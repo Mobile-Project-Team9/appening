@@ -74,12 +74,19 @@ const styles = StyleSheet.create({
 
   //Shotdescription:
   modalContainer: {
-    
+    flex: 1,
+    flexDirection: 'column',
+    //justifyContent: 'flex-end',
+    //alignItems: 'center',
+
+    // Make modal occupy half of the screen height
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
     justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    height: '50%', // Make modal occupy half of the screen height
-    width: '100%'
+    backgroundColor: '#fff',
+    padding: 10,
+    margin:5
   },
 
   modalContent: {
@@ -88,15 +95,15 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 30,
-    
-    height: '50%', 
-    width: '100%', 
+
+    height: '50%',
+    width: '100%',
   },
 
   title: {
     fontSize: 20,
     color: "#fff",
-    backgroundColor:colors.mainColor,
+    backgroundColor: colors.mainColor,
     padding: 5,
     alignContent: 'center'
   },
@@ -113,7 +120,12 @@ const styles = StyleSheet.create({
   },
 
   x: {
-    padding: 10,
+    
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+
+  eventButton: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },

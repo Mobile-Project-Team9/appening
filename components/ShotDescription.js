@@ -10,9 +10,9 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
         <Modal
             visible={visible}
             onRequestClose={onRequestClose}
-            contentContainerStyle={styles.modalContainer}
+            transparent={true}
         >
-            <ScrollView style={styles.modalContent}>
+            <ScrollView contentContainerStyle={styles.modalContainer}>
                 {selectedShot && (
                     <View>
                         <TouchableOpacity 
@@ -27,15 +27,25 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                                 source={{ uri: imagePath }}
                                 style={styles.image}
                             />
+                        
+
 
                         )}
+                        <Text style={styles.infoText}>Category: {selectedShot?.Categories?.[0]?.title}</Text>
+
+                        <View style= {styles.eventButton}>
 
                         <Button
                             title="Event page"
                             onPress={onRequestClose}
-                            mode='contained-tonal'>
+                            mode='contained-tonal'
+                            buttonColor='#E10069'
+                            textColor='#fff'
+                            
+                            >
                             Event page
                         </Button>
+                        </View>
 
                     </View>
                 )}
