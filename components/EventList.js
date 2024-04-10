@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, FlatList, Button } from 'react-native'
-import { React, useContext, useEffect } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import fullData from "../data/fullData.json";
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
@@ -15,22 +15,72 @@ export default function EventList() {
   // This is the item which flatlist goes through
   function Item({ json }){
     const eventName = (json.title);
-    // None of the icons load, placeholder human icon is active right now
-    const eventIcon = 0; //(json.Categories[0].icon);
+    const eventIconPath = (json.Categories[0].title);
+    let eventIcon = "";
 
-    // I was thinking this would open and close drawer
-    function drawer(){
-      display = 0;
+    // Icons for every event according to category
+    if (eventIconPath == "Puut ja kasvit"){
+      eventIcon = "pine-tree";
+    } else if (eventIconPath == "Taideteos"){
+      eventIcon = "globe-model";
+    } else if (eventIconPath == "Arkkitehtuuri"){
+      eventIcon = "android-studio";
+    } else if (eventIconPath == "Puisto"){
+      eventIcon = "tree";
+    } else if (eventIconPath == "Patsas"){
+      eventIcon = "account";
+    } else if (eventIconPath == "Nähtävyys"){
+      eventIcon = "apple-keyboard-command";
+    } else if (eventIconPath == "Ravintola"){
+      eventIcon = "food";
+    } else if (eventIconPath == "Info"){
+      eventIcon = "information-variant";
+    } else if (eventIconPath == "Historiallinen kohde"){
+      eventIcon = "bank";
+    } else if (eventIconPath == "Tapahtuma"){
+      eventIcon = "account-cash";
+    } else if (eventIconPath == "Tulentekopaikka"){
+      eventIcon = "campfire";
+    } else if (eventIconPath == "Kirkko"){
+      eventIcon = "cross";
+    } else if (eventIconPath == "Kulttuuritalo"){
+      eventIcon = "atom";
+    } else if (eventIconPath == "Näköalatorni"){
+      eventIcon = "binoculars";
+    } else if (eventIconPath == "Kulttuuri"){
+      eventIcon = "atom";
+    } else if (eventIconPath == "Galleria"){
+      eventIcon = "view-gallery";
+    } else if (eventIconPath == "Virtuaalipolku"){
+      eventIcon = "virtual-reality";
+    } else if (eventIconPath == "Reitti"){
+      eventIcon = "apple-safari";
+    } else if (eventIconPath == "Roskakatos"){
+      eventIcon = "trash-can";
+    } else if (eventIconPath == "Retkeilyreitti"){
+      eventIcon = "apple-safari";
+    } else if (eventIconPath == "Kuivakäymälä"){
+      eventIcon = "toilet";
+    } else if (eventIconPath == "Parkkipaikka"){
+      eventIcon = "parking";
+    } else if (eventIconPath == "Liiteri"){
+      eventIcon = "greenhouse";
+    } else if (eventIconPath == "Kirjasto"){
+      eventIcon = "book-open-blank-variant";
+    } else if (eventIconPath == "Laavu"){
+      eventIcon = "bed-empty";
+    } else if (eventIconPath == "Uimaranta"){
+      eventIcon = "swim";
     }
 
-    const leftContent = props => <Avatar.Icon {...props} /* Put event category icon here, human is placeholder
-      final version will have eventicon */ icon="human"
-      color={colors.white}
-      style={styles.cardIcon}/>
+    // This is for events to open and close
+    const [elementVisible, setElementVisible] = useState(false);
+
+    const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon}/>
     
     const rightContent = props => <Drawer.CollapsedItem focusedIcon="chevron-up"
       unfocusedIcon="chevron-down"
-      onPress={drawer()} // Not sure what to add here to make it open a bigger section
+      onPress={() => setElementVisible(!elementVisible)}
       theme={{ colors: { onSurfaceVariant: colors.white }}}/>
 
     // Opens full info of event
@@ -42,12 +92,14 @@ export default function EventList() {
       <View>
         <ScrollView>
             <Card style={styles.card}>
-              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/> 
+              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/>
+              {elementVisible ? (
               <Card.Content style={styles.cardUnder}>
                 <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
                 <Text style={styles.text}>Info: {json.content}</Text>
                 <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
               </Card.Content>
+              ) : null}
             </Card>
           </ScrollView>
       </View>

@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     marginBottom: '22%',
   },
 
+  // Event list card
   card: {
     alignContent: "center",
     backgroundColor: colors.mainColor,
@@ -271,13 +272,13 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
 
+  // Bottom part of event list cards
   cardUnder: {
     alignContent: "center",
     backgroundColor: colors.offBlue,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    paddingTop: 10,
-    display: ""
+    paddingTop: 10
   },
 
   cardText: {
