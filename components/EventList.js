@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, FlatList, Button } from 'react-native'
-import { React, useContext, useEffect } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import fullData from "../data/fullData.json";
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
@@ -18,6 +18,7 @@ export default function EventList() {
     const eventIconPath = (json.Categories[0].title);
     let eventIcon = "";
 
+    // Icons for every event according to category
     if (eventIconPath == "Puut ja kasvit"){
       eventIcon = "pine-tree";
     } else if (eventIconPath == "Taideteos"){
@@ -72,16 +73,14 @@ export default function EventList() {
       eventIcon = "swim";
     }
 
-    // I was thinking this would open and close drawer
-    function drawer(){
-      display = 0;
-    }
+    // This is for events to open and close
+    const [elementVisible, setElementVisible] = useState(false);
 
     const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon}/>
     
     const rightContent = props => <Drawer.CollapsedItem focusedIcon="chevron-up"
       unfocusedIcon="chevron-down"
-      onPress={drawer()} // Not sure what to add here to make it open a bigger section
+      onPress={() => setElementVisible(!elementVisible)}
       theme={{ colors: { onSurfaceVariant: colors.white }}}/>
 
     // Opens full info of event
@@ -93,12 +92,14 @@ export default function EventList() {
       <View>
         <ScrollView>
             <Card style={styles.card}>
-              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/> 
+              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/>
+              {elementVisible ? (
               <Card.Content style={styles.cardUnder}>
                 <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
                 <Text style={styles.text}>Info: {json.content}</Text>
                 <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
               </Card.Content>
+              ) : null}
             </Card>
           </ScrollView>
       </View>
