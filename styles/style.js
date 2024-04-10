@@ -287,7 +287,39 @@ const styles = StyleSheet.create({
 
   cardIcon: {
     backgroundColor: colors.secondaryColor
-  }
+  }, 
+  container3:{
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  button3:{
+    backgroundColor: '#9190a3',
+    padding: 10,
+    borderRadius: 3, 
+
+  },
+  buttonText3: {
+    color: 'white',
+    fontSize: 16,
+  },
+
+  text3: {
+    marginBottom: 100,
+    fontSize: 18,
+    color: 'white',
+  },
+  languageButton: {
+    padding: 10,
+    borderBottomColor: '#dddddd',
+    borderBottomWidth: 1,
+  },
+  lngName: {
+    fontSize: 16,
+    color: 'white',
+  },
+
 });
 
 export { styles, colors };

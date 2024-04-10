@@ -2,6 +2,9 @@ import { View, Text, Modal, Pressable, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+//import Language from './Filter/language'
+
+
 
 export default function FilterMenu() {
     const [modalVisible, setModalVisible] = useState(false)
@@ -21,6 +24,8 @@ export default function FilterMenu() {
                     <View style={styles.filterMenu}>
                         <View style={styles.filterMenuContent}>
                             <Text>This is where filters will be found</Text>
+                            
+                            
                         </View>
                         <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
                                 <Text style={styles.hideMenuButtonText}>Close menu</Text>
