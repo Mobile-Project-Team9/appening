@@ -41,6 +41,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                             />
                         )}
                         <Text style={styles.infoText}>Category: {selectedShot?.Categories?.[0]?.title}</Text>
+                        <Text>Active time: {selectedShot.ActiveTimeStart}</Text>
                         {!showEventDetails && (
                             <View style={styles.eventButton}>
                                 <Button

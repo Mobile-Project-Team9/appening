@@ -86,7 +86,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: '#fff',
     padding: 10,
-    margin:5
+    margin:5,
+   
+    
+  },
+
+  scrollViewContainer: {
+    flexGrow: 1,
   },
 
   modalContent: {
@@ -114,7 +120,8 @@ const styles = StyleSheet.create({
 
   image: {
 
-    height: 150,
+    height: 200,
+    
 
     margin: 10
   },
