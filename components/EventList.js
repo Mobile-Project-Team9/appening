@@ -4,6 +4,7 @@ import fullData from "../data/fullData.json";
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar, Drawer, IconButton } from "react-native-paper";
+import { useNavigation } from '@react-navigation/native'
 
 export default function EventList() {
   const {json, setJson} = useContext(QueryContext);
@@ -83,6 +84,14 @@ export default function EventList() {
       onPress={() => setElementVisible(!elementVisible)}
       theme={{ colors: { onSurfaceVariant: colors.white }}}/>
 
+      //const [isFavorite, setIsFavorite] = useState(false); 
+      const [element, setElement] = useState(false);
+      const navigation = useNavigation();
+
+      const handlePress = (eventName) => {
+        navigation.navigate('User', { eventName}); // Olettaen, että 'User' on navigaattorissasi määritelty reitin nimi ja jsonData sisältää tiedot, jotka haluat siirtää.
+      };
+
     // Opens full info of event
     function openFullEvent(){
       // Fill once full even item page is done
@@ -90,21 +99,22 @@ export default function EventList() {
 
     return(
       <View>
-        <ScrollView>
+        
             <Card style={styles.card}>
               <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/>
               {elementVisible ? (
               <Card.Content style={styles.cardUnder}>
-                
-                <IconButton icon="heart" color={colors.primary}>
-                </IconButton>
+                <IconButton
+                  icon={"heart-outline"}
+                  onPress={() => handlePress(eventName)}
+                />
                 <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
                 <Text style={styles.text}>Info: {json.content}</Text>
                 <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
               </Card.Content>
               ) : null}
             </Card>
-          </ScrollView>
+          
       </View>
     )
   }

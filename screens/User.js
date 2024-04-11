@@ -1,24 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import FilterMenu from '../components/FilterMenu';
-//import { styles } from '../styles/style'
-import Login from './Login'
-import Filter3 from '../components/Filter/Filter1';
+import React from 'react';
+import { View, Text } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import { styles } from '../styles/style';
 
-//import Register from './Register';
-
- //<Text style ={styles.label}>My travel plan</Text>
-  //<Text style ={styles.label}>Schedule</Text>
 export default function User() {
+  const route = useRoute();
+  const { eventName } = route.params; 
+
  
+
+
   return (
-    <>
     <View>
-      <Filter3/>
+      <Text>Event Name: {eventName.title}</Text> 
     </View>
-    <View>
-      <Login/>
-    </View>
-    </>
-  )
+  );
 }
+
+
