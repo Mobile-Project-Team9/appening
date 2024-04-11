@@ -30,6 +30,12 @@ export default function Home() {
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [filteredLocations, setFilteredLocations] = useState(fullData);
+
+  const handleFilterChange = (filteredLocations) => {
+    setFilteredLocations(filteredLocations);
+  };
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -69,7 +75,7 @@ export default function Home() {
   else {
     return (
       <View style={styles.container}>
-        <Search />
+        <Search locations={locations} onFilterChange={handleFilterChange} />
         <FilterMenu />
         <MapView
           style={styles.map}
@@ -84,7 +90,7 @@ export default function Home() {
 
         // mapType="satellite"
         >
-          {locations.map((location) => {
+          {filteredLocations.map((location) => {
             // Check if latitude and longitude are valid numbers
             const latitude = parseFloat(location.geo.coordinates[0]);
             const longitude = parseFloat(location.geo.coordinates[1]);
