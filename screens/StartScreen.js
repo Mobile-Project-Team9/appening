@@ -1,15 +1,11 @@
 import { View, Text, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-
-
 import Login from '../screens/Login';
 
 
 
 
 export default function StartScreen() {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
     <ImageBackground
@@ -19,14 +15,14 @@ export default function StartScreen() {
       <View >
         <TouchableOpacity
           style={styles.loginButton}
-          activeOpacity={0.8} 
+          activeOpacity={0.8} // Adjust opacity on press if desired
           onPress={() => navigation.navigate()}
         >
-         
+          {/* Add content for login button (text, icon, etc.) */}
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.skipButton}
-          activeOpacity={0.8} 
+          activeOpacity={0.8} // Adjust opacity on press if desired
           onPress={() => navigation.navigate('Home')}
         >
           <Text style={styles.skipText}>Skip</Text>
