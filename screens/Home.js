@@ -14,8 +14,6 @@ import { styles } from '../styles/style';
 
 import fullData from '../data/fullData.json';
 
-
-
 const INITIAL_LATITUDE = 65.0800;
 const INITIAL_LONGITUDE = 25.4800;
 const INITIAL_LATITUDE_DELTA = 0.0922;
@@ -26,14 +24,39 @@ export default function Home() {
   const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
   const [isLoading, setIsLoading] = useState(true);
   const [locations, setLocations] = useState([]);
-
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
+  const [filteredLocations, setFilteredLocations] = useState(fullData); // for searching
+  const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
+  const [categories, setCategories] = useState([]);
 
-  const [filteredLocations, setFilteredLocations] = useState(fullData);
+  // Extract unique categories from the fullData
+  useEffect(() => {
+    const uniqueCategories = [...new Set(fullData.flatMap(item => item.Categories.map(category => category.title)))];
+    // Format categories into the required structure
+    const formattedCategories = uniqueCategories.map((title, index) => ({
+      id: index + 1,
+      title: title // Random color generation
+    }));
+    setCategories(formattedCategories);
+  }, []);
 
+  // For searching
   const handleFilterChange = (filteredLocations) => {
     setFilteredLocations(filteredLocations);
+  };
+
+  // For filtering by category
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    if (category) {
+      const filtered = locations.filter((location) =>
+        location.Categories.some((cat) => cat.id === category.id)
+      );
+      setFilteredLocations(filtered);
+    } else {
+      setFilteredLocations(locations);
+    }
   };
 
   useEffect(() => {
@@ -63,7 +86,6 @@ export default function Home() {
     setLocations(filteredLocations)
   }, [])
 
-
   const handleMarkerPress = (shot) => {
     setSelectedShot(shot);
     setModalVisible(true);
@@ -76,7 +98,7 @@ export default function Home() {
     return (
       <View style={styles.container}>
         <Search locations={locations} onFilterChange={handleFilterChange} />
-        <FilterMenu />
+        <FilterMenu categories={categories} onCategoryChange={handleCategoryChange}/>
         <MapView
           style={styles.map}
           initialRegion={{
@@ -87,8 +109,6 @@ export default function Home() {
           }}
           clusterColor = {'#E10069'}
           showsUserLocation={true}
-
-        // mapType="satellite"
         >
           {filteredLocations.map((location) => {
             // Check if latitude and longitude are valid numbers
@@ -120,7 +140,6 @@ export default function Home() {
           onRequestClose={() => setModalVisible(false)}
           selectedShot={selectedShot}
         />
-
       </View>
     );
   }
