@@ -5,7 +5,7 @@ import { Marker } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
-import LoadingIndicator from '../components/LoadingIndicator';
+import LoadingScreen from '../components/LoadingScreen';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
 import ShotDescription from '../components/ShotDescription';
@@ -92,7 +92,7 @@ export default function Home() {
   }
 
   if (isLoading) {
-    return <LoadingIndicator />
+    return <LoadingScreen/>
   }
   else {
     return (
