@@ -81,10 +81,7 @@ export default function Home() {
         setIsLoading(false);
       }
     })();
-    
-  }, [])
 
-  useEffect(() => {
     const filteredLocations = json.filter(location => (
       location.title && location.geo && location.geo.coordinates &&
       location.geo.coordinates.length === 2
@@ -92,6 +89,10 @@ export default function Home() {
     
     setLocations(filteredLocations)
   }, [])
+
+  useEffect(() => {
+    setFilteredLocations(json)
+  }, [json])
 
   const handleMarkerPress = (shot) => {
     setSelectedShot(shot);
@@ -105,7 +106,7 @@ export default function Home() {
     return (
       <View style={styles.container}>
         <Search locations={locations} onFilterChange={handleFilterChange} />
-        <FilterMenu categories={categories} onCategoryChange={handleCategoryChange}/>
+        <FilterMenu />
         <MapView
           style={styles.map}
           initialRegion={{

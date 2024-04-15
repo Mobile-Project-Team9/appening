@@ -9,10 +9,6 @@ import { useNavigation } from '@react-navigation/native'
 export default function EventList() {
   const {json, setJson} = useContext(QueryContext);
 
-  useEffect(() => {
-    setJson(fullData);
-  }, []);
-
   // This is the item which flatlist goes through
   function Item({ json }){
     const eventName = (json.title);

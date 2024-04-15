@@ -9,7 +9,7 @@ import fullData from '../data/fullData.json';
 
 
 
-export default function FilterMenu({ locations, onFilterChange }) {
+export default function FilterMenu() {
     const {json} = useContext(QueryContext)
     const {setJson} = useContext(QueryContext)
 
@@ -19,7 +19,6 @@ export default function FilterMenu({ locations, onFilterChange }) {
     const [culture, setCulture] = useState([])
     const [utilities, setUtilities] = useState([])
     const [selectedFilters, setSelectedFilters] = useState([])
-    const [filteredLocations, setFilteredLocations] = useState(locations)
 
     //Dropdown-picker variables
     const [natureOpen, setNatureOpen] = useState(false)
@@ -45,7 +44,7 @@ export default function FilterMenu({ locations, onFilterChange }) {
         let categoryList = []
         let jsonLength = Object.keys(json).length
 
-        for (let i = 0; i < json.length; i++) {
+        for (let i = 0; i < jsonLength; i++) {
             if (!categoryList.includes(json[i].Categories[0].title)){
                 categoryList.push(json[i].Categories[0].title)
             }
@@ -82,14 +81,6 @@ export default function FilterMenu({ locations, onFilterChange }) {
         setUtilities(utilities)
     }
 
-    /* const filterData = (index, data) => {
-        let categoryLowercase = data[index].Categories[0].title.toLowerCase()
-
-        if (selectedFilters.some((filter) => filter === categoryLowercase)) {
-            data.filter(location => location.Categories[0].title.toLowerCase() === categoryLowercase)
-        }
-    } */
-
     useEffect(() => {
         getUniqueCategories()
     }, [])
@@ -98,21 +89,26 @@ export default function FilterMenu({ locations, onFilterChange }) {
         getFilterItems()
     }, [categories])
 
-    /* useEffect(() => {
-        let tempData = [...json]
-        let dataLength = Object.keys(locations).length
+    useEffect(() => {
+        let tempData = []
+        let dataLength = Object.keys(json).length
 
-        if (selectedFilters == []) {
-            setFilteredLocations(locations)
+        if (selectedFilters.length === 0) {
+            setJson(fullData)
         }
         else {
+            setJson(fullData)
             for (let i = 0; i < dataLength; i++){
-                filterData(i, locations)
+                let categoryLowercase = json[i].Categories[0].title.toLowerCase()
+
+                if (selectedFilters.some(filter => filter === categoryLowercase) && !tempData.includes(json[i])) {
+                    tempData.push(json[i])
+                }
             }
-            setFilteredLocations(locations)
+            setJson(tempData)
         }
         
-    }, [selectedFilters]) */
+    }, [selectedFilters])
     
 
 
