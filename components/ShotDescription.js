@@ -44,8 +44,12 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                         <Text>Active time: {selectedShot.ActiveTimeStart}</Text>
                         {!showEventDetails && (
                             <View style={styles.eventButton}>
+                                <Button mode='contained-tonal'
+                                    buttonColor='#E10069'
+                                    textColor='#fff'
+                                    onPress={() => saveToBookmark()}>Save</Button>
                                 <Button
-                                    title="Event page"
+                                    
                                     onPress={() => setShowEventDetails(true)}
                                     mode='contained-tonal'
                                     buttonColor='#E10069'
@@ -53,6 +57,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                                 >
                                     Event page
                                 </Button>
+
                             </View>
                         )}
                         {showEventDetails && (
