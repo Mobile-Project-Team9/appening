@@ -1,13 +1,120 @@
 import { View, Text, Modal, Pressable, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import { QueryContext } from '../data/Contexts'
+import DropDownPicker from 'react-native-dropdown-picker'
+import fullData from '../data/fullData.json';
 //import Language from './Filter/language'
 
 
 
-export default function FilterMenu() {
+export default function FilterMenu({ locations, onFilterChange }) {
+    const {json} = useContext(QueryContext)
+    const {setJson} = useContext(QueryContext)
+
     const [modalVisible, setModalVisible] = useState(false)
+    const [categories, setCategories] = useState([])
+    const [nature, setNature] = useState([])
+    const [culture, setCulture] = useState([])
+    const [utilities, setUtilities] = useState([])
+    const [selectedFilters, setSelectedFilters] = useState([])
+    const [filteredLocations, setFilteredLocations] = useState(locations)
+
+    //Dropdown-picker variables
+    const [natureOpen, setNatureOpen] = useState(false)
+    const [cultureOpen, setCultureOpen] = useState(false)
+    const [utilitiesOpen, setUtilitiesOpen] = useState(false)
+
+    const onNatureOpen = () => {
+        setCultureOpen(false)
+        setUtilitiesOpen(false)
+    }
+
+    const onCultureOpen = () => {
+        setNatureOpen(false)
+        setUtilitiesOpen(false)
+    }
+
+    const onUtilitiesOpen = () => {
+        setCultureOpen(false)
+        setNatureOpen(false)
+    }
+
+    const getUniqueCategories = () => {
+        let categoryList = []
+        let jsonLength = Object.keys(json).length
+
+        for (let i = 0; i < json.length; i++) {
+            if (!categoryList.includes(json[i].Categories[0].title)){
+                categoryList.push(json[i].Categories[0].title)
+            }
+        }
+
+        setCategories(categoryList)
+    }
+
+    const getFilterItems = () => {
+        let items = []
+        let nature = []
+        let culture = []
+        let utilities = []
+        let categoriesLength = categories.length
+
+        for (let i = 0; i < categoriesLength; i++) {
+            items.push({label: categories[i], value: categories[i].toLowerCase()})
+        }
+
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].value === 'puut ja kasvit' || items[i].value === 'puisto' || items[i].value === 'retkeilyreitti' || items[i].value === 'tulentekopaikka' || items[i].value === 'näköalatorni' || items[i].value === 'kuivakäymälä' ||items[i].value === 'liiteri' || items[i].value === 'laavu' || items[i].value === 'uimaranta') {
+                nature.push(items[i])
+            }
+            else if (items[i].value === 'taideteos' || items[i].value === 'arkkitehtuuri' || items[i].value === 'patsas' || items[i].value === 'nähtävyys' || items[i].value === 'historiallinen kohde' || items[i].value === 'tapahtuma' || items[i].value === 'kirkko' || items[i].value === 'kulttuuritalo' || items[i].value === 'kulttuuri' || items[i].value === 'galleria' || items[i].value === 'virtuaalipolku' || items[i].value === 'reitti' || items[i].value === 'kirjasto') {
+                culture.push(items[i])
+            }
+            else {
+                utilities.push(items[i])
+            }
+        }
+
+        setNature(nature)
+        setCulture(culture)
+        setUtilities(utilities)
+    }
+
+    const filterData = (index, data) => {
+        let categoryLowercase = data[index].Categories[0].title.toLowerCase()
+
+        if (selectedFilters.some((filter) => filter === categoryLowercase)) {
+            data.filter(location => location.Categories[0].title.toLowerCase() === categoryLowercase)
+        }
+    }
+
+    useEffect(() => {
+        getUniqueCategories()
+    }, [])
+
+    useEffect(() => {
+        getFilterItems()
+    }, [categories])
+
+    useEffect(() => {
+        let tempData = [...json]
+        let dataLength = Object.keys(locations).length
+
+        if (selectedFilters == []) {
+            setFilteredLocations(locations)
+        }
+        else {
+            for (let i = 0; i < dataLength; i++){
+                filterData(i, locations)
+            }
+            setFilteredLocations(locations)
+        }
+        
+    }, [selectedFilters])
+    
+
 
 
 
@@ -23,7 +130,47 @@ export default function FilterMenu() {
                 <View style={styles.filterMenuContainer}>
                     <View style={styles.filterMenu}>
                         <View style={styles.filterMenuContent}>
-                            <Text>This is where filters will be found</Text>
+                            <DropDownPicker 
+                                multiple={true}
+                                open={natureOpen}
+                                value={selectedFilters}
+                                items={nature}
+                                setOpen={setNatureOpen}
+                                setValue={setSelectedFilters}
+                                setItems={setNature}
+                                onOpen={onNatureOpen}
+
+                                zIndex={3000}
+                                zIndexInverse={1000}
+                            />
+
+                            <DropDownPicker 
+                                multiple={true}
+                                open={cultureOpen}
+                                value={selectedFilters}
+                                items={culture}
+                                setOpen={setCultureOpen}
+                                setValue={setSelectedFilters}
+                                setItems={setCulture}
+                                onOpen={onCultureOpen}
+
+                                zIndex={2000}
+                                zIndexInverse={2000}
+                            />
+
+                            <DropDownPicker 
+                                multiple={true}
+                                open={utilitiesOpen}
+                                value={selectedFilters}
+                                items={utilities}
+                                setOpen={setUtilitiesOpen}
+                                setValue={setSelectedFilters}
+                                setItems={setUtilities}
+                                onOpen={onUtilitiesOpen}
+
+                                zIndex={1000}
+                                zIndexInverse={3000}
+                            />
                             
                             
                         </View>

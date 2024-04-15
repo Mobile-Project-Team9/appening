@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Dimensions, StyleSheet, Text, View, Button, Modal, Image } from 'react-native';
 
 import { Marker } from 'react-native-maps';
@@ -13,6 +13,7 @@ import { styles } from '../styles/style';
 
 
 import fullData from '../data/fullData.json';
+import { QueryContext } from '../data/Contexts';
 
 
 
@@ -22,6 +23,8 @@ const INITIAL_LATITUDE_DELTA = 0.0922;
 const INITIAL_LONGITUDE_DELTA = 0.0421;
 
 export default function Home() {
+  const {json} = useContext(QueryContext)
+
   const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
   const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +32,12 @@ export default function Home() {
 
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [filteredLocations, setFilteredLocations] = useState(fullData);
+
+  const handleFilterChange = (filteredLocations) => {
+    setFilteredLocations(filteredLocations);
+  };
 
   useEffect(() => {
     (async () => {
@@ -50,12 +59,18 @@ export default function Home() {
         setIsLoading(false);
       }
     })();
-    const filteredLocations = fullData.filter(location => (
+    
+  }, [])
+
+  useEffect(() => {
+    const filteredLocations = json.filter(location => (
       location.title && location.geo && location.geo.coordinates &&
       location.geo.coordinates.length === 2
     ));
+    
     setLocations(filteredLocations)
-  }, [])
+  }, [json])
+  
 
 
   const handleMarkerPress = (shot) => {
@@ -70,7 +85,7 @@ export default function Home() {
     return (
       <View style={styles.container}>
         <Search />
-        <FilterMenu />
+        <FilterMenu locations={locations} onFilterChange={handleFilterChange}/>
         <MapView
           style={styles.map}
           initialRegion={{
@@ -84,7 +99,7 @@ export default function Home() {
 
         // mapType="satellite"
         >
-          {locations.map((location) => {
+          {filteredLocations.map((location) => {
             // Check if latitude and longitude are valid numbers
             const latitude = parseFloat(location.geo.coordinates[0]);
             const longitude = parseFloat(location.geo.coordinates[1]);
