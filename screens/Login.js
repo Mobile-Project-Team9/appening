@@ -6,6 +6,7 @@ import {auth} from '../firebase/Confing';
 //import {MaterialIcons} from '@expo/vector-icons/MaterialIcons';
 import { MaterialIcons } from '@expo/vector-icons';
 
+
 import { styles } from "../styles/style";
 
 
@@ -56,7 +57,7 @@ export default function Login ({navigation}) {
     }
     if (isLoggedin) {
         return(
-        <View style={styles.con}>
+        <View>
             <View style ={styles.headerItem}>
                 <Text style = {styles.header}> Login </Text>
                 <Pressable style ={styles.logoutIcon} onPress ={handlePressLogout} >
@@ -70,7 +71,7 @@ export default function Login ({navigation}) {
     }
     else {
         return (
-            <View style= {styles.con}>
+            <View style= {styles.Llogin}>
                 <View style ={styles.headerItem}>
                     <Text style ={styles.header}>Login in</Text>
                 </View>

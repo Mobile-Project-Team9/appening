@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   loadingTextView: {
     alignItems: "center",
     justifyContent: "center",
-    top: 100
+   
   },
 
   loadingTextMain: {
@@ -40,11 +40,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10
   },
-
-  loadingText: {
-    color: colors.white,
-    fontSize: 16,
-    marginBottom: 10
+  cardTitle: {
+    flexDirection: 'row', // Arrange elements horizontally
+    justifyContent: 'space-between', // Distribute elements evenly
+    alignItems: 'center', // Align vertically
   },
 
   search: {
@@ -153,10 +152,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
-  // Con what??
-  con: {
-    backgroundColor: colors.white,
+ 
+  Llogin: {
+    backgroundColor: colors.offBlue,
     paddingHorizontal: 10,
+    
+    
   },
 
   todosContainer: {

@@ -10,6 +10,7 @@ import { colors } from './styles/style';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
+
 export default function App() {
   const [json, setJson] = useState(fullData);
   

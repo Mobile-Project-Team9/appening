@@ -96,7 +96,7 @@ export default function EventList() {
     return(
       <View>
             <Card style={styles.card}>
-              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/>
+              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
               {elementVisible ? (
               <Card.Content style={styles.cardUnder}>
                 <IconButton
