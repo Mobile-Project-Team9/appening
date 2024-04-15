@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { styles } from '../styles/style';
+import BookmarkList from '../components/BookmarkList';
+import { BookmarkContext } from '../data/Contexts';
 // ... other imports for displaying user information, etc. (if needed)
 
 export default function User() {
+  //const { bookmarkList } = useContext(BookmarkContext);
 
   return (
-    <View>
-      <Text>Here will be list of events saved by user</Text>
+    <View style={styles.container}>
+      <Text>Here will list of saved events</Text>
+      <BookmarkList  />
     </View>
-  )
+  );
+
   // const route = useRoute();
   // const { eventName, fullData } = route.params; // Access event data passed from EventList
 

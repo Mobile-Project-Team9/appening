@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import React, { useContext } from 'react';
 import { BookmarkContext } from '../data/Contexts';
 
@@ -7,11 +7,12 @@ import { BookmarkContext } from '../data/Contexts';
 
 export default function BookmarkList() {
 
-  const bookmarkList = useContext(BookmarkContext);
+  const { bookmarkList } = useContext(BookmarkContext);
 
   return (
     <View>
-      <Text>BookmarkList</Text>
+      <Text>Bookmark component renders</Text>
+      <FlatList data={bookmarkList} renderItem={({ item }) => <Text>{item.title}</Text>}/>
     </View>
   )
 }
