@@ -94,11 +94,11 @@ export default function FilterMenu({ locations, onFilterChange }) {
         getUniqueCategories()
     }, [])
 
-    /* useEffect(() => {
+    useEffect(() => {
         getFilterItems()
     }, [categories])
 
-    useEffect(() => {
+    /* useEffect(() => {
         let tempData = [...json]
         let dataLength = Object.keys(locations).length
 
