@@ -8,8 +8,6 @@ const colors = {
   white: "#ffffff"
 }
 
-
-
 const styles = StyleSheet.create({
   //Home-screen
   container: {
@@ -18,16 +16,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 
+  containerLoading: {
+    backgroundColor: colors.offBlue,
+    flex: 1,
+    alignItems: "center"
+  },
+
+  loadingImage: {
+    height: 200,
+    width: 400,
+    position: "relative",
+    top: 0
+  },
+
+  loadingTextView: {
+    alignItems: "center",
+    justifyContent: "center",
+    top: 100
+  },
+
+  loadingTextMain: {
+    color: colors.white,
+    fontSize: 20,
+    margin: 10
+  },
+
+  loadingText: {
+    color: colors.white,
+    fontSize: 16,
+    marginBottom: 10
+  },
+
   search: {
     zIndex: 1,
     position: "absolute",
     top: 400
-  },
-
-  indicator: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 
   text: {
