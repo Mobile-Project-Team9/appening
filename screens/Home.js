@@ -3,13 +3,12 @@ import { Dimensions, StyleSheet, Text, View, Button, Modal, Image } from 'react-
 
 import { Marker } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
-import Constants from 'expo-constants';
 import * as Location from 'expo-location';
-import LoadingScreen from '../components/LoadingScreen';
+import LoadingScreen from '../screens/LoadingScreen';
 import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
 import ShotDescription from '../components/ShotDescription';
-import { styles } from '../styles/style';
+import { styles, colors } from '../styles/style';
 
 
 import fullData from '../data/fullData.json';
@@ -115,7 +114,7 @@ export default function Home() {
             latitudeDelta: INITIAL_LATITUDE_DELTA,
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
-          clusterColor = {'#E10069'}
+          clusterColor = {colors.secondaryColor}
           showsUserLocation={true}
         >
           {filteredLocations.map((location) => {
@@ -137,7 +136,7 @@ export default function Home() {
                   latitude: latitude,
                   longitude: longitude
                 }}
-                pinColor={'#E10069'}
+                pinColor= {colors.secondaryColor}
                 onPress={() => handleMarkerPress(location)}
               />
             );

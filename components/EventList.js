@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, FlatList, Button } from 'react-native'
+import { View, Text, FlatList, Button } from 'react-native'
 import { React, useContext, useEffect, useState } from 'react';
 import fullData from "../data/fullData.json";
 import { QueryContext } from '../data/Contexts';
@@ -84,13 +84,13 @@ export default function EventList() {
       onPress={() => setElementVisible(!elementVisible)}
       theme={{ colors: { onSurfaceVariant: colors.white }}}/>
 
-      //const [isFavorite, setIsFavorite] = useState(false); 
-      const [element, setElement] = useState(false);
-      const navigation = useNavigation();
+    //const [isFavorite, setIsFavorite] = useState(false); 
+    const [element, setElement] = useState(false);
+    const navigation = useNavigation();
 
-      const handlePress = (eventName) => {
-        navigation.navigate('User', { eventName}); // Olettaen, että 'User' on navigaattorissasi määritelty reitin nimi ja jsonData sisältää tiedot, jotka haluat siirtää.
-      };
+    const handlePress = (eventName) => {
+      navigation.navigate('User', { eventName}); // Olettaen, että 'User' on navigaattorissasi määritelty reitin nimi ja jsonData sisältää tiedot, jotka haluat siirtää.
+    };
 
     // Opens full info of event
     function openFullEvent(){
@@ -99,7 +99,6 @@ export default function EventList() {
 
     return(
       <View>
-        
             <Card style={styles.card}>
               <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText}/>
               {elementVisible ? (
@@ -114,7 +113,6 @@ export default function EventList() {
               </Card.Content>
               ) : null}
             </Card>
-          
       </View>
     )
   }

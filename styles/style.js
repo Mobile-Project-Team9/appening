@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
 const colors = {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight + 5,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
 
   containerLoading: {
@@ -56,14 +56,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     padding: 6,
-    color: "#fff" // You can change later
+    color: colors.white
   },
 
   footer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#E10069", // You can change later
+    backgroundColor: "#E10069",
     padding: 10,
     maxHeight: 120,
     borderTopStartRadius: 10,
@@ -101,17 +101,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     //justifyContent: 'flex-end',
     //alignItems: 'center',
-
     // Make modal occupy half of the screen height
     position: 'absolute',
     bottom: 0,
     width: '100%',
     justifyContent: 'flex-end',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     padding: 10,
-    margin:5,
-   
-    
+    margin:5
   },
 
   scrollViewContainer: {
@@ -119,19 +116,18 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 30,
-
     height: '50%',
     width: '100%',
   },
 
   title: {
     fontSize: 20,
-    color: "#fff",
+    color: colors.white,
     backgroundColor: colors.mainColor,
     padding: 5,
     alignContent: 'center'
@@ -142,15 +138,12 @@ const styles = StyleSheet.create({
   },
 
   image: {
-
     height: 200,
-    
-
     margin: 10
   },
 
+  // What is this x?
   x: {
-    
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
@@ -160,9 +153,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
-  // ??
+  // Con what??
   con: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
     paddingHorizontal: 10,
   },
 
@@ -210,7 +203,7 @@ const styles = StyleSheet.create({
 
   textInput: {
     borderWidth: 1,
-    borderColor: '#130404',
+    borderColor: colors.black,
     width: '90%',
     borderRadius: 5,
     paddingHorizontal: 15,
@@ -257,7 +250,7 @@ const styles = StyleSheet.create({
     paddingTop: 35,
     paddingLeft: 15,
     height: '90%',
-    backgroundColor: '#fff'
+    backgroundColor: colors.white
   },
 
   filterButton: {
@@ -283,7 +276,7 @@ const styles = StyleSheet.create({
   },
 
   hideMenuButtonText: {
-    color: '#fff'
+    color: colors.white
   },
 
   overlayPressable: {
@@ -318,39 +311,43 @@ const styles = StyleSheet.create({
 
   cardIcon: {
     backgroundColor: colors.secondaryColor
-  }, 
+  },
+
   container3:{
     flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
 
   },
+
   button3:{
     backgroundColor: '#9190a3',
     padding: 10,
-    borderRadius: 3, 
-
+    borderRadius: 3,
   },
+
   buttonText3: {
-    color: 'white',
+    color:  colors.white,
     fontSize: 16,
   },
 
+  // Text what?
   text3: {
     marginBottom: 100,
     fontSize: 18,
-    color: 'white',
-  },
-  languageButton: {
-    padding: 10,
-    borderBottomColor: '#dddddd',
-    borderBottomWidth: 1,
-  },
-  lngName: {
-    fontSize: 16,
-    color: 'white',
+    color: colors.white,
   },
 
+  languageButton: {
+    padding: 10,
+    borderBottomColor: colors.white,
+    borderBottomWidth: 1,
+  },
+
+  lngName: {
+    fontSize: 16,
+    color: colors.white,
+  },
 });
 
 export { styles, colors };

@@ -6,20 +6,17 @@ import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
 import fullData from './data/fullData.json';
-
 import { colors } from './styles/style';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-
 export default function App() {
   const [json, setJson] = useState(fullData);
   
-
   return (
     <NavigationContainer>
       <QueryContext.Provider value={{ json, setJson }}>
-        <PaperProvider theme={MD3LightTheme}>
+        <PaperProvider>
             <MyTabs/>
         </PaperProvider>
       </QueryContext.Provider>
@@ -33,8 +30,8 @@ function MyTabs() {
   return (
     <Tab.Navigator  initialRouteName="Home"
       // Still missing colour for focused icons' background color
-      activeColor= {colors.offBlue} // Change these if values are not final
-      inactiveColor= {colors.white} // Change these if values are not final
+      activeColor= {colors.offBlue}
+      inactiveColor= {colors.white}
       barStyle={{ backgroundColor: colors.mainColor }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
@@ -49,7 +46,6 @@ function MyTabs() {
           return <MaterialCommunityIcons name={iconName} size={23} color={color}/>;
         }
       })}>
-      
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="List" component={List} />
       <Tab.Screen name="User" component={User} />
