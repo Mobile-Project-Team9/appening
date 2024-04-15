@@ -4,6 +4,7 @@ import { styles } from '../styles/style';
 import { Button, Portal } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import EventDetails from './EventDetails';
+import Bookmark from './Bookmark';
 
 const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const [showEventDetails, setShowEventDetails] = useState(false);
@@ -44,10 +45,9 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                         <Text>Active time: {selectedShot.ActiveTimeStart}</Text>
                         {!showEventDetails && (
                             <View style={styles.eventButton}>
-                                <Button mode='contained-tonal'
-                                    buttonColor='#E10069'
-                                    textColor='#fff'
-                                    onPress={() => saveToBookmark()}>Save</Button>
+
+                                <Bookmark item={selectedShot}/>
+
                                 <Button
                                     
                                     onPress={() => setShowEventDetails(true)}
