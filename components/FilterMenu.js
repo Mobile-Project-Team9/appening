@@ -82,19 +82,19 @@ export default function FilterMenu({ locations, onFilterChange }) {
         setUtilities(utilities)
     }
 
-    const filterData = (index, data) => {
+    /* const filterData = (index, data) => {
         let categoryLowercase = data[index].Categories[0].title.toLowerCase()
 
         if (selectedFilters.some((filter) => filter === categoryLowercase)) {
             data.filter(location => location.Categories[0].title.toLowerCase() === categoryLowercase)
         }
-    }
+    } */
 
     useEffect(() => {
         getUniqueCategories()
     }, [])
 
-    useEffect(() => {
+    /* useEffect(() => {
         getFilterItems()
     }, [categories])
 
@@ -112,7 +112,7 @@ export default function FilterMenu({ locations, onFilterChange }) {
             setFilteredLocations(locations)
         }
         
-    }, [selectedFilters])
+    }, [selectedFilters]) */
     
 
 
