@@ -15,6 +15,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  containeruser: {
+    flex:1,
+    paddingTop: Constants.statusBarHeight + 5,
+    backgroundColor: colors.white,
+  },
+  headeruser:{
+    borderRadius: 40,    
+    fontSize: 34,      
+    flexWrap: 'wrap',    
+    textAlign: 'center', 
+    color: colors.white, 
+    backgroundColor: colors.mainColor, 
+    paddingVertical: 10, 
+    paddingHorizontal: 20, 
+    marginVertical: 5, 
+    elevation: 5,         
+    shadowColor: '#000',  
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.1,   
+    shadowRadius: 3.84 
+  },
+  textuser:{
+    fontSize: 16,
+    color: 'black', 
+    padding: 10,
+    backgroundColor:colors.offBlue,
+
+  },
 
   containerLoading: {
     backgroundColor: colors.offBlue,

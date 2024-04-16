@@ -1,25 +1,26 @@
 import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
-import { styles } from '../styles/style';
-import BookmarkList from '../components/BookmarkList';
+import { View, Text, SectionList} from 'react-native';
+import { styles, colors } from '../styles/style';
 import { BookmarkContext } from '../data/Contexts';
 
 export default function User() {
   const { bookmarkList } = useContext(BookmarkContext);
 
-  console.log("Number of items in bookmarkList:", bookmarkList.length);
-  console.log("bookmarkList:", bookmarkList);
-  
-  if (bookmarkList.length > 0) {
-    console.log("First item in bookmarkList:", bookmarkList[0]);
-  } else {
-    console.log("Bookmark list is empty.");
-  }
+  const sections = [
+    { title: 'Bookmark', data: bookmarkList },
+  ];
 
   return (
-    <View style={styles.container}>
-      <Text>Here will list of saved events</Text>
-      <BookmarkList bookmarkList={bookmarkList}/>
+    <View style={styles.containeruser}>
+      
+      <SectionList
+        sections={sections}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <Text style={styles.textuser}>{item.title}</Text>}
+        renderSectionHeader={({ section: { title } }) => <Text style={styles.headeruser}>{title}</Text>}
+      />
     </View>
   );
 }
+
+
