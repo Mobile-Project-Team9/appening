@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { styles } from '../styles/style';
@@ -7,12 +7,14 @@ import { BookmarkContext } from '../data/Contexts';
 // ... other imports for displaying user information, etc. (if needed)
 
 export default function User() {
-  //const { bookmarkList } = useContext(BookmarkContext);
+const { bookmarkList } = useContext(BookmarkContext);
+console.log("Number of items in bookmarkList:", bookmarkList.length);
+console.log("bookmarkList:", bookmarkList);
 
   return (
     <View style={styles.container}>
       <Text>Here will list of saved events</Text>
-      <BookmarkList  />
+      <BookmarkList bookmarkList = {bookmarkList} />
     </View>
   );
 
