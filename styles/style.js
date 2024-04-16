@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
 
   // Event list card
   card: {
-    alignContent: "center",
+    justifyContent: "center",
     backgroundColor: colors.mainColor,
     marginLeft: 15,
     marginRight: 15,
@@ -312,6 +312,14 @@ const styles = StyleSheet.create({
 
   cardIcon: {
     backgroundColor: colors.secondaryColor
+  },
+
+  drawerIconPressable: {
+    paddingRight: 20
+  },
+  
+  drawerIcon: {
+    backgroundColor: colors.mainColor
   },
 
   container3:{

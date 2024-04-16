@@ -1,6 +1,5 @@
-import { View, Text, FlatList, Button } from 'react-native'
+import { View, Text, FlatList, Button, Pressable } from 'react-native'
 import { React, useContext, useEffect, useState } from 'react';
-import fullData from "../data/fullData.json";
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar, Drawer, IconButton } from "react-native-paper";
@@ -14,6 +13,7 @@ export default function EventList() {
     const eventName = (json.title);
     const eventIconPath = (json.Categories[0].title);
     let eventIcon = "";
+    let drawerIcon = "arrow-down";
 
     // Icons for every event according to category
     if (eventIconPath == "Puut ja kasvit"){
@@ -75,12 +75,17 @@ export default function EventList() {
 
     const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon}/>
     
-    const rightContent = props => <Drawer.CollapsedItem focusedIcon="chevron-up"
-      unfocusedIcon="chevron-down"
-      onPress={() => setElementVisible(!elementVisible)}
-      theme={{ colors: { onSurfaceVariant: colors.white }}}/>
-
-    //const [isFavorite, setIsFavorite] = useState(false); 
+    const rightContent = props => <Pressable onPress={() => setElementVisible(!elementVisible)} style={styles.drawerIconPressable}>
+      <Avatar.Icon {...props} icon={drawerIcon} size="40" style={styles.drawerIcon}/></Pressable>
+    
+    // This is for card icon to change upon opening details
+    if (elementVisible == false){
+      drawerIcon = "arrow-up";
+    } else if (elementVisible == true){
+      drawerIcon = "arrow-down";
+    }
+    
+    const [isFavorite, setIsFavorite] = useState(false); 
     const [element, setElement] = useState(false);
     const navigation = useNavigation();
 
@@ -95,20 +100,17 @@ export default function EventList() {
 
     return(
       <View>
-            <Card style={styles.card}>
-              <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
-              {elementVisible ? (
-              <Card.Content style={styles.cardUnder}>
-                <IconButton
-                  icon={"heart-outline"}
-                  onPress={() => handlePress(eventName)}
-                />
-                <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
-                <Text style={styles.text}>Info: {json.content}</Text>
-                <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
-              </Card.Content>
-              ) : null}
-            </Card>
+          <Card style={styles.card}>
+            <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
+            {elementVisible ? (
+            <Card.Content style={styles.cardUnder}>
+              <IconButton icon={"heart-outline"} onPress={() => handlePress(eventName)}/>
+              <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
+              <Text style={styles.text}>Info: {json.content}</Text>
+              <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
+            </Card.Content>
+            ) : null}
+          </Card>
       </View>
     )
   }
