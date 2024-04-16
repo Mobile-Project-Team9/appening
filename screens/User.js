@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { View, Text, SectionList} from 'react-native';
-import { styles, colors } from '../styles/style';
+import { View, Text, SectionList, Platform} from 'react-native';
+import { styles} from '../styles/style';
 import { BookmarkContext } from '../data/Contexts';
 
 export default function User() {
