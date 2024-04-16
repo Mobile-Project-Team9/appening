@@ -39,9 +39,13 @@ const styles = StyleSheet.create({
   },
   textuser:{
     fontSize: 16,
-    color: 'black', 
+    color: 'black',
     padding: 10,
-    backgroundColor:colors.offBlue
+    backgroundColor: colors.offBlue,
+    marginBottom: 10, 
+    marginLeft: 10, 
+    marginRight: 10, 
+    borderRadius: 5, 
 
   },
 
