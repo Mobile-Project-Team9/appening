@@ -8,6 +8,7 @@ import { BookmarkContext } from '../data/Contexts';
 export default function BookmarkList() {
 
   const { bookmarkList } = useContext(BookmarkContext);
+  console.log('render bookmarkList:'+ bookmarkList)
 
   return (
     <View>

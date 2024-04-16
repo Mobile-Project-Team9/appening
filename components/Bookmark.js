@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useContext } from 'react';
 import { IconButton } from "react-native-paper";
 import { BookmarkContext } from '../data/Contexts';
+import BookmarkList from './BookmarkList';
 
 /* Component for bookmarking specific events from map or list view  */
 
@@ -13,6 +14,7 @@ export default function Bookmark(item) {
     console.log(item)
 
   }
+ 
   return (
     <View>
       <IconButton

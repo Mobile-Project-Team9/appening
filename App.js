@@ -13,12 +13,12 @@ import { useState } from "react";
 
 export default function App() {
   const [json, setJson] = useState(fullData);
-  const [bookmarklist, setBookmarkList] = useState([]);
+  const [bookmarkList, setBookmarkList] = useState([]);
   
   return (
     <NavigationContainer>
       <QueryContext.Provider value={{ json, setJson }}>
-        <BookmarkContext.Provider value ={{bookmarklist, setBookmarkList}}>
+        <BookmarkContext.Provider value ={{bookmarkList, setBookmarkList}}>
         <PaperProvider>
             <MyTabs/>
         </PaperProvider>
