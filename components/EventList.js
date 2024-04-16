@@ -99,7 +99,7 @@ export default function EventList() {
             <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
             {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
-              <Bookmark/>
+              <Bookmark item = {json}/>
               <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
               <Text style={styles.text}>Info: {json.content}</Text>
               <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>

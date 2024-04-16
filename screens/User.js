@@ -10,22 +10,15 @@ export default function User() {
 const { bookmarkList } = useContext(BookmarkContext);
 console.log("Number of items in bookmarkList:", bookmarkList.length);
 console.log("bookmarkList:", bookmarkList);
+//ei tulosta data from bookmarklist.js 
+console.log(bookmarkList, bookmarkList[0].item);
 
   return (
     <View style={styles.container}>
       <Text>Here will list of saved events</Text>
-      <BookmarkList bookmarkList = {bookmarkList} />
+      <BookmarkList bookmarkList = {bookmarkList}/>
     </View>
   );
 
-  // const route = useRoute();
-  // const { eventName, fullData } = route.params; // Access event data passed from EventList
-
-  // return (
-  //   <View style={styles.container}>
-  //     <Text>Event Name: {eventName}</Text>
-  //     <Text>Event Name: {fullData}</Text>
-      
-  //   </View>
- // );
+  
 }
