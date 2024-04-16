@@ -19,9 +19,9 @@ export default function App() {
     <NavigationContainer>
       <QueryContext.Provider value={{ json, setJson }}>
         <BookmarkContext.Provider value ={{bookmarkList, setBookmarkList}}>
-        <PaperProvider>
-            <MyTabs/>
-        </PaperProvider>
+          <PaperProvider>
+              <MyTabs/>
+          </PaperProvider>
         </BookmarkContext.Provider>
       </QueryContext.Provider>
 

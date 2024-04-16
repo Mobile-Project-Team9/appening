@@ -89,23 +89,23 @@ export default function FilterMenu() {
         getFilterItems()
     }, [categories])
 
-    useEffect(() => {
-        let tempData = []
-        let dataLength = Object.keys(json).length
+    let tempData = []
+    useEffect(() => {  
+        let dataLength = Object.keys(fullData).length
 
-        if (selectedFilters.length === 0) {
-            setJson(fullData)
-        }
-        else {
-            setJson(fullData)
+        if (selectedFilters.length !== 0) {
             for (let i = 0; i < dataLength; i++){
-                let categoryLowercase = json[i].Categories[0].title.toLowerCase()
+                let categoryLowercase = fullData[i].Categories[0].title.toLowerCase()
 
-                if (selectedFilters.some(filter => filter === categoryLowercase) && !tempData.includes(json[i])) {
-                    tempData.push(json[i])
+                if (selectedFilters.some(filter => filter === categoryLowercase) && !tempData.includes(fullData[i])) {
+                    tempData.push(fullData[i])
                 }
             }
             setJson(tempData)
+        }
+        else {
+            setJson(fullData)
+            tempData = []
         }
         
     }, [selectedFilters])

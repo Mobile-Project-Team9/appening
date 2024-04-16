@@ -32,34 +32,11 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
   const [categories, setCategories] = useState([]);
 
-  // Extract unique categories from the fullData
-  useEffect(() => {
-    const uniqueCategories = [...new Set(fullData.flatMap(item => item.Categories.map(category => category.title)))];
-    // Format categories into the required structure
-    const formattedCategories = uniqueCategories.map((title, index) => ({
-      id: index + 1,
-      title: title // Random color generation
-    }));
-    setCategories(formattedCategories);
-  }, []);
-
   // For searching
   const handleFilterChange = (filteredLocations) => {
     setFilteredLocations(filteredLocations);
   };
 
-  // For filtering by category
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    if (category) {
-      const filtered = locations.filter((location) =>
-        location.Categories.some((cat) => cat.id === category.id)
-      );
-      setFilteredLocations(filtered);
-    } else {
-      setFilteredLocations(locations);
-    }
-  };
 
   useEffect(() => {
     (async () => {
