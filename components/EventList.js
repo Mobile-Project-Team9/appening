@@ -3,7 +3,8 @@ import { React, useContext, useEffect, useState } from 'react';
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar, Drawer, IconButton } from "react-native-paper";
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import Bookmark from '../components/Bookmark'
 
 export default function EventList() {
   const {json, setJson} = useContext(QueryContext);
@@ -85,13 +86,7 @@ export default function EventList() {
       drawerIcon = "arrow-down";
     }
     
-    const [isFavorite, setIsFavorite] = useState(false); 
-    const [element, setElement] = useState(false);
-    const navigation = useNavigation();
-
-    const handlePress = (eventName) => {
-      navigation.navigate('User', { eventName}); // Olettaen, että 'User' on navigaattorissasi määritelty reitin nimi ja jsonData sisältää tiedot, jotka haluat siirtää.
-    };
+  
 
     // Opens full info of event
     function openFullEvent(){
@@ -104,7 +99,7 @@ export default function EventList() {
             <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
             {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
-              <IconButton icon={"heart-outline"} onPress={() => handlePress(eventName)}/>
+              <Bookmark/>
               <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
               <Text style={styles.text}>Info: {json.content}</Text>
               <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
