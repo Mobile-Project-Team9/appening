@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   headeruser:{
-      
     fontSize: 24,
     fontWeight: 'bold',
     color: colors.white,
@@ -53,6 +52,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offBlue,
     flex: 1,
     alignItems: "center"
+  },
+  //headeruser style
+  containerheaderuser: {
+    flexDirection: "row",  
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 20,
+    marginHorizontal: 16,
+    paddingVertical: 10,
+
   },
 
   loadingImage: {
