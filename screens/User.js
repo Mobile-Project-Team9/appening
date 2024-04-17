@@ -20,8 +20,8 @@ export default function User() {
         renderSectionHeader={({ section: { title } }) => 
         <Text style={styles.headeruser}>{title}</Text>}
       />
-    </View>
+    </View> 
   );
 }
 
-
+  
