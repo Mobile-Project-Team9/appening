@@ -39,6 +39,11 @@ const styles = StyleSheet.create({
     
   
   },
+  headerTitle: {
+    fontSize: 16,
+    color: colors.white,
+    flex: 1, 
+  },
   textuser:{
     fontSize: 16,
     color: 'black',
