@@ -350,9 +350,49 @@ const styles = StyleSheet.create({
   drawerIconPressable: {
     paddingRight: 20
   },
-  
+
   drawerIcon: {
     backgroundColor: colors.mainColor
+  },
+
+  fullDetailEventView: {
+    flex: 1
+  },
+
+  fullDetailEventExitPressable: {
+    alignItems: "flex-end",
+    padding: 10,
+    paddingRight: 15
+  },
+
+  fullDetailEventExitIcon: {
+    backgroundColor: colors.white
+  },
+
+  fullDetailEventHeader: {
+    fontSize: 20,
+    color: colors.white,
+    backgroundColor: colors.mainColor,
+    padding: 20,
+    textAlign: "center"
+  },
+
+  fullDetailEventImageView: {
+    padding: 10,
+    alignItems: "center"
+  },
+
+  fullDetailEventImage: {
+    width: 360,
+    height: 200
+  },
+
+  fullDetailEventText: {
+    fontSize: 16,
+    color: colors.black,
+    padding: 6,
+    paddingLeft: 15,
+    paddingRight: 15
   },
 
   container3:{
