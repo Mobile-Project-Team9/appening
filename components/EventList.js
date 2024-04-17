@@ -1,8 +1,8 @@
-import { View, Text, FlatList, Button, Pressable } from 'react-native'
+import { View, Text, FlatList, Button, Pressable, Modal, Image, ScrollView } from 'react-native'
 import { React, useContext, useEffect, useState } from 'react';
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
-import { Card, Avatar, Drawer, IconButton } from "react-native-paper";
+import { Card, Avatar, IconButton } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
 import Bookmark from '../components/Bookmark'
 
@@ -15,6 +15,12 @@ export default function EventList() {
     const eventIconPath = (json.Categories[0].title);
     let eventIcon = "";
     let drawerIcon = "arrow-down";
+    const [elementVisible, setElementVisible] = useState(false);
+    
+    const [modalVisible, setModalVisible] = useState(false);
+    const imagePath = json?.Media?.[0]?.path;
+    const openingHours = json?.activeTimeStart;
+    const address = json?.meta?.streetAddress;
 
     // Icons for every event according to category
     if (eventIconPath == "Puut ja kasvit"){
@@ -71,11 +77,7 @@ export default function EventList() {
       eventIcon = "swim";
     }
 
-    // This is for events to open and close
-    const [elementVisible, setElementVisible] = useState(false);
-
     const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon}/>
-    
     const rightContent = props => <Pressable onPress={() => setElementVisible(!elementVisible)} style={styles.drawerIconPressable}>
       <Avatar.Icon {...props} icon={drawerIcon} size="40" style={styles.drawerIcon}/></Pressable>
     
@@ -85,13 +87,6 @@ export default function EventList() {
     } else if (elementVisible == true){
       drawerIcon = "arrow-down";
     }
-    
-  
-
-    // Opens full info of event
-    function openFullEvent(){
-      // Fill once full even item page is done
-    }
 
     return(
       <View>
@@ -99,17 +94,41 @@ export default function EventList() {
             <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
             {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
-              <Bookmark item = {json}/>
               <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
               <Text style={styles.text}>Info: {json.content}</Text>
-              <Button title="Event Page" onPress={openFullEvent()} color= {colors.secondaryColor}></Button>
+              <Button title="Event Page" onPress={() => setModalVisible(!modalVisible)} color= {colors.secondaryColor}></Button>
             </Card.Content>
             ) : null}
           </Card>
+
+          {modalVisible && (
+            <Modal>
+              <View style={styles.fullDetailEventView}>
+                  <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
+                    <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
+                  </Pressable>
+                <Text style={styles.fullDetailEventHeader}>{json.title}</Text>
+                <View style={styles.fullDetailEventImageView}>
+                  <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
+                </View>
+                <ScrollView>
+                  <Text style={styles.fullDetailEventText}>Category: {json.Categories[0].title}</Text>
+                  {openingHours && (
+                    <Text style={styles.fullDetailEventText}>Opening hours: {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
+                  )}
+                  {address && (
+                    <Text style={styles.fullDetailEventText}>Street address: {json.meta.streetAddress}</Text>
+                  )}
+                  <Text style={styles.fullDetailEventText}>Info: {json.content}</Text>
+                </ScrollView>
+                <Bookmark item={json}/>
+              </View>
+            </Modal>
+          )}
       </View>
     )
   }
-  
+
   return (
     <View>
       {/* Flatlist goes through the json and make a card with a list for each event */}

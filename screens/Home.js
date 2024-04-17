@@ -20,7 +20,7 @@ const INITIAL_LATITUDE_DELTA = 0.0922;
 const INITIAL_LONGITUDE_DELTA = 0.0421;
 
 export default function Home() {
-  const {json} = useContext(QueryContext)
+  const { json } = useContext(QueryContext)
 
   const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
   const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
@@ -63,7 +63,7 @@ export default function Home() {
       location.title && location.geo && location.geo.coordinates &&
       location.geo.coordinates.length === 2
     ));
-    
+
     setLocations(filteredLocations)
   }, [])
 
@@ -77,13 +77,12 @@ export default function Home() {
   }
 
   if (isLoading) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
   else {
     return (
       <View style={styles.container}>
-        <Search locations={locations} onFilterChange={handleFilterChange} />
-        <FilterMenu />
+
         <MapView
           style={styles.map}
           initialRegion={{
@@ -92,7 +91,7 @@ export default function Home() {
             latitudeDelta: INITIAL_LATITUDE_DELTA,
             longitudeDelta: INITIAL_LONGITUDE_DELTA
           }}
-          clusterColor = {colors.secondaryColor}
+          clusterColor={colors.secondaryColor}
           showsUserLocation={true}
         >
           {filteredLocations.map((location) => {
@@ -114,14 +113,18 @@ export default function Home() {
                   latitude: latitude,
                   longitude: longitude
                 }}
-                pinColor= {colors.secondaryColor}
+                pinColor={colors.secondaryColor}
                 onPress={() => handleMarkerPress(location)}
               />
             );
           })}
         </MapView>
-        <ShotDescription 
-          visible = {modalVisible}
+        <View style={styles.searchContainer}>
+          <Search locations={locations} onFilterChange={handleFilterChange} />
+          <FilterMenu />
+        </View>
+        <ShotDescription
+          visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
           selectedShot={selectedShot}
         />

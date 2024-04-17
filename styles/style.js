@@ -88,10 +88,12 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Align vertically
   },
 
-  search: {
+  searchContainer: {
     zIndex: 1,
     position: "absolute",
-    top: 400
+    width: '100%',
+    paddingTop: Constants.statusBarHeight + 5
+   
   },
 
   text: {
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '110%',
-    marginTop: -145,
+    marginTop: 0,
   },
 
   //Shotdescription:
@@ -274,8 +276,9 @@ const styles = StyleSheet.create({
   //Search -component
   searchbar: {
     backgroundColor: colors.mainColor,
-    zIndex: 1,
-    margin: 10
+    marginTop: 10,
+    marginLeft:10,
+    marginRight:10
   },
 
   //FilterMenu-component
@@ -359,9 +362,49 @@ const styles = StyleSheet.create({
   drawerIconPressable: {
     paddingRight: 20
   },
-  
+
   drawerIcon: {
     backgroundColor: colors.mainColor
+  },
+
+  fullDetailEventView: {
+    flex: 1
+  },
+
+  fullDetailEventExitPressable: {
+    alignItems: "flex-end",
+    padding: 10,
+    paddingRight: 15
+  },
+
+  fullDetailEventExitIcon: {
+    backgroundColor: colors.white
+  },
+
+  fullDetailEventHeader: {
+    fontSize: 20,
+    color: colors.white,
+    backgroundColor: colors.mainColor,
+    padding: 20,
+    textAlign: "center"
+  },
+
+  fullDetailEventImageView: {
+    padding: 10,
+    alignItems: "center"
+  },
+
+  fullDetailEventImage: {
+    width: 360,
+    height: 200
+  },
+
+  fullDetailEventText: {
+    fontSize: 16,
+    color: colors.black,
+    padding: 6,
+    paddingLeft: 15,
+    paddingRight: 15
   },
 
   container3:{
