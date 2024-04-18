@@ -2,7 +2,7 @@ import { View, Text, Modal, Pressable, Alert } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { QueryContext } from '../data/Contexts'
+import { FilterContext, QueryContext } from '../data/Contexts'
 import DropDownPicker from 'react-native-dropdown-picker'
 import fullData from '../data/fullData.json';
 //import Language from './Filter/language'
@@ -10,8 +10,8 @@ import fullData from '../data/fullData.json';
 
 
 export default function FilterMenu() {
-    const {json} = useContext(QueryContext)
-    const {setJson} = useContext(QueryContext)
+    const {json, setJson} = useContext(QueryContext)
+    const {filtersOn, setFiltersOn} = useContext(FilterContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
@@ -102,9 +102,11 @@ export default function FilterMenu() {
                 }
             }
             setJson(tempData)
+            setFiltersOn(selectedFilters.length)
         }
         else {
             setJson(fullData)
+            setFiltersOn(0)
             tempData = []
         }
         
