@@ -32,11 +32,6 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
   const [categories, setCategories] = useState([]);
 
-  // For searching
-  const handleFilterChange = (filteredLocations) => {
-    setFilteredLocations(filteredLocations);
-  };
-
 
   useEffect(() => {
     (async () => {
@@ -120,7 +115,7 @@ export default function Home() {
           })}
         </MapView>
         <View style={styles.searchContainer}>
-          <Search locations={locations} onFilterChange={handleFilterChange} />
+          <Search />
           <FilterMenu />
         </View>
         <ShotDescription
