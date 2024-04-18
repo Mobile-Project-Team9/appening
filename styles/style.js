@@ -16,26 +16,33 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   containeruser: {
-    flex:1,
-    paddingTop: Constants.statusBarHeight + 5,
-    backgroundColor: colors.white,
+    zIndex: 1,
+    position: "absolute",
+    width: '100%',
+    paddingTop: Constants.statusBarHeight + 5
   },
   headeruser:{
-      
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: colors.white,
     backgroundColor: colors.mainColor,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 3,
-    marginBottom: 10,
+    marginTop: 10,                      
+    marginLeft: 10,                    
+    marginRight: 10,                   
+    paddingVertical: 10,
+    paddingHorizontal: 10,              
+    borderRadius: 10,                   
+    shadowColor: colors.black,          
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowRadius: 6,                   
+    elevation: 3,                      
+    fontSize: 16,                       
+    color: colors.white,                         
+    marginBottom: 10, 
+    
   
+  },
+  headerTitle: {
+    fontSize: 16,
+    color: colors.white,
+    flex: 1, 
   },
   textuser:{
     fontSize: 16,
@@ -53,6 +60,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offBlue,
     flex: 1,
     alignItems: "center"
+  },
+  //headeruser style
+  containerheaderuser: {
+    flexDirection: "row",  
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 20,
+    marginHorizontal: 16,
+    paddingVertical: 10,
+
   },
 
   loadingImage: {
@@ -286,7 +303,7 @@ const styles = StyleSheet.create({
   filterMenuContent: {
     paddingTop: 35,
     paddingLeft: 15,
-    height: '90%',
+    height: '191%',
     backgroundColor: colors.white
   },
 
@@ -312,6 +329,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
 
+  clearFiltersButton: {
+    width: 105,
+    height: 55,
+    marginTop: -55,
+    marginRight: 15,
+    backgroundColor: colors.mainColor,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+  },
+
   hideMenuButtonText: {
     color: colors.white
   },
@@ -319,7 +348,7 @@ const styles = StyleSheet.create({
   overlayPressable: {
     flex: 1,
     backgroundColor: '#696969a8',
-    marginTop: '-9.5%',
+    marginTop: '55%',
     marginBottom: '22%',
   },
 

@@ -2,7 +2,7 @@ import { View, Text, Modal, Pressable, Alert } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { QueryContext } from '../data/Contexts'
+import { FilterContext, QueryContext } from '../data/Contexts'
 import DropDownPicker from 'react-native-dropdown-picker'
 import fullData from '../data/fullData.json';
 //import Language from './Filter/language'
@@ -10,8 +10,8 @@ import fullData from '../data/fullData.json';
 
 
 export default function FilterMenu() {
-    const {json} = useContext(QueryContext)
-    const {setJson} = useContext(QueryContext)
+    const {json, setJson} = useContext(QueryContext)
+    const {filtersOn, setFiltersOn} = useContext(FilterContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
@@ -102,9 +102,11 @@ export default function FilterMenu() {
                 }
             }
             setJson(tempData)
+            setFiltersOn(selectedFilters.length)
         }
         else {
             setJson(fullData)
+            setFiltersOn(0)
             tempData = []
         }
         
@@ -135,6 +137,8 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setNature}
                                 onOpen={onNatureOpen}
+                                placeholder='Nature'
+                                mode='BADGE'
 
                                 zIndex={3000}
                                 zIndexInverse={1000}
@@ -149,6 +153,8 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setCulture}
                                 onOpen={onCultureOpen}
+                                placeholder='Culture'
+                                mode='BADGE'
 
                                 zIndex={2000}
                                 zIndexInverse={2000}
@@ -163,6 +169,8 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setUtilities}
                                 onOpen={onUtilitiesOpen}
+                                placeholder='Utilities'
+                                mode='BADGE'
 
                                 zIndex={1000}
                                 zIndexInverse={3000}
@@ -172,6 +180,9 @@ export default function FilterMenu() {
                         </View>
                         <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
                                 <Text style={styles.hideMenuButtonText}>Close menu</Text>
+                        </Pressable>
+                        <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
+                                <Text style={styles.hideMenuButtonText}>Clear filters</Text>
                         </Pressable>
                     </View>
                     <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />
