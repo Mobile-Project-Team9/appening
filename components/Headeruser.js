@@ -20,7 +20,8 @@ const HeaderUser = () => {
                 anchor={<IconButton icon="menu" onPress={openMenu} />}
             >
                 <Menu.Item onPress={() => ('Login')} title="Login" />
-                <Menu.Item onPress={() => ('Register')} title="Register" /> 
+                <Menu.Item onPress={() => ('Register')} title="Register" />
+                
             </Menu>
         </View>
     );

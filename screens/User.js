@@ -20,9 +20,9 @@ export default function User() {
         renderItem={({ item }) => <Text style={styles.textuser}>{item.title}</Text>}
         
         renderSectionHeader={({ section: { title } }) =>(
-          <View style={styles.headerTitle}>
-            <Text style={styles.headeruser}>{title}</Text>
-            <Headeruser />
+          <View style={styles.headeruser}>
+            <Text style={styles.headerTitle}>{title}</Text>
+            <Headeruser style={styles.headerusersivu} />
           </View>
         )}
       />

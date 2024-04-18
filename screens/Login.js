@@ -80,7 +80,7 @@ export default function Login ({navigation}) {
                 style = {styles.textInput}
                 placeholder="Enter your email"
                 value={email}
-                onChangeText={() => setEmail (email.trim( )}
+                onChangeText={() => setEmail (email.trim())}
                 keyboardType='email-address'
                 autoCapitalize='none'
                 ></TextInput>

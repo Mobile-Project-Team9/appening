@@ -44,6 +44,15 @@ const styles = StyleSheet.create({
     color: colors.white,
     flex: 1, 
   },
+  
+  headerusersivu :{
+    position: "absolute",
+    right:30,
+    alignSelf: 'center',
+
+
+  
+  },
   textuser:{
     fontSize: 16,
     color: 'black',
