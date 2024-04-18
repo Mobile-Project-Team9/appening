@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
   filterMenuContent: {
     paddingTop: 35,
     paddingLeft: 15,
-    height: '90%',
+    height: '191%',
     backgroundColor: colors.white
   },
 
@@ -329,6 +329,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
 
+  clearFiltersButton: {
+    width: 105,
+    height: 55,
+    marginTop: -55,
+    marginRight: 15,
+    backgroundColor: colors.mainColor,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+  },
+
   hideMenuButtonText: {
     color: colors.white
   },
@@ -336,7 +348,7 @@ const styles = StyleSheet.create({
   overlayPressable: {
     flex: 1,
     backgroundColor: '#696969a8',
-    marginTop: '-9.5%',
+    marginTop: '55%',
     marginBottom: '22%',
   },
 

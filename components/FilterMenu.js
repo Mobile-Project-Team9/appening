@@ -135,6 +135,8 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setNature}
                                 onOpen={onNatureOpen}
+                                placeholder='Nature'
+                                mode='BADGE'
 
                                 zIndex={3000}
                                 zIndexInverse={1000}
@@ -149,6 +151,8 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setCulture}
                                 onOpen={onCultureOpen}
+                                placeholder='Culture'
+                                mode='BADGE'
 
                                 zIndex={2000}
                                 zIndexInverse={2000}
@@ -163,6 +167,8 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setUtilities}
                                 onOpen={onUtilitiesOpen}
+                                placeholder='Utilities'
+                                mode='BADGE'
 
                                 zIndex={1000}
                                 zIndexInverse={3000}
@@ -172,6 +178,9 @@ export default function FilterMenu() {
                         </View>
                         <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
                                 <Text style={styles.hideMenuButtonText}>Close menu</Text>
+                        </Pressable>
+                        <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
+                                <Text style={styles.hideMenuButtonText}>Clear filters</Text>
                         </Pressable>
                     </View>
                     <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />
