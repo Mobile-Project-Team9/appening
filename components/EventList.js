@@ -22,12 +22,6 @@ export default function EventList() {
     const openingHours = json?.activeTimeStart;
     const address = json?.meta?.streetAddress;
 
-    let short = "";
-
-    if (json.content.length > 30){
-      let short = json.content.slice(0, 99) + "...";
-    }
-
     // Icons for every event according to category
     if (eventIconPath == "Puut ja kasvit"){
       eventIcon = "pine-tree";
@@ -105,7 +99,7 @@ export default function EventList() {
               <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
               <Text style={styles.text}>Info: {json.content.length > 99 && (json.content.slice(0, 99) + "...")}
                 {json.content.length <= 99 && (json.content)}</Text>
-              <Button title="Event Page" onPress={() => setModalVisible(!modalVisible)} color= {colors.secondaryColor}></Button>
+              <Button title="More info" onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
             </Card.Content>
             ) : null}
           </Card>
