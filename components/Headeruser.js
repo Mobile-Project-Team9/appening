@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Modal } from 'react-native';
+import { View } from 'react-native';
 import { IconButton, Menu } from 'react-native-paper';
 import Login from '../screens/Login';
+import Register from '../screens/Register'; 
 
 import { styles } from '../styles/style';
 
-const HeaderUser = ({ toggleLoginModal, loginVisible }) => {
+const HeaderUser = ({ toggleLoginModal, loginVisible, toggleRegisterModal, registerVisible }) => {
     const [menuVisible, setMenuVisible] = useState(false);
     
     const openMenu = () => setMenuVisible(true);
@@ -19,17 +20,29 @@ const HeaderUser = ({ toggleLoginModal, loginVisible }) => {
                 anchor={<IconButton icon="menu" onPress={openMenu} />}
             >
                 <Menu.Item onPress={() => {
-                  toggleLoginModal(); 
+                  if (!loginVisible) {
+                    toggleLoginModal();
+                    if (registerVisible) {
+                      toggleRegisterModal(); // Ensure only one modal is open at a time
+                    }
+                  }
                   closeMenu();
                 }} title="Login" />
                 <Menu.Item onPress={() => {
-                   
+                    if (!registerVisible) {
+                      toggleRegisterModal();
+                      if (loginVisible) {
+                        toggleLoginModal(); 
+                      }
+                    }
                     closeMenu(); 
                 }} title="Register" />
             </Menu>
 
-            {/* Login Modal */}
+            
             <Login visible={loginVisible} onClose={toggleLoginModal} />
+
+            <Register visible={registerVisible} onClose={toggleRegisterModal} />
         </View>
     );
 }
