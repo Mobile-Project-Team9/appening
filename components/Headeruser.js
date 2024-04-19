@@ -19,12 +19,12 @@ const HeaderUser = ({ toggleLoginModal, loginVisible }) => {
                 anchor={<IconButton icon="menu" onPress={openMenu} />}
             >
                 <Menu.Item onPress={() => {
-                  toggleLoginModal(); // Toggle the visibility of the login modal
-                  closeMenu(); // Close the menu after clicking
+                  toggleLoginModal(); 
+                  closeMenu();
                 }} title="Login" />
                 <Menu.Item onPress={() => {
-                    /* Navigate to Register */
-                    closeMenu(); // Close the menu after clicking
+                   
+                    closeMenu(); 
                 }} title="Register" />
             </Menu>
 
