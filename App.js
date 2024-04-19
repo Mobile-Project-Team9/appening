@@ -1,7 +1,7 @@
 import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { QueryContext, BookmarkContext, FilterContext } from './data/Contexts';
+import { QueryContext, BookmarkContext, FilterContext, LoginContext, RekisterContext } from './data/Contexts';
 import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
@@ -14,16 +14,22 @@ import { useState } from "react";
 export default function App() {
   const [json, setJson] = useState(fullData);
   const [bookmarkList, setBookmarkList] = useState([]);
-  const [filtersOn, setFiltersOn] = useState(0)
+  const [filtersOn, setFiltersOn] = useState(0);
+  const [Login, setLogin] = useState (0);
+  const [Rekister, setRekister] = useState(0);
   
   return (
     <NavigationContainer>
       <QueryContext.Provider value={{ json, setJson }}>
         <BookmarkContext.Provider value ={{bookmarkList, setBookmarkList}}>
           <FilterContext.Provider value={{filtersOn, setFiltersOn}}>
-            <PaperProvider>
-                <MyTabs/>
-            </PaperProvider>
+            <LoginContext.Provider value ={{Login, setLogin}}>
+              <RekisterContext.Provider value= {{Rekister, setRekister}}>
+                <PaperProvider>
+                  <MyTabs/>
+                </PaperProvider>
+              </RekisterContext.Provider>
+             </LoginContext.Provider>
           </FilterContext.Provider>
         </BookmarkContext.Provider>
       </QueryContext.Provider>
@@ -56,7 +62,7 @@ function MyTabs() {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="List" component={List} />
-      <Tab.Screen name="User" component={User} />
+      <Tab.Screen name="User" component={User}  />
     </Tab.Navigator>
   );
 }

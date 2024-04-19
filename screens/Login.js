@@ -10,7 +10,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from "../styles/style";
 
 
+
 export default function Login ({navigation}) {
+    const {Login} = useContext(LoginContext)
     const [isLoggedin, setIsLoggedIn] =  useState(false); 
     const [email, setEmail] = useState ('');
     const [password, setPassword] = useState ('');

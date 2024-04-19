@@ -8,6 +8,7 @@ import { styles } from "../styles/style";
 
 
 export default function Register ({navigation}) {
+    
     const [isLoggedin, setIsLoggedIn] =  useState(false); 
     const [nickname, setNickname] = useState ('');
     const [email, setEmail] = useState ('');
