@@ -1,36 +1,37 @@
-import React, { useContext, useState } from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Modal } from 'react-native';
 import { IconButton, Menu } from 'react-native-paper';
-import { LoginContext } from '../data/Contexts';
+import Login from '../screens/Login';
 
 import { styles } from '../styles/style';
 
-const HeaderUser = () => { 
+const HeaderUser = ({ toggleLoginModal, loginVisible }) => {
+    const [menuVisible, setMenuVisible] = useState(false);
+    
+    const openMenu = () => setMenuVisible(true);
+    const closeMenu = () => setMenuVisible(false);
 
-  const [visible, setVisible] = useState(false);
+    return (
+        <View style={styles.containerheaderuser}>
+            <Menu
+                visible={menuVisible}
+                onDismiss={closeMenu}
+                anchor={<IconButton icon="menu" onPress={openMenu} />}
+            >
+                <Menu.Item onPress={() => {
+                  toggleLoginModal(); // Toggle the visibility of the login modal
+                  closeMenu(); // Close the menu after clicking
+                }} title="Login" />
+                <Menu.Item onPress={() => {
+                    /* Navigate to Register */
+                    closeMenu(); // Close the menu after clicking
+                }} title="Register" />
+            </Menu>
 
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
-
-  const { setLogin} = useContext(LoginContext);
-
-  const handleLogin = () => {
-    setLogin
-    console.log(LoginContext); 
-  };
-
-  return (
-    <View style={styles.containerheaderuser}>
-      <Menu
-        visible={visible}
-        onDismiss={closeMenu}
-        anchor={<IconButton icon="menu" onPress={openMenu} />}
-      >
-        <Menu.Item onPress={handleLogin} title="Login" />
-        
-      </Menu>
-    </View>
-  );
-};
+            {/* Login Modal */}
+            <Login visible={loginVisible} onClose={toggleLoginModal} />
+        </View>
+    );
+}
 
 export default HeaderUser;
