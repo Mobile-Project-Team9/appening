@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { styles, colors } from '../styles/style';
+import { styles } from '../styles/style';
 import { Button, Portal } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import EventDetails from './EventDetails';
 import Bookmark from './Bookmark';
 
-const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
+const ShotDescription = ({ visible, onRequestClose, selectedShot, toggleEventDetailsModal }) => {
     const [showEventDetails, setShowEventDetails] = useState(false);
 
     const handleCloseModal = () => {
@@ -22,27 +22,42 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
 
     return (
         <Portal>
-            <Modal visible={visible} onRequestClose={handleCloseModal} transparent={true}>
+            <Modal
+                visible={visible}
+                onRequestClose={handleCloseModal}
+                transparent={true}
+            >
                 <ScrollView contentContainerStyle={styles.modalContainer}>
                     <View>
-                        <TouchableOpacity onPress={handleCloseModal} style={styles.x}>
-                            <Ionicons name="close" size={24} color={colors.black} />
+                        <TouchableOpacity
+                            onPress={handleCloseModal}
+                            style={styles.x}>
+                            <Ionicons name="close" size={24} color="black" />
                         </TouchableOpacity>
                         <Text style={styles.title}>{selectedShot.title}</Text>
                         {imagePath && (
-                            <Image source={{ uri: imagePath }} style={styles.image}/>
+                            <Image
+                                source={{ uri: imagePath }}
+                                style={styles.image}
+                            />
                         )}
                         <Text style={styles.infoText}>Category: {selectedShot?.Categories?.[0]?.title}</Text>
                         <Text>Active time: {selectedShot.ActiveTimeStart}</Text>
                         {!showEventDetails && (
                             <View style={styles.eventButton}>
                                 <Bookmark item={selectedShot}/>
-                                <Button onPress={() => setShowEventDetails(true)} mode='contained-tonal'
-                                    buttonColor={colors.secondaryColor} textColor={colors.white}>Event page</Button>
+                                <Button
+                                    onPress={toggleEventDetailsModal}
+                                    mode='contained-tonal'
+                                    buttonColor='#E10069'
+                                    textColor='#fff'
+                                >
+                                    Event page
+                                </Button>
                             </View>
                         )}
                         {showEventDetails && (
-                            <EventDetails event={selectedShot} onRequestClose={handleCloseModal}/>
+                            <EventDetails event={selectedShot} modalVisible={visible} setModalVisible={toggleEventDetailsModal} />
                         )}
                     </View>
                 </ScrollView>
