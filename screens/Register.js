@@ -2,132 +2,115 @@ import { useState, useEffect } from "react";
 import { View, Text, TextInput, Alert, Button, Pressable } from "react-native";
 import { logout, signUp } from "../components/Auth";
 import { onAuthStateChanged } from "firebase/auth";
-import {auth} from '../firebase/Confing';
-import {MaterialIcons} from '@expo/vector-icons/MaterialIcons';
+import { auth } from '../firebase/Confing';
+import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from "../styles/style";
 
+export default function Register({ visible, onClose, navigation }) {
+    const [isLoggedin, setIsLoggedIn] = useState(false);
+    const [nickname, setNickname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmpassword, setConfirmPassword] = useState('');
 
-export default function Register ({navigation}) {
-    const [isLoggedin, setIsLoggedIn] =  useState(false); 
-    const [nickname, setNickname] = useState ('');
-    const [email, setEmail] = useState ('');
-    const [password, setPassword] = useState ('');
-    const [confirmpassword, setConfirmPassword] = useState ('');
-    
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setIsLoggedIn(true);
-            }
-            else {
-                setIsLoggedIn(false);
-            }
-        })
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsLoggedIn(!!user);
+        });
+        return () => unsubscribe();
     }, []);
 
     const handlePressRegister = () => {
-        if (nickname) {
-            Alert.alert('Nickname is reqired');
+        if (!nickname) {
+            Alert.alert('Nickname is required');
+            return;
         }
-        else if (!email) {
-            Alert.alert('Email is reqired');
+        if (!email) {
+            Alert.alert('Email is required');
+            return;
         }
-        else if (!password) {
-            Alert.alert('Password is reqired');
+        if (!password) {
+            Alert.alert('Password is required');
+            return;
         }
-        else if (!!confirmpassword) {
-            setPassword('');
-            Alert.alert('Confirmation is reqired');
+        if (!confirmpassword) {
+            Alert.alert('Confirmation is required');
+            return;
         }
-        else if (password !== confirmpassword) {
-            Alert.alert('passwords do not match')
-        }
-        else {
-            signUp(nickname, email, password); 
-            onAuthStateChanged(auth, (user) =>{
-                if (user) {
-                    setNickname('');
-                    setEmail('');
-                    setPassword('');
-                    setConfirmPassword('');
-
-                // navigation to todos screen .... 
-                }
-            });
-
+        if (password !== confirmpassword) {
+            Alert.alert('Passwords do not match');
+            return;
         }
 
-    }
+        signUp(nickname, email, password);
+        // Consider handling success or failure of signUp
+    };
 
     const handlePressLogout = () => {
         logout();
-    }
+        onClose(); // Close modal on logout
+    };
+
+    if (!visible) return null; // Only render if visible
+
     if (isLoggedin) {
-        return(
-        <View style={styles.con}>
-            <View style ={styles.headerItem}>
-                <Text style = {styles.header}> Todos: Register </Text>
-                <Pressable style ={styles.logoutIcon} on press ={handlePressLogout} >
-                    <MaterialIcons name= "logout" size ={24} color='black'/>
-                </Pressable>
-            </View>
-            <Text style ={styles.infoText}> You are logged in. Go to your todos...</Text>
-        </View>
-        )
-
-    }
-    else {
         return (
-            <View style= {styles.con}>
-                <View style ={styles.headerItem}>
-                    <Text style ={styles.header}>Register</Text>
+            <View>
+                <View style={styles.headerItem}>
+                    <Text style={styles.header}>Todos: Register</Text>
+                    <Pressable style={styles.logoutIcon} onPress={handlePressLogout}>
+                        <MaterialIcons name="logout" size={24} color='black' />
+                    </Pressable>
                 </View>
-                <Text style = {styles.infoText}> Create an account</Text>
+                <Text style={styles.infoText}>You are logged in. Go to your todos...</Text>
+            </View>
+        );
+    } else {
+        return (
+            <View style={styles.con}>
+                <View style={styles.headerItem}>
+                    <Text style={styles.header}>Register</Text>
+                </View>
+                <Text style={styles.infoText}>Create an account</Text>
                 <TextInput
-                style = {styles.textInput}
-                placeholder="Nickname"
-                value={nickname}
-                onChangeText={() => setNickname (nickname.trim())}
-                ></TextInput>
+                    style={styles.textInput}
+                    placeholder="Nickname"
+                    value={nickname}
+                    onChangeText={text => setNickname(text.trim())}
+                />
                 <TextInput
-                style = {styles.textInput}
-                placeholder="Enter your email"
-                value={email}
-                onChangeText={() => setEmail (email.trim())}
-                keyboardType='email-address'
-                autoCapitalize='none'
-                ></TextInput>
+                    style={styles.textInput}
+                    placeholder="Enter your email"
+                    value={email}
+                    onChangeText={text => setEmail(text.trim())}
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                />
                 <TextInput
-                style = {styles.textInput}
-                placeholder="Enter your password"
-                value={password}
-                onChangeText={() => setPassword (password)}
-                secureTextEntry={true}
-                ></TextInput>
+                    style={styles.textInput}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={true}
+                />
                 <TextInput
-                style = {styles.textInput}
-                placeholder="Confirm password"
-                value={confirmpassword}
-                onChangeText={() => setConfirmPassword (confirmpassword)}
-                secureTextEntry={true}
-                ></TextInput>
-                <Pressable style = {styles.buttonStyle}>
-                    <Button 
-                    title="Register"
-                    onPress={handlePressRegister}>
-                    </Button>
+                    style={styles.textInput}
+                    placeholder="Confirm password"
+                    value={confirmpassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry={true}
+                />
+                <Pressable style={styles.buttonStyle} onPress={handlePressRegister}>
+                    <Button title="Register" />
                 </Pressable>
-                <Text style = {styles.infoText}> Alread have an account</Text>
-                <Pressable style = {styles.buttonStyle}>
-                    <Button 
-                    title="Login"
-                    onPress={() => navigation.navigate('Login')}>
-                    </Button>
+                <Text style={styles.infoText}>Already have an account?</Text>
+                <Pressable style={styles.buttonStyle} onPress={() => {
+                    onClose(); 
+                    navigation.navigate('Login');
+                }}>
+                    <Button title="Login" />
                 </Pressable>
             </View>
-
-
-        )
-
+        );
     }
 }

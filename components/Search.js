@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Searchbar } from 'react-native-paper';
 import { styles } from '../styles/style';
+import { FilterContext, QueryContext } from '../data/Contexts';
+import fullData from '../data/fullData.json';
 
-const Search = ({ locations, onFilterChange }) => {
+const Search = () => {
+  const { json, setJson } = useContext(QueryContext)
+  const {filtersOn} = useContext(FilterContext)
+
   const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    handleSearch(searchQuery)
+ 
+  }, [filtersOn])
+  
   
   const handleSearch = (query) => {
+    if (filtersOn === 0 && json !== fullData) {
+      setJson(fullData)
+    }
+
     setSearchQuery(query);
-    const filteredLocations = query === '' ? locations : locations.filter(location =>
+    const filteredLocations = query === '' ? json : json.filter(location =>
       location.title.toLowerCase().includes(query.toLowerCase())
     );
-    onFilterChange(filteredLocations);
+    setJson(filteredLocations);
   };
 
   return (

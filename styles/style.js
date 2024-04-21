@@ -15,36 +15,46 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+
   containeruser: {
     zIndex: 1,
     position: "absolute",
     width: '100%',
     paddingTop: Constants.statusBarHeight + 5
   },
-  headeruser:{
+
+  headeruser: {
     backgroundColor: colors.mainColor,
-    marginTop: 10,                      
-    marginLeft: 10,                    
-    marginRight: 10,                   
-    paddingVertical: 10,
-    paddingHorizontal: 10,              
-    borderRadius: 10,                   
-    shadowColor: colors.black,          
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowRadius: 6,                   
-    elevation: 3,                      
-    fontSize: 16,                       
-    color: colors.white,                         
-    marginBottom: 10, 
-    
-  
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingVertical: 1,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    elevation: 3,
+    color: colors.white,
+    marginBottom: 10,
   },
+
   headerTitle: {
     fontSize: 16,
     color: colors.white,
     flex: 1, 
   },
-  textuser:{
+  
+  headerusersivu: {
+    position: "absolute",
+    right: 30,
+    alignSelf: 'center',
+  },
+
+  textuser: {
     fontSize: 16,
     color: 'black',
     padding: 10,
@@ -53,7 +63,6 @@ const styles = StyleSheet.create({
     marginLeft: 10, 
     marginRight: 10, 
     borderRadius: 5, 
-
   },
 
   containerLoading: {
@@ -61,6 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center"
   },
+
   //headeruser style
   containerheaderuser: {
     flexDirection: "row",  
@@ -69,7 +79,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 16,
     paddingVertical: 10,
-
   },
 
   loadingImage: {
@@ -82,7 +91,6 @@ const styles = StyleSheet.create({
   loadingTextView: {
     alignItems: "center",
     justifyContent: "center",
-   
   },
 
   loadingTextMain: {
@@ -90,6 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10
   },
+
   cardTitle: {
     flexDirection: 'row', // Arrange elements horizontally
     justifyContent: 'space-between', // Distribute elements evenly
@@ -149,17 +158,12 @@ const styles = StyleSheet.create({
   //Shotdescription:
   modalContainer: {
     flex: 1,
-    flexDirection: 'column',
-    //justifyContent: 'flex-end',
-    //alignItems: 'center',
     // Make modal occupy half of the screen height
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    justifyContent: 'flex-end',
     backgroundColor: colors.white,
-    padding: 10,
-    margin:5
+    padding: 10
   },
 
   scrollViewContainer: {
@@ -193,23 +197,14 @@ const styles = StyleSheet.create({
     margin: 10
   },
 
-  // What is this x?
-  x: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end'
-  },
-
   eventButton: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
 
- 
   Llogin: {
     backgroundColor: colors.offBlue,
     paddingHorizontal: 10,
-    
-    
   },
 
   todosContainer: {
@@ -241,10 +236,8 @@ const styles = StyleSheet.create({
   },
 
   infoText: {
-    marginTop: 5,
-    marginHorizontal: 5,
-    marginBottom: 5,
-    fontSize: 15
+    padding: 6,
+    fontSize: 16
   },
 
   buttonStyle: {
@@ -303,7 +296,7 @@ const styles = StyleSheet.create({
   filterMenuContent: {
     paddingTop: 35,
     paddingLeft: 15,
-    height: '90%',
+    height: '191%',
     backgroundColor: colors.white
   },
 
@@ -329,6 +322,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
 
+  clearFiltersButton: {
+    width: 105,
+    height: 55,
+    marginTop: -55,
+    marginRight: 15,
+    backgroundColor: colors.mainColor,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+  },
+
   hideMenuButtonText: {
     color: colors.white
   },
@@ -336,7 +341,7 @@ const styles = StyleSheet.create({
   overlayPressable: {
     flex: 1,
     backgroundColor: '#696969a8',
-    marginTop: '-9.5%',
+    marginTop: '55%',
     marginBottom: '22%',
   },
 
@@ -381,8 +386,10 @@ const styles = StyleSheet.create({
 
   fullDetailEventExitPressable: {
     alignItems: "flex-end",
-    padding: 10,
-    paddingRight: 15
+    paddingTop: 0,
+    paddingRight: 12,
+    paddingBottom: 7,
+    paddingLeft: 12
   },
 
   fullDetailEventExitIcon: {
@@ -415,14 +422,13 @@ const styles = StyleSheet.create({
     paddingRight: 15
   },
 
-  container3:{
+  container3: {
     flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
 
-  button3:{
+  button3: {
     backgroundColor: '#9190a3',
     padding: 10,
     borderRadius: 3,
@@ -449,7 +455,7 @@ const styles = StyleSheet.create({
   lngName: {
     fontSize: 16,
     color: colors.white,
-  },
+  }
 });
 
 export { styles, colors };
