@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Dimensions, View } from 'react-native';
-
+import { Alert, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import * as Location from 'expo-location';
@@ -9,7 +8,6 @@ import FilterMenu from '../components/FilterMenu';
 import Search from '../components/Search';
 import ShotDescription from '../components/ShotDescription';
 import { styles, colors } from '../styles/style';
-
 
 import fullData from '../data/fullData.json';
 import { QueryContext } from '../data/Contexts';
@@ -32,14 +30,12 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
   const [categories, setCategories] = useState([]);
 
-
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       try {
         if (status !== 'granted') {
           setIsLoading(false);
-          console.log('Geolocation failed');
           return;
         }
         const location = await Location.getLastKnownPositionAsync(
@@ -49,7 +45,9 @@ export default function Home() {
         setIsLoading(false);
       }
       catch (error) {
-        alert(error);
+        Alert.alert("An error has occurred", "Cannot retrieve your location.", [{
+            text: "Ok", style: "cancel",}
+        ]);
         setIsLoading(false);
       }
     })();
