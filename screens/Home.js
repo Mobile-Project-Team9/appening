@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Dimensions, StyleSheet, Text, View, Button, Modal, Image } from 'react-native';
+import { Dimensions, View } from 'react-native';
 
 import { Marker } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
@@ -72,7 +72,7 @@ export default function Home() {
   }
 
   if (isLoading) {
-    return <LoadingScreen />
+    return <LoadingScreen/>
   }
   else {
     return (

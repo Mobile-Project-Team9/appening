@@ -1,9 +1,8 @@
 import { View, Text, FlatList, Button, Pressable, Modal, Image, ScrollView } from 'react-native'
-import { React, useContext, useEffect, useState } from 'react';
+import { React, useContext, useState } from 'react';
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar, IconButton } from "react-native-paper";
-import { useNavigation } from '@react-navigation/native';
 import Bookmark from '../components/Bookmark'
 
 export default function EventList() {
