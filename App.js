@@ -14,7 +14,7 @@ import { useState } from "react";
 export default function App() {
   const [json, setJson] = useState(fullData);
   const [bookmarkList, setBookmarkList] = useState([]);
-  const [filtersOn, setFiltersOn] = useState(0);
+  const [filtersOn, setFiltersOn] = useState([]);
   const [Login, setLogin] = useState ([]);
   
   return (

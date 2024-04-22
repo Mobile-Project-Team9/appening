@@ -17,7 +17,7 @@ const Search = () => {
   
   
   const handleSearch = (query) => {
-    if (filtersOn === 0 && json !== fullData) {
+    if (filtersOn.length === 0 && json !== fullData) {
       setJson(fullData)
     }
 
