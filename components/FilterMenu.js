@@ -42,11 +42,11 @@ export default function FilterMenu() {
 
     const getUniqueCategories = () => {
         let categoryList = []
-        let jsonLength = Object.keys(json).length
+        let jsonLength = Object.keys(fullData).length
 
         for (let i = 0; i < jsonLength; i++) {
-            if (!categoryList.includes(json[i].Categories[0].title)){
-                categoryList.push(json[i].Categories[0].title)
+            if (!categoryList.includes(fullData[i].Categories[0].title)){
+                categoryList.push(fullData[i].Categories[0].title)
             }
         }
 
@@ -87,6 +87,10 @@ export default function FilterMenu() {
 
     useEffect(() => {
         getFilterItems()
+
+        if (filtersOn.length !== 0) {
+            setSelectedFilters(filtersOn)
+        }
     }, [categories])
 
     let tempData = []
@@ -102,11 +106,11 @@ export default function FilterMenu() {
                 }
             }
             setJson(tempData)
-            setFiltersOn(selectedFilters.length)
+            setFiltersOn(selectedFilters)
         }
         else {
             setJson(fullData)
-            setFiltersOn(0)
+            setFiltersOn([])
             tempData = []
         }
         
