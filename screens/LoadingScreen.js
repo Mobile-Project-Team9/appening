@@ -18,12 +18,6 @@ const LoadingScreen = () => {
       <View style={styles.loadingTextView}>
         <Text style={styles.loadingTextMain}>Tervetuloa Ouluun</Text>
       </View>
-      <View style={styles.Llogin}><Login/></View>
-      <View>
-        <Button onPress={handlePress}>
-          Skip
-        </Button>
-      </View>
     </View>
   );
 };

@@ -12,6 +12,7 @@ import fullData from '../data/fullData.json';
 export default function FilterMenu() {
     const {json, setJson} = useContext(QueryContext)
     const {filtersOn, setFiltersOn} = useContext(FilterContext)
+    const {filteredJson, setFilteredJson} = useContext(FilterContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
@@ -105,11 +106,13 @@ export default function FilterMenu() {
                     tempData.push(fullData[i])
                 }
             }
+            setFilteredJson(tempData)
             setJson(tempData)
             setFiltersOn(selectedFilters)
         }
         else {
             setJson(fullData)
+            setFilteredJson([])
             setFiltersOn([])
             tempData = []
         }

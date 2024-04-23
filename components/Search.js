@@ -7,25 +7,38 @@ import fullData from '../data/fullData.json';
 const Search = () => {
   const { json, setJson } = useContext(QueryContext)
   const {filtersOn} = useContext(FilterContext)
+  const {filteredJson} = useContext(FilterContext)
 
   const [searchQuery, setSearchQuery] = useState('');
 
+  
   useEffect(() => {
+    
     handleSearch(searchQuery)
  
   }, [filtersOn])
   
-  
+
   const handleSearch = (query) => {
     if (filtersOn.length === 0 && json !== fullData) {
       setJson(fullData)
     }
 
     setSearchQuery(query);
-    const filteredLocations = query === '' ? json : json.filter(location =>
-      location.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setJson(filteredLocations);
+    if (filtersOn.length !== 0) {
+
+      const filteredLocations = query === '' ? filteredJson : filteredJson.filter(location =>
+        location.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setJson(filteredLocations);
+    }
+    else {
+      const filteredLocations = query === '' ? json : json.filter(location =>
+        location.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setJson(filteredLocations);
+    }
+
   };
 
   return (

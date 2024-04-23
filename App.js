@@ -15,13 +15,14 @@ export default function App() {
   const [json, setJson] = useState(fullData);
   const [bookmarkList, setBookmarkList] = useState([]);
   const [filtersOn, setFiltersOn] = useState([]);
+  const [filteredJson, setFilteredJson] = useState([])
   const [Login, setLogin] = useState ([]);
   
   return (
     <NavigationContainer>
       <QueryContext.Provider value={{ json, setJson }}>
         <BookmarkContext.Provider value ={{bookmarkList, setBookmarkList}}>
-          <FilterContext.Provider value={{filtersOn, setFiltersOn}}>
+          <FilterContext.Provider value={{filtersOn, setFiltersOn, filteredJson, setFilteredJson}}>
             <PaperProvider>
                 <MyTabs/>
             </PaperProvider>
