@@ -1,8 +1,8 @@
 import { View, Text, FlatList, Button, Pressable, Modal, Image, ScrollView } from 'react-native'
-import { React, useContext, useState } from 'react';
+import { React, useContext, useState, useEffect } from 'react';
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
-import { Card, Avatar, IconButton } from "react-native-paper";
+import { Card, Avatar } from "react-native-paper";
 import Bookmark from '../components/Bookmark'
 
 export default function EventList() {
@@ -20,6 +20,29 @@ export default function EventList() {
     const imagePath = json?.Media?.[0]?.path;
     const openingHours = json?.activeTimeStart;
     const address = json?.meta?.streetAddress;
+
+    const language = "fin"; // Add context here
+    const [infoText1, setInfoText1] = useState("Kategoria:");
+    const [infoText2, setInfoText2] = useState("Aukiolo ajat:");
+    const [infoText3, setInfoText3] = useState("Osoite:");
+    const [infoText4, setInfoText4] = useState("Lisää tietoa");
+    const [infoText5, setInfoText5] = useState("Tietoa:");
+
+    useEffect(() => {
+      if (language == "eng") {
+        setInfoText1("Category:");
+        setInfoText2("Opening hours:");
+        setInfoText3("Address:");
+        setInfoText4("More info");
+        setInfoText5("Info:");
+      } else if (language == "fin") {
+        setInfoText1("Kategoria:");
+        setInfoText2("Aukioloajat:");
+        setInfoText3("Osoite:");
+        setInfoText4("Lisää tietoa");
+        setInfoText5("Tietoa:");
+      }
+    }, [language])
 
     // Icons for every event according to category
     if (eventIconPath == "Puut ja kasvit"){
@@ -95,10 +118,10 @@ export default function EventList() {
             {/* This modal is drop down from card */}
             {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
-              <Text style={styles.text}>Category: {json.Categories[0].title}</Text>
-              <Text style={styles.text}>Info: {json.content.length > 99 && (json.content.slice(0, 99) + "...")}
+              <Text style={styles.text}>{infoText1} {json.Categories[0].title}</Text>
+              <Text style={styles.text}>{infoText5} {json.content.length > 99 && (json.content.slice(0, 99) + "...")}
                 {json.content.length <= 99 && (json.content)}</Text>
-              <Button title="More info" onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
+              <Button title={infoText4} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
             </Card.Content>
             ) : null}
           </Card>
@@ -115,14 +138,14 @@ export default function EventList() {
                   <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
                 </View>
                 <ScrollView>
-                  <Text style={styles.fullDetailEventText}>Category: {json.Categories[0].title}</Text>
+                  <Text style={styles.fullDetailEventText}>{infoText1} {json.Categories[0].title}</Text>
                   {openingHours && (
-                    <Text style={styles.fullDetailEventText}>Opening hours: {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
+                    <Text style={styles.fullDetailEventText}>{infoText2} {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
                   )}
                   {address && (
-                    <Text style={styles.fullDetailEventText}>Street address: {json.meta.streetAddress}</Text>
+                    <Text style={styles.fullDetailEventText}>{infoText3} {json.meta.streetAddress}</Text>
                   )}
-                  <Text style={styles.fullDetailEventText}>Info: {json.content}</Text>
+                  <Text style={styles.fullDetailEventText}>{infoText5} {json.content}</Text>
                 </ScrollView>
                 <Bookmark item={json}/>
               </View>

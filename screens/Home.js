@@ -30,6 +30,23 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
   const [categories, setCategories] = useState([]);
 
+  const language = "fin"; // Add context here
+  const [alertButton1, setAlertButton1] = useState("Ok");
+  const [alertButton2, setAlertButton2] = useState("Virhe on tapahtunut");
+  const [alertButton3, setAlertButton3] = useState("Sinun sijaintia ei voitu saavuttaa.");
+
+  useEffect(() => {
+    if (language == "eng") {
+      setAlertButton1("Ok");
+      setAlertButton2("An error has occured");
+      setAlertButton3("Cannot retrieve your location.");
+    } else if (language == "fin") {
+      setAlertButton1("Ok");
+      setAlertButton2("Virhe on tapahtunut");
+      setAlertButton3("Sinun sijaintia ei voitu saavuttaa.");
+    }
+  }, [])
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -45,8 +62,8 @@ export default function Home() {
         setIsLoading(false);
       }
       catch (error) {
-        Alert.alert("An error has occurred", "Cannot retrieve your location.", [{
-            text: "Ok", style: "cancel",}
+        Alert.alert(alertButton2, alertButton3, [{
+            text: alertButton1, style: "cancel",}
         ]);
         setIsLoading(false);
       }

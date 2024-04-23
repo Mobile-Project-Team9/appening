@@ -8,8 +8,7 @@ import User from './screens/User';
 import fullData from './data/fullData.json';
 import { colors } from './styles/style';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [json, setJson] = useState(fullData);
@@ -29,7 +28,6 @@ export default function App() {
           </FilterContext.Provider>
         </BookmarkContext.Provider>
       </QueryContext.Provider>
-
    </NavigationContainer>
   );
 }
@@ -37,8 +35,25 @@ export default function App() {
 const Tab = createMaterialBottomTabNavigator();
 
 function MyTabs() {
+  const language = "fin"; // Add context here
+  const [navName1, setNavName1] = useState("Koti");
+  const [navName2, setNavName2] = useState("Lista");
+  const [navName3, setNavName3] = useState("Käyttäjä");
+
+  useEffect(() => {
+    if (language == "eng") {
+      setNavName1("Home");
+      setNavName2("List");
+      setNavName3("User");
+    } else if (language == "fin") {
+      setNavName1("Koti");
+      setNavName2("Lista");
+      setNavName3("Käyttäjä");
+    }
+  }, [language])
+
   return (
-    <Tab.Navigator  initialRouteName="Home"
+    <Tab.Navigator  initialRouteName={navName1}
       // Still missing colour for focused icons' background color
       activeColor= {colors.offBlue}
       inactiveColor= {colors.white}
@@ -46,19 +61,19 @@ function MyTabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
           let iconName;
-          if (route.name === 'Home') {
+          if (route.name === navName1) {
             iconName = focused ? 'map' : 'map-outline';
-          } else if (route.name === 'List') {
+          } else if (route.name === navName2) {
             iconName = focused ? 'view-list' : 'view-list-outline';
-          } else if (route.name === "User") {
+          } else if (route.name === navName3) {
             iconName = focused ? "account" : "account-outline";
           }
           return <MaterialCommunityIcons name={iconName} size={23} color={color}/>;
         }
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="List" component={List} />
-      <Tab.Screen name="User" component={User}  />
+      <Tab.Screen name={navName1} component={Home} />
+      <Tab.Screen name={navName2} component={List} />
+      <Tab.Screen name={navName3} component={User}  />
     </Tab.Navigator>
   );
 }
