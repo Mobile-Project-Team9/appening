@@ -17,12 +17,17 @@ const Search = () => {
     handleSearch(searchQuery)
  
   }, [filtersOn])
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      filtersOn.length !== 0 ? setJson(filteredJson) : setJson(fullData)
+    }
+  
+  }, [searchQuery])
+  
   
 
   const handleSearch = (query) => {
-    if (filtersOn.length === 0 && json !== fullData) {
-      setJson(fullData)
-    }
 
     setSearchQuery(query);
     if (filtersOn.length !== 0) {
