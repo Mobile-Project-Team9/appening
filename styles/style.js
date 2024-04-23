@@ -5,7 +5,8 @@ const colors = {
   mainColor: "#001E96",
   secondaryColor: "#E10069",
   offBlue: "#6878B5",
-  white: "#ffffff"
+  white: "#ffffff",
+  transparent: "#69696900"
 }
 
 const styles = StyleSheet.create({
@@ -153,6 +154,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '110%',
     marginTop: 0,
+  },
+
+  shortDescriptionPressableExit: {
+    backgroundColor: colors.transparent,
+    height: 440,
+    top: 6
   },
 
   //Shotdescription:

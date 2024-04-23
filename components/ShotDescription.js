@@ -45,6 +45,9 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
 
     return (
         <Modal visible={visible} onRequestClose={handleCloseModal} transparent={true}>
+            <Pressable onPress={handleCloseModal}>
+                <View style={styles.shortDescriptionPressableExit}></View>
+            </Pressable>
             <ScrollView contentContainerStyle={styles.modalContainer}>
                 <View>
                     <Pressable onPress={handleCloseModal} style={styles.fullDetailEventExitPressable}>
