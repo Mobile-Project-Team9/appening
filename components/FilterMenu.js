@@ -2,7 +2,7 @@ import { View, Text, Modal, Pressable, Alert } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { FilterContext, QueryContext } from '../data/Contexts'
+import { FilterContext, LanguageContext, QueryContext } from '../data/Contexts'
 import DropDownPicker from 'react-native-dropdown-picker'
 import fullData from '../data/fullData.json';
 //import Language from './Filter/language'
@@ -13,6 +13,7 @@ export default function FilterMenu() {
     const {json, setJson} = useContext(QueryContext)
     const {filtersOn, setFiltersOn} = useContext(FilterContext)
     const {filteredJson, setFilteredJson} = useContext(FilterContext)
+    const {language} = useContext(LanguageContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
@@ -25,6 +26,8 @@ export default function FilterMenu() {
     const [natureOpen, setNatureOpen] = useState(false)
     const [cultureOpen, setCultureOpen] = useState(false)
     const [utilitiesOpen, setUtilitiesOpen] = useState(false)
+
+    
 
     const onNatureOpen = () => {
         setCultureOpen(false)
@@ -144,7 +147,7 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setNature}
                                 onOpen={onNatureOpen}
-                                placeholder='Nature'
+                                placeholder={language === 'fi' ? 'Luonto' : 'Nature'}
                                 mode='BADGE'
 
                                 zIndex={3000}
@@ -160,7 +163,7 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setCulture}
                                 onOpen={onCultureOpen}
-                                placeholder='Culture'
+                                placeholder={language === 'fi' ? 'Kulttuuri' : 'Culture'}
                                 mode='BADGE'
 
                                 zIndex={2000}
@@ -176,7 +179,7 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setUtilities}
                                 onOpen={onUtilitiesOpen}
-                                placeholder='Utilities'
+                                placeholder={language === 'fi' ? 'Palvelut' : 'Utilities'}
                                 mode='BADGE'
 
                                 zIndex={1000}
@@ -186,10 +189,10 @@ export default function FilterMenu() {
                             
                         </View>
                         <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.hideMenuButtonText}>Close menu</Text>
+                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Sulje valikko' : 'Close menu'}</Text>
                         </Pressable>
                         <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
-                                <Text style={styles.hideMenuButtonText}>Clear filters</Text>
+                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Tyhjennä valinnat' : 'Clear filters'}</Text>
                         </Pressable>
                     </View>
                     <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />

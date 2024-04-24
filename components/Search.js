@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Searchbar } from 'react-native-paper';
 import { styles } from '../styles/style';
-import { FilterContext, QueryContext } from '../data/Contexts';
+import { FilterContext, LanguageContext, QueryContext } from '../data/Contexts';
 import fullData from '../data/fullData.json';
 
 const Search = () => {
   const { json, setJson } = useContext(QueryContext)
   const {filtersOn} = useContext(FilterContext)
   const {filteredJson} = useContext(FilterContext)
+  const {language} = useContext(LanguageContext)
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -50,7 +51,7 @@ const Search = () => {
     <Searchbar
       style={styles.searchbar}
       theme={{ colors: { onSurfaceVariant: '#fff', onSurface: '#fff' } }}
-      placeholder="Search"
+      placeholder={language === 'fi' ? 'Haku' : 'Search'}
       onChangeText={handleSearch}
       value={searchQuery}
     />
