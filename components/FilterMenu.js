@@ -17,6 +17,7 @@ export default function FilterMenu() {
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
+    const [categoriesEN, setCategoriesEN] = useState([])
     const [nature, setNature] = useState([])
     const [culture, setCulture] = useState([])
     const [utilities, setUtilities] = useState([])
@@ -46,6 +47,7 @@ export default function FilterMenu() {
 
     const getUniqueCategories = () => {
         let categoryList = []
+        let categoryListEN = []
         let jsonLength = Object.keys(fullData).length
 
         for (let i = 0; i < jsonLength; i++) {
@@ -55,17 +57,31 @@ export default function FilterMenu() {
         }
 
         setCategories(categoryList)
+
+        for (let i = 0; i < jsonLength; i++) {
+            if (!categoryListEN.includes(fullData[i].Categories[0].icon.slice(9))){
+                categoryListEN.push(fullData[i].Categories[0].icon.slice(9))
+            }
+        }
+
+        setCategoriesEN(categoryListEN)
     }
 
     const getFilterItems = () => {
         let items = []
+        let itemsEN = []
         let nature = []
         let culture = []
         let utilities = []
+        let natureEN = []
+        let cultureEN = []
+        let utilitiesEN = []
         let categoriesLength = categories.length
 
         for (let i = 0; i < categoriesLength; i++) {
             items.push({label: categories[i], value: categories[i].toLowerCase()})
+
+            itemsEN.push({label: categoriesEN[i], value: categoriesEN[i]})
         }
 
         for (let i = 0; i < items.length; i++) {
@@ -78,6 +94,8 @@ export default function FilterMenu() {
             else {
                 utilities.push(items[i])
             }
+
+            natureEN.push(itemsEN[i])
         }
 
         setNature(nature)
