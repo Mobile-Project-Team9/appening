@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     marginRight: 10, 
     borderRadius: 5, 
   },
+  
 
   containerLoading: {
     backgroundColor: colors.offBlue,
