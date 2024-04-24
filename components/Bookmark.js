@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { IconButton, Button } from 'react-native-paper';
+import React, { useContext, useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { IconButton } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BookmarkContext } from '../data/Contexts';
 
@@ -8,28 +8,37 @@ import { BookmarkContext } from '../data/Contexts';
 
 export default function Bookmark({ item }) {
   const { bookmarkList, setBookmarkList } = useContext(BookmarkContext);
+  // State to manage the bookmark icon color
+  const [isBookmarked, setIsBookmarked] = useState(bookmarkList.some(b => b.id === item.id));
 
-  const handlePress = async (item) => {
+  useEffect(() => {
+    setIsBookmarked(bookmarkList.some(b => b.id === item.id));
+  }, [bookmarkList]);
+
+  const handlePress = async () => {
     try {
-      // Check if the item is already in the bookmarkList
-      const isAlreadyBookmarked = bookmarkList.some((bookmark) => bookmark.id === item.id);
-      if (!isAlreadyBookmarked) {
-        // Update the bookmark list in context
-        setBookmarkList((prev) => [...prev, item]);
-        // Save the updated bookmark list to async storage
-        await AsyncStorage.setItem('bookmarkList', JSON.stringify([...bookmarkList, item]));
-      }
+      const updatedBookmarkList = isBookmarked
+        ? bookmarkList.filter(b => b.id !== item.id)
+        : [...bookmarkList, item];
+
+      // Update bookmark list in context
+      setBookmarkList(updatedBookmarkList);
+
+      // Save the updated bookmark list to async storage
+      await AsyncStorage.setItem('bookmarkList', JSON.stringify(updatedBookmarkList));
+
+      // Toggle bookmark state
+      setIsBookmarked(!isBookmarked);
     } catch (error) {
-      console.error('Error saving bookmark:', error);
+      console.error('Error updating bookmark:', error);
     }
   };
 
   useEffect(() => {
     const loadBookmarkList = async () => {
       try {
-        // Load bookmark list from async storage when component mounts
         const storedBookmarkList = await AsyncStorage.getItem('bookmarkList');
-        if (storedBookmarkList !== null) {
+        if (storedBookmarkList) {
           setBookmarkList(JSON.parse(storedBookmarkList));
         }
       } catch (error) {
@@ -38,18 +47,14 @@ export default function Bookmark({ item }) {
     };
 
     loadBookmarkList();
-
-    // Cleanup function
-    return () => {
-      // Cleanup actions if needed
-    };
-  }, [setBookmarkList]); // Run effect only on component mount and when setBookmarkList changes
+  }, [setBookmarkList]);
 
   return (
     <View>
       <IconButton
-        icon={"heart-outline"}
-        onPress={() => handlePress(item)}
+        icon={isBookmarked ? "heart" : "heart-outline"}
+        onPress={handlePress}
+        color={isBookmarked ? 'red' : 'grey'}
       />
     </View>
   );
