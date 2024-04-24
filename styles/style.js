@@ -21,8 +21,11 @@ const styles = StyleSheet.create({
     zIndex: 1,
     position: "absolute",
     width: '100%',
-    paddingTop: Constants.statusBarHeight + 5
+    paddingTop: Constants.statusBarHeight + 5,
+    paddingHorizontal: 10, // Add horizontal padding
+    backgroundColor: colors.transparent, // Ensuring it doesn't block underlying components
   },
+  
 
   headeruser: {
     backgroundColor: colors.mainColor,
@@ -42,6 +45,18 @@ const styles = StyleSheet.create({
     color: colors.white,
     marginBottom: 10,
   },
+  listItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    
+    borderBottomWidth: 1,
+    borderBottomColor: colors.offBlue,
+    marginHorizontal: 10,
+    
+  },
+  
 
   headerTitle: {
     fontSize: 16,
@@ -56,15 +71,21 @@ const styles = StyleSheet.create({
   },
 
   textuser: {
-    fontSize: 16,
-    color: 'black',
-    padding: 10,
-    backgroundColor: colors.offBlue,
-    marginBottom: 10, 
-    marginLeft: 10, 
-    marginRight: 10, 
-    borderRadius: 5, 
+    fontSize: 18,
+    color: colors.mainColor, // Adjust for better visibility
+    padding: 12,
+    backgroundColor: colors.offBlue, // Slightly lighter or darker for depth
+    marginBottom: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 8, // Slightly increased for a softer look
+    shadowColor: '#000', // Adding shadow for depth
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1.5,
+    elevation: 2,
   },
+  
   
 
   containerLoading: {

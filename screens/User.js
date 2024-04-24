@@ -3,8 +3,8 @@ import { View, SectionList, Text, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BookmarkContext } from '../data/Contexts';
 import Headeruser from '../components/Headeruser';
+import { IconButton } from 'react-native-paper';
 import { styles } from '../styles/style';
-import { Button } from 'react-native-paper';
 
 export default function User() {
   const { bookmarkList, setBookmarkList } = useContext(BookmarkContext); 
@@ -14,25 +14,18 @@ export default function User() {
   const toggleLoginModal = () => setLoginVisible(!loginVisible);
   const toggleRegisterModal = () => setRegisterVisible(!registerVisible);
 
-  const clearAsyncStorage = async () => {
-    Alert.alert(
-      "Clear AsyncStorage",
-      "Are you sure you want to clear all data?",
-      [
-        { text: "Cancel", style: "cancel" },
-        { text: "OK", onPress: async () => {
-          try {
-            await AsyncStorage.clear();
-            console.log('AsyncStorage cleared successfully.');
-            setBookmarkList([]); // Also clear the bookmark list in the context
-          } catch (error) {
-            console.error('Error clearing AsyncStorage:', error);
-          }
-        }},
-      ],
-    );
+  // Function to remove a bookmark from the list
+  const removeBookmark = async (id) => {
+    const newBookmarkList = bookmarkList.filter(item => item.id !== id);
+    try {
+      await AsyncStorage.setItem('bookmarkList', JSON.stringify(newBookmarkList));
+      setBookmarkList(newBookmarkList);
+    } catch (error) {
+      console.error('Error updating bookmark list:', error);
+    }
   };
 
+  // Effect to load bookmarks from storage on component mount
   useEffect(() => {
     const loadBookmarkList = async () => {
       try {
@@ -46,14 +39,22 @@ export default function User() {
     };
 
     loadBookmarkList();
-  }, []); // Removing setBookmarkList from dependencies if it's not expected to change
+  }, []);
 
   return (
     <View style={styles.containeruser}>
       <SectionList
         sections={[{ title: 'Bookmarks', data: bookmarkList }]}
         keyExtractor={(item) => item.id.toString()} 
-        renderItem={({ item }) => <Text style={styles.textuser}>{item.title}</Text>} 
+        renderItem={({ item }) => (
+          <View style={styles.listItem}>
+            <Text style={styles.textuser}>{item.title}</Text>
+            <IconButton
+              icon="delete"
+              onPress={() => removeBookmark(item.id)}
+            />
+          </View>
+        )} 
         renderSectionHeader={({ section: { title } }) => (
           <View style={styles.headeruser}>
             <Text style={styles.headerTitle}>{title}</Text>
@@ -66,7 +67,6 @@ export default function User() {
           </View>
         )}
       />
-      <Button onPress={clearAsyncStorage} mode="contained">Clear all</Button>
     </View>
   );
 }

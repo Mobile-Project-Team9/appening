@@ -27,7 +27,7 @@ export default function Bookmark({ item }) {
       // Save the updated bookmark list to async storage
       await AsyncStorage.setItem('bookmarkList', JSON.stringify(updatedBookmarkList));
 
-      // Toggle bookmark state
+     
       setIsBookmarked(!isBookmarked);
     } catch (error) {
       console.error('Error updating bookmark:', error);
