@@ -16,7 +16,7 @@ export default function App() {
   const [filtersOn, setFiltersOn] = useState([]);
   const [filteredJson, setFilteredJson] = useState([])
   const [Login, setLogin] = useState ([]);
-  const [language, setLanguage] = useState('fi')
+  const [language, setLanguage] = useState('en')
   
   return (
     <NavigationContainer>
@@ -38,17 +38,17 @@ export default function App() {
 const Tab = createMaterialBottomTabNavigator();
 
 function MyTabs() {
-  const language = "fin"; // Add context here
+  const language = "fi"; // Add context here
   const [navNameMap, setNavNameMap] = useState("Koti");
   const [navNameList, setNavNameList] = useState("Lista");
   const [navNameUser, setNavNameUser] = useState("Käyttäjä");
 
   useEffect(() => {
-    if (language == "eng") {
+    if (language == "en") {
       setNavNameMap("Home");
       setNavNameList("List");
       setNavNameUser("User");
-    } else if (language == "fin") {
+    } else if (language == "fi") {
       setNavNameMap("Koti");
       setNavNameList("Lista");
       setNavNameUser("Käyttäjä");

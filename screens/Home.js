@@ -10,7 +10,7 @@ import ShotDescription from '../components/ShotDescription';
 import { styles, colors } from '../styles/style';
 
 import fullData from '../data/fullData.json';
-import { QueryContext } from '../data/Contexts';
+import { LanguageContext, QueryContext } from '../data/Contexts';
 
 const INITIAL_LATITUDE = 65.0800;
 const INITIAL_LONGITUDE = 25.4800;
@@ -30,17 +30,17 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
   const [categories, setCategories] = useState([]);
 
-  const language = "fin"; // Add context here
+  const { language } = useContext(LanguageContext);
   const [alertButton, setAlertButton] = useState("Ok");
   const [alertHeader, setAlertHeader] = useState("Virhe on tapahtunut");
   const [alertContent, setAlertContent] = useState("Sinun sijaintia ei voitu saavuttaa.");
 
   useEffect(() => {
-    if (language == "eng") {
+    if (language == "en") {
       setAlertButton("Ok");
       setAlertHeader("An error has occured");
       setAlertContent("Cannot retrieve your location.");
-    } else if (language == "fin") {
+    } else if (language == "fi") {
       setAlertButton("Ok");
       setAlertHeader("Virhe on tapahtunut");
       setAlertContent("Sinun sijaintia ei voitu saavuttaa.");

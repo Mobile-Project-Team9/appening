@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, View, Text, Image, ScrollView, Pressable, Button } from 'react-native';
 import { styles, colors } from '../styles/style';
 import { Avatar } from "react-native-paper";
 import Bookmark from './Bookmark';
+import { LanguageContext } from '../data/Contexts';
 
 const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -11,7 +12,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const address = selectedShot?.meta?.streetAddress;
     const category = selectedShot?.Categories[0].title;
 
-    const language = "fin"; // Add context here
+    const { language } = useContext(LanguageContext);
     const [infoCategory, setInfoCategory] = useState("Kategoria:");
     const [infoHours, setInfoHours] = useState("Aukioloajat:");
     const [infoAddress, setInfoAddress] = useState("Osoite:");
@@ -21,7 +22,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const [infoTextContent, setInfoTextContent] = useState("");
 
     useEffect(() => {
-      if (language == "eng") {
+      if (language == "en") {
         setInfoCategory("Category:");
         setInfoHours("Opening hours:");
         setInfoAddress("Address:");
@@ -30,21 +31,20 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
         if (selectedShot?.i18n?.en?.title) {
             setInfoTitle(selectedShot?.i18n?.en?.title);
         } else if (!selectedShot?.i18n?.en?.title) {
-            setInfoTitle("Title cannot be found in this language.");
+            setInfoTitle("Title can't be found in this language.");
         }
-
         if (selectedShot?.i18n?.en?.content) {
             setInfoTextContent(selectedShot?.i18n?.en?.content);
         } else if (!selectedShot?.i18n?.en?.content) {
-            setInfoTextContent("Content cannot be found in this language.");
+            setInfoTextContent("Content can't be found in this language.");
         }
-      } else if (language == "fin") {
+      } else if (language == "fi") {
         setInfoCategory("Kategoria:");
         setInfoHours("Aukioloajat:");
         setInfoAddress("Osoite:");
         setInfoButton("Lisää tietoa");
-        setInfoTextHeader("Tietoa:");
         setInfoTitle(selectedShot?.title);
+        setInfoTextHeader("Tietoa:");
         setInfoTextContent(selectedShot?.content);
       }
     }, [selectedShot])

@@ -20,26 +20,40 @@ export default function EventList() {
     const openingHours = json?.activeTimeStart;
     const address = json?.meta?.streetAddress;
 
-    const language = useContext(LanguageContext);
-    const [infoText1, setInfoText1] = useState("Kategoria:");
-    const [infoText2, setInfoText2] = useState("Aukiolo ajat:");
-    const [infoText3, setInfoText3] = useState("Osoite:");
-    const [infoText4, setInfoText4] = useState("Lisää tietoa");
-    const [infoText5, setInfoText5] = useState("Tietoa:");
+    const { language } = useContext(LanguageContext);
+    const [infoCategory, setInfoCategory] = useState("Kategoria:");
+    const [infoHours, setInfoHours] = useState("Aukioloajat:");
+    const [infoAddress, setInfoAddress] = useState("Osoite:");
+    const [infoButton, setInfoButton] = useState("Lisää tietoa");
+    const [infoTitle, setInfoTitle] = useState("");
+    const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
+    const [infoTextContent, setInfoTextContent] = useState("");
 
     useEffect(() => {
       if (language == "en") {
-        setInfoText1("Category:");
-        setInfoText2("Opening hours:");
-        setInfoText3("Address:");
-        setInfoText4("More info");
-        setInfoText5("Info:");
+        setInfoCategory("Category:");
+        setInfoHours("Opening hours:");
+        setInfoAddress("Address:");
+        setInfoButton("More info");
+        setInfoTextHeader("Info:");
+        if (json?.i18n?.en?.title) {
+            setInfoTitle(json?.i18n?.en?.title);
+        } else if (!json?.i18n?.en?.title) {
+            setInfoTitle("Title can't be found in this language.");
+        }
+        if (json?.i18n?.en?.content) {
+            setInfoTextContent(json?.i18n?.en?.content);
+        } else if (!json?.i18n?.en?.content) {
+            setInfoTextContent("Content can't be found in this language.");
+        }
       } else if (language == "fi") {
-        setInfoText1("Kategoria:");
-        setInfoText2("Aukioloajat:");
-        setInfoText3("Osoite:");
-        setInfoText4("Lisää tietoa");
-        setInfoText5("Tietoa:");
+        setInfoCategory("Kategoria:");
+        setInfoHours("Aukioloajat:");
+        setInfoAddress("Osoite:");
+        setInfoButton("Lisää tietoa");
+        setInfoTitle(json?.title);
+        setInfoTextHeader("Tietoa:");
+        setInfoTextContent(json?.content);
       }
     }, [json])
 
