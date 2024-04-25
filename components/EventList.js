@@ -1,6 +1,6 @@
 import { View, Text, FlatList, Button, Pressable, Modal, Image, ScrollView } from 'react-native'
 import { React, useContext, useState, useEffect } from 'react';
-import { QueryContext } from '../data/Contexts';
+import { LanguageContext, QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar } from "react-native-paper";
 import Bookmark from '../components/Bookmark'
@@ -21,7 +21,7 @@ export default function EventList() {
     const openingHours = json?.activeTimeStart;
     const address = json?.meta?.streetAddress;
 
-    const language = "fin"; // Add context here
+    const {language} = useContext(LanguageContext)
     const [infoText1, setInfoText1] = useState("Kategoria:");
     const [infoText2, setInfoText2] = useState("Aukiolo ajat:");
     const [infoText3, setInfoText3] = useState("Osoite:");
@@ -29,13 +29,13 @@ export default function EventList() {
     const [infoText5, setInfoText5] = useState("Tietoa:");
 
     useEffect(() => {
-      if (language == "eng") {
+      if (language == "en") {
         setInfoText1("Category:");
         setInfoText2("Opening hours:");
         setInfoText3("Address:");
         setInfoText4("More info");
         setInfoText5("Info:");
-      } else if (language == "fin") {
+      } else if (language == "fi") {
         setInfoText1("Kategoria:");
         setInfoText2("Aukioloajat:");
         setInfoText3("Osoite:");
