@@ -27,14 +27,14 @@ export default function Home() {
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState(fullData); // for searching
-  const [selectedCategory, setSelectedCategory] = useState(null); // for filtering by category
-  const [categories, setCategories] = useState([]);
+  
 
   const language = "fin"; // Add context here
   const [alertButton1, setAlertButton1] = useState("Ok");
   const [alertButton2, setAlertButton2] = useState("Virhe on tapahtunut");
   const [alertButton3, setAlertButton3] = useState("Sinun sijaintia ei voitu saavuttaa.");
 
+ 
   useEffect(() => {
     if (language == "eng") {
       setAlertButton1("Ok");

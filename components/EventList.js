@@ -3,7 +3,8 @@ import { React, useContext, useState, useEffect } from 'react';
 import { QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar } from "react-native-paper";
-import Bookmark from '../components/Bookmark'
+import Bookmark from '../components/Bookmark';
+import ShowOnMap from './ShowOnMap';
 
 export default function EventList() {
   const {json, setJson} = useContext(QueryContext);
@@ -27,6 +28,7 @@ export default function EventList() {
     const [infoText3, setInfoText3] = useState("Osoite:");
     const [infoText4, setInfoText4] = useState("Lisää tietoa");
     const [infoText5, setInfoText5] = useState("Tietoa:");
+    const [infoText6, setInfoText6] = useState("Näytä kartalla")
 
     useEffect(() => {
       if (language == "eng") {
@@ -35,12 +37,14 @@ export default function EventList() {
         setInfoText3("Address:");
         setInfoText4("More info");
         setInfoText5("Info:");
+        setInfoText6("Show on map");
       } else if (language == "fin") {
         setInfoText1("Kategoria:");
         setInfoText2("Aukioloajat:");
         setInfoText3("Osoite:");
         setInfoText4("Lisää tietoa");
         setInfoText5("Tietoa:");
+        setInfoText6("Näytä kartalla");
       }
     }, [language])
 
@@ -122,6 +126,7 @@ export default function EventList() {
               <Text style={styles.text}>{infoText5} {json.content.length > 99 && (json.content.slice(0, 99) + "...")}
                 {json.content.length <= 99 && (json.content)}</Text>
               <Button title={infoText4} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
+              <ShowOnMap buttonName={infoText6} item={json} navigation={navigation}/>
             </Card.Content>
             ) : null}
           </Card>
