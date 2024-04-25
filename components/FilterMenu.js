@@ -81,7 +81,14 @@ export default function FilterMenu() {
         for (let i = 0; i < categoriesLength; i++) {
             items.push({label: categories[i], value: categories[i].toLowerCase()})
 
-            itemsEN.push({label: categoriesEN[i], value: categoriesEN[i]})
+            if (categoriesEN[i] === 'ked-3-active') {
+                categoriesEN[i] = 'sightseeing'
+            }
+            else if (categoriesEN[i] === '') {
+                categoriesEN[i] = 'route'
+            }
+
+            itemsEN.push({label: categoriesEN[i].replaceAll("-", ' '), value: categories[i].toLowerCase()})
         }
 
         for (let i = 0; i < items.length; i++) {
@@ -95,12 +102,28 @@ export default function FilterMenu() {
                 utilities.push(items[i])
             }
 
-            natureEN.push(itemsEN[i])
+            if (itemsEN[i].value === 'puut ja kasvit' || itemsEN[i].value === 'puisto' || itemsEN[i].value === 'retkeilyreitti' || itemsEN[i].value === 'tulentekopaikka' || itemsEN[i].value === 'näköalatorni' || itemsEN[i].value === 'kuivakäymälä' ||itemsEN[i].value === 'liiteri' || itemsEN[i].value === 'laavu' || itemsEN[i].value === 'uimaranta') {
+                natureEN.push(itemsEN[i])
+            }
+            else if (itemsEN[i].value === 'taideteos' || itemsEN[i].value === 'arkkitehtuuri' || itemsEN[i].value === 'patsas' || itemsEN[i].value === 'nähtävyys' || itemsEN[i].value === 'historiallinen kohde' || itemsEN[i].value === 'tapahtuma' || itemsEN[i].value === 'kirkko' || itemsEN[i].value === 'kulttuuritalo' || itemsEN[i].value === 'kulttuuri' || itemsEN[i].value === 'galleria' || itemsEN[i].value === 'virtuaalipolku' || itemsEN[i].value === 'reitti' || itemsEN[i].value === 'kirjasto') {
+                cultureEN.push(itemsEN[i])
+            }
+            else {
+                utilitiesEN.push(itemsEN[i])
+            }
+
         }
 
-        setNature(nature)
-        setCulture(culture)
-        setUtilities(utilities)
+        if (language === 'fi') {
+            setNature(nature)
+            setCulture(culture)
+            setUtilities(utilities)
+        }
+        else if (language === 'en') {
+            setNature(natureEN)
+            setCulture(cultureEN)
+            setUtilities(utilitiesEN)
+        }
     }
 
     useEffect(() => {
@@ -157,6 +180,7 @@ export default function FilterMenu() {
                     <View style={styles.filterMenu}>
                         <View style={styles.filterMenuContent}>
                             <DropDownPicker 
+                                textStyle={{textTransform: 'capitalize'}}
                                 multiple={true}
                                 open={natureOpen}
                                 value={selectedFilters}
@@ -173,6 +197,7 @@ export default function FilterMenu() {
                             />
 
                             <DropDownPicker 
+                                textStyle={{textTransform: 'capitalize'}}
                                 multiple={true}
                                 open={cultureOpen}
                                 value={selectedFilters}
@@ -189,6 +214,7 @@ export default function FilterMenu() {
                             />
 
                             <DropDownPicker 
+                                textStyle={{textTransform: 'capitalize'}}
                                 multiple={true}
                                 open={utilitiesOpen}
                                 value={selectedFilters}
