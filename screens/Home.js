@@ -31,19 +31,19 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
 
   const language = "fin"; // Add context here
-  const [alertButton1, setAlertButton1] = useState("Ok");
-  const [alertButton2, setAlertButton2] = useState("Virhe on tapahtunut");
-  const [alertButton3, setAlertButton3] = useState("Sinun sijaintia ei voitu saavuttaa.");
+  const [alertButton, setAlertButton] = useState("Ok");
+  const [alertHeader, setAlertHeader] = useState("Virhe on tapahtunut");
+  const [alertContent, setAlertContent] = useState("Sinun sijaintia ei voitu saavuttaa.");
 
   useEffect(() => {
     if (language == "eng") {
-      setAlertButton1("Ok");
-      setAlertButton2("An error has occured");
-      setAlertButton3("Cannot retrieve your location.");
+      setAlertButton("Ok");
+      setAlertHeader("An error has occured");
+      setAlertContent("Cannot retrieve your location.");
     } else if (language == "fin") {
-      setAlertButton1("Ok");
-      setAlertButton2("Virhe on tapahtunut");
-      setAlertButton3("Sinun sijaintia ei voitu saavuttaa.");
+      setAlertButton("Ok");
+      setAlertHeader("Virhe on tapahtunut");
+      setAlertContent("Sinun sijaintia ei voitu saavuttaa.");
     }
   }, [])
 
@@ -62,8 +62,8 @@ export default function Home() {
         setIsLoading(false);
       }
       catch (error) {
-        Alert.alert(alertButton2, alertButton3, [{
-            text: alertButton1, style: "cancel",}
+        Alert.alert(alertHeader, alertContent, [{
+            text: alertButton, style: "cancel",}
         ]);
         setIsLoading(false);
       }

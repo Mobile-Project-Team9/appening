@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image } from "react-native";
 import { styles } from '../styles/style';
-import Login from '../screens/Login'
-import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 const LoadingScreen = () => {

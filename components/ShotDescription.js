@@ -12,27 +12,42 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const category = selectedShot?.Categories[0].title;
 
     const language = "fin"; // Add context here
-    const [infoText1, setInfoText1] = useState("Kategoria:");
-    const [infoText2, setInfoText2] = useState("Aukioloajat:");
-    const [infoText3, setInfoText3] = useState("Osoite:");
-    const [infoText4, setInfoText4] = useState("Lisää tietoa");
-    const [infoText5, setInfoText5] = useState("Tietoa:");
-  
+    const [infoCategory, setInfoCategory] = useState("Kategoria:");
+    const [infoHours, setInfoHours] = useState("Aukioloajat:");
+    const [infoAddress, setInfoAddress] = useState("Osoite:");
+    const [infoButton, setInfoButton] = useState("Lisää tietoa");
+    const [infoTitle, setInfoTitle] = useState("");
+    const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
+    const [infoTextContent, setInfoTextContent] = useState("");
+
     useEffect(() => {
       if (language == "eng") {
-        setInfoText1("Category:");
-        setInfoText2("Opening hours:");
-        setInfoText3("Address:");
-        setInfoText4("More info");
-        setInfoText5("Info:");
+        setInfoCategory("Category:");
+        setInfoHours("Opening hours:");
+        setInfoAddress("Address:");
+        setInfoButton("More info");
+        setInfoTextHeader("Info:");
+        if (selectedShot?.i18n?.en?.title) {
+            setInfoTitle(selectedShot?.i18n?.en?.title);
+        } else if (!selectedShot?.i18n?.en?.title) {
+            setInfoTitle("Title cannot be found in this language.");
+        }
+
+        if (selectedShot?.i18n?.en?.content) {
+            setInfoTextContent(selectedShot?.i18n?.en?.content);
+        } else if (!selectedShot?.i18n?.en?.content) {
+            setInfoTextContent("Content cannot be found in this language.");
+        }
       } else if (language == "fin") {
-        setInfoText1("Kategoria:");
-        setInfoText2("Aukioloajat:");
-        setInfoText3("Osoite:");
-        setInfoText4("Lisää tietoa");
-        setInfoText5("Tietoa:");
+        setInfoCategory("Kategoria:");
+        setInfoHours("Aukioloajat:");
+        setInfoAddress("Osoite:");
+        setInfoButton("Lisää tietoa");
+        setInfoTextHeader("Tietoa:");
+        setInfoTitle(selectedShot?.title);
+        setInfoTextContent(selectedShot?.content);
       }
-    }, [language])
+    }, [selectedShot])
 
     const handleCloseModal = () => {
         setModalVisible(false);
@@ -53,7 +68,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                     <Pressable onPress={handleCloseModal} style={styles.fullDetailEventExitPressable}>
                         <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
                     </Pressable>
-                    <Text style={styles.title}>{selectedShot?.title}</Text>
+                    <Text style={styles.title}>{infoTitle}</Text>
                     {imagePath && (
                         <Image
                             source={{ uri: imagePath }}
@@ -61,33 +76,33 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                         />
                     )}
                     {category && (
-                        <Text style={styles.infoText}>{infoText1} {selectedShot?.Categories?.[0]?.title}</Text>
+                        <Text style={styles.infoText}>{infoCategory} {selectedShot?.Categories?.[0]?.title}</Text>
                     )}
                     {openingHours && (
-                        <Text style={styles.infoText}>{infoText2} {selectedShot?.ActiveTimeStart}</Text>
+                        <Text style={styles.infoText}>{infoHours} {selectedShot?.ActiveTimeStart}</Text>
                     )}
-                    <Button title={infoText4} onPress={() => setModalVisible(true)} color={colors.secondaryColor}></Button>
+                    <Button title={infoButton} onPress={() => setModalVisible(true)} color={colors.secondaryColor}></Button>
                     {modalVisible && (
                         <Modal>
                             <View style={styles.fullDetailEventView}>
                                 <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
                                     <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
                                 </Pressable>
-                                <Text style={styles.fullDetailEventHeader}>{selectedShot?.title}</Text>
+                                <Text style={styles.fullDetailEventHeader}>{infoTitle}</Text>
                                 <View style={styles.fullDetailEventImageView}>
                                 {imagePath && (
                                     <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
                                 )}
                                 </View>
                                 <ScrollView>
-                                <Text style={styles.fullDetailEventText}>{infoText1} {selectedShot?.Categories[0].title}</Text>
+                                <Text style={styles.fullDetailEventText}>{infoCategory} {selectedShot?.Categories[0].title}</Text>
                                 {openingHours && (
-                                    <Text style={styles.fullDetailEventText}>{infoText2} {selectedShot?.activeTimeStart} - {selectedShot?.activeTimeEnd} .</Text>
+                                    <Text style={styles.fullDetailEventText}>{infoHours} {selectedShot?.activeTimeStart} - {selectedShot?.activeTimeEnd} .</Text>
                                 )}
                                 {address && (
-                                    <Text style={styles.fullDetailEventText}>{infoText3} {selectedShot?.meta.streetAddress}</Text>
+                                    <Text style={styles.fullDetailEventText}>{infoAddress} {selectedShot?.meta.streetAddress}</Text>
                                 )}
-                                <Text style={styles.fullDetailEventText}>{infoText5} {selectedShot?.content}</Text>
+                                <Text style={styles.fullDetailEventText}>{infoTextHeader} {infoTextContent}</Text>
                                 </ScrollView>
                                 <Bookmark item={selectedShot}/>
                             </View>
