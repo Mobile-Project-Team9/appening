@@ -2,7 +2,7 @@ import { View, Text, Modal, Pressable, Alert } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { FilterContext, QueryContext } from '../data/Contexts'
+import { FilterContext, LanguageContext, QueryContext } from '../data/Contexts'
 import DropDownPicker from 'react-native-dropdown-picker'
 import fullData from '../data/fullData.json';
 //import Language from './Filter/language'
@@ -13,9 +13,11 @@ export default function FilterMenu() {
     const {json, setJson} = useContext(QueryContext)
     const {filtersOn, setFiltersOn} = useContext(FilterContext)
     const {filteredJson, setFilteredJson} = useContext(FilterContext)
+    const {language} = useContext(LanguageContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
+    const [categoriesEN, setCategoriesEN] = useState([])
     const [nature, setNature] = useState([])
     const [culture, setCulture] = useState([])
     const [utilities, setUtilities] = useState([])
@@ -25,6 +27,8 @@ export default function FilterMenu() {
     const [natureOpen, setNatureOpen] = useState(false)
     const [cultureOpen, setCultureOpen] = useState(false)
     const [utilitiesOpen, setUtilitiesOpen] = useState(false)
+
+    
 
     const onNatureOpen = () => {
         setCultureOpen(false)
@@ -43,6 +47,7 @@ export default function FilterMenu() {
 
     const getUniqueCategories = () => {
         let categoryList = []
+        let categoryListEN = []
         let jsonLength = Object.keys(fullData).length
 
         for (let i = 0; i < jsonLength; i++) {
@@ -52,17 +57,38 @@ export default function FilterMenu() {
         }
 
         setCategories(categoryList)
+
+        for (let i = 0; i < jsonLength; i++) {
+            if (!categoryListEN.includes(fullData[i].Categories[0].icon.slice(9))){
+                categoryListEN.push(fullData[i].Categories[0].icon.slice(9))
+            }
+        }
+
+        setCategoriesEN(categoryListEN)
     }
 
     const getFilterItems = () => {
         let items = []
+        let itemsEN = []
         let nature = []
         let culture = []
         let utilities = []
+        let natureEN = []
+        let cultureEN = []
+        let utilitiesEN = []
         let categoriesLength = categories.length
 
         for (let i = 0; i < categoriesLength; i++) {
             items.push({label: categories[i], value: categories[i].toLowerCase()})
+
+            if (categoriesEN[i] === 'ked-3-active') {
+                categoriesEN[i] = 'sightseeing'
+            }
+            else if (categoriesEN[i] === '') {
+                categoriesEN[i] = 'route'
+            }
+
+            itemsEN.push({label: categoriesEN[i].replaceAll("-", ' '), value: categories[i].toLowerCase()})
         }
 
         for (let i = 0; i < items.length; i++) {
@@ -75,11 +101,29 @@ export default function FilterMenu() {
             else {
                 utilities.push(items[i])
             }
+
+            if (itemsEN[i].value === 'puut ja kasvit' || itemsEN[i].value === 'puisto' || itemsEN[i].value === 'retkeilyreitti' || itemsEN[i].value === 'tulentekopaikka' || itemsEN[i].value === 'näköalatorni' || itemsEN[i].value === 'kuivakäymälä' ||itemsEN[i].value === 'liiteri' || itemsEN[i].value === 'laavu' || itemsEN[i].value === 'uimaranta') {
+                natureEN.push(itemsEN[i])
+            }
+            else if (itemsEN[i].value === 'taideteos' || itemsEN[i].value === 'arkkitehtuuri' || itemsEN[i].value === 'patsas' || itemsEN[i].value === 'nähtävyys' || itemsEN[i].value === 'historiallinen kohde' || itemsEN[i].value === 'tapahtuma' || itemsEN[i].value === 'kirkko' || itemsEN[i].value === 'kulttuuritalo' || itemsEN[i].value === 'kulttuuri' || itemsEN[i].value === 'galleria' || itemsEN[i].value === 'virtuaalipolku' || itemsEN[i].value === 'reitti' || itemsEN[i].value === 'kirjasto') {
+                cultureEN.push(itemsEN[i])
+            }
+            else {
+                utilitiesEN.push(itemsEN[i])
+            }
+
         }
 
-        setNature(nature)
-        setCulture(culture)
-        setUtilities(utilities)
+        if (language === 'fi') {
+            setNature(nature)
+            setCulture(culture)
+            setUtilities(utilities)
+        }
+        else if (language === 'en') {
+            setNature(natureEN)
+            setCulture(cultureEN)
+            setUtilities(utilitiesEN)
+        }
     }
 
     useEffect(() => {
@@ -136,6 +180,7 @@ export default function FilterMenu() {
                     <View style={styles.filterMenu}>
                         <View style={styles.filterMenuContent}>
                             <DropDownPicker 
+                                textStyle={{textTransform: 'capitalize'}}
                                 multiple={true}
                                 open={natureOpen}
                                 value={selectedFilters}
@@ -144,7 +189,7 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setNature}
                                 onOpen={onNatureOpen}
-                                placeholder='Nature'
+                                placeholder={language === 'fi' ? 'Luonto' : 'Nature'}
                                 mode='BADGE'
 
                                 zIndex={3000}
@@ -152,6 +197,7 @@ export default function FilterMenu() {
                             />
 
                             <DropDownPicker 
+                                textStyle={{textTransform: 'capitalize'}}
                                 multiple={true}
                                 open={cultureOpen}
                                 value={selectedFilters}
@@ -160,7 +206,7 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setCulture}
                                 onOpen={onCultureOpen}
-                                placeholder='Culture'
+                                placeholder={language === 'fi' ? 'Kulttuuri' : 'Culture'}
                                 mode='BADGE'
 
                                 zIndex={2000}
@@ -168,6 +214,7 @@ export default function FilterMenu() {
                             />
 
                             <DropDownPicker 
+                                textStyle={{textTransform: 'capitalize'}}
                                 multiple={true}
                                 open={utilitiesOpen}
                                 value={selectedFilters}
@@ -176,7 +223,7 @@ export default function FilterMenu() {
                                 setValue={setSelectedFilters}
                                 setItems={setUtilities}
                                 onOpen={onUtilitiesOpen}
-                                placeholder='Utilities'
+                                placeholder={language === 'fi' ? 'Palvelut' : 'Utilities'}
                                 mode='BADGE'
 
                                 zIndex={1000}
@@ -186,10 +233,10 @@ export default function FilterMenu() {
                             
                         </View>
                         <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.hideMenuButtonText}>Close menu</Text>
+                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Sulje valikko' : 'Close menu'}</Text>
                         </Pressable>
                         <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
-                                <Text style={styles.hideMenuButtonText}>Clear filters</Text>
+                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Tyhjennä valinnat' : 'Clear filters'}</Text>
                         </Pressable>
                     </View>
                     <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />

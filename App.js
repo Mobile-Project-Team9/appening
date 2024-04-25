@@ -1,7 +1,7 @@
 import { PaperProvider } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { QueryContext, BookmarkContext, FilterContext, LoginContext } from './data/Contexts';
+import { QueryContext, BookmarkContext, FilterContext, LoginContext, LanguageContext } from './data/Contexts';
 import Home from './screens/Home';
 import List from './screens/List';
 import User from './screens/User';
@@ -16,15 +16,18 @@ export default function App() {
   const [filtersOn, setFiltersOn] = useState([]);
   const [filteredJson, setFilteredJson] = useState([])
   const [Login, setLogin] = useState ([]);
+  const [language, setLanguage] = useState('fi')
   
   return (
     <NavigationContainer>
       <QueryContext.Provider value={{ json, setJson }}>
         <BookmarkContext.Provider value ={{bookmarkList, setBookmarkList}}>
           <FilterContext.Provider value={{filtersOn, setFiltersOn, filteredJson, setFilteredJson}}>
-            <PaperProvider>
-                <MyTabs/>
-            </PaperProvider>
+            <LanguageContext.Provider value={{language, setLanguage}}>
+              <PaperProvider>
+                  <MyTabs/>
+              </PaperProvider>
+            </LanguageContext.Provider>
           </FilterContext.Provider>
         </BookmarkContext.Provider>
       </QueryContext.Provider>
