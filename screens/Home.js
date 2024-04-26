@@ -10,7 +10,7 @@ import ShotDescription from '../components/ShotDescription';
 import { styles, colors } from '../styles/style';
 
 import fullData from '../data/fullData.json';
-import { QueryContext } from '../data/Contexts';
+import { LanguageContext, QueryContext } from '../data/Contexts';
 
 const INITIAL_LATITUDE = 65.0800;
 const INITIAL_LONGITUDE = 25.4800;
@@ -29,21 +29,21 @@ export default function Home() {
   const [filteredLocations, setFilteredLocations] = useState(fullData); // for searching
   
 
-  const language = "fin"; // Add context here
-  const [alertButton1, setAlertButton1] = useState("Ok");
-  const [alertButton2, setAlertButton2] = useState("Virhe on tapahtunut");
-  const [alertButton3, setAlertButton3] = useState("Sinun sijaintia ei voitu saavuttaa.");
+  const { language } = useContext(LanguageContext);
+  const [alertButton, setAlertButton] = useState("Ok");
+  const [alertHeader, setAlertHeader] = useState("Virhe on tapahtunut");
+  const [alertContent, setAlertContent] = useState("Sinun sijaintia ei voitu saavuttaa.");
 
  
   useEffect(() => {
-    if (language == "eng") {
-      setAlertButton1("Ok");
-      setAlertButton2("An error has occured");
-      setAlertButton3("Cannot retrieve your location.");
-    } else if (language == "fin") {
-      setAlertButton1("Ok");
-      setAlertButton2("Virhe on tapahtunut");
-      setAlertButton3("Sinun sijaintia ei voitu saavuttaa.");
+    if (language == "en") {
+      setAlertButton("Ok");
+      setAlertHeader("An error has occured");
+      setAlertContent("Cannot retrieve your location.");
+    } else if (language == "fi") {
+      setAlertButton("Ok");
+      setAlertHeader("Virhe on tapahtunut");
+      setAlertContent("Sinun sijaintia ei voitu saavuttaa.");
     }
   }, [])
 
@@ -62,8 +62,8 @@ export default function Home() {
         setIsLoading(false);
       }
       catch (error) {
-        Alert.alert(alertButton2, alertButton3, [{
-            text: alertButton1, style: "cancel",}
+        Alert.alert(alertHeader, alertContent, [{
+            text: alertButton, style: "cancel",}
         ]);
         setIsLoading(false);
       }

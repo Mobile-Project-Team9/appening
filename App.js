@@ -1,4 +1,4 @@
-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryContext, BookmarkContext, FilterContext, LoginContext, LanguageContext } from './data/Contexts';
@@ -16,7 +16,7 @@ export default function App() {
   const [filtersOn, setFiltersOn] = useState([]);
   const [filteredJson, setFilteredJson] = useState([])
   const [Login, setLogin] = useState ([]);
-  const [language, setLanguage] = useState('fi')
+  const [language, setLanguage] = useState('en')
   
   return (
     <NavigationContainer>
@@ -38,25 +38,25 @@ export default function App() {
 const Tab = createMaterialBottomTabNavigator();
 
 function MyTabs() {
-  const language = "fin"; // Add context here
-  const [navName1, setNavName1] = useState("Koti");
-  const [navName2, setNavName2] = useState("Lista");
-  const [navName3, setNavName3] = useState("Käyttäjä");
+  const language = "fi"; // Add context here
+  const [navNameMap, setNavNameMap] = useState("Koti");
+  const [navNameList, setNavNameList] = useState("Lista");
+  const [navNameUser, setNavNameUser] = useState("Käyttäjä");
 
   useEffect(() => {
-    if (language == "eng") {
-      setNavName1("Home");
-      setNavName2("List");
-      setNavName3("User");
-    } else if (language == "fin") {
-      setNavName1("Koti");
-      setNavName2("Lista");
-      setNavName3("Käyttäjä");
+    if (language == "en") {
+      setNavNameMap("Home");
+      setNavNameList("List");
+      setNavNameUser("User");
+    } else if (language == "fi") {
+      setNavNameMap("Koti");
+      setNavNameList("Lista");
+      setNavNameUser("Käyttäjä");
     }
   }, [language])
 
   return (
-    <Tab.Navigator  initialRouteName={navName1}
+    <Tab.Navigator  initialRouteName={navNameMap}
       // Still missing colour for focused icons' background color
       activeColor= {colors.offBlue}
       inactiveColor= {colors.white}
@@ -64,19 +64,19 @@ function MyTabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
           let iconName;
-          if (route.name === navName1) {
+          if (route.name === navNameMap) {
             iconName = focused ? 'map' : 'map-outline';
-          } else if (route.name === navName2) {
+          } else if (route.name === navNameList) {
             iconName = focused ? 'view-list' : 'view-list-outline';
-          } else if (route.name === navName3) {
+          } else if (route.name === navNameUser) {
             iconName = focused ? "account" : "account-outline";
           }
           return <MaterialCommunityIcons name={iconName} size={23} color={color}/>;
         }
       })}>
-      <Tab.Screen name={navName1} component={Home} />
-      <Tab.Screen name={navName2} component={List} />
-      <Tab.Screen name={navName3} component={User}  />
+      <Tab.Screen name={navNameMap} component={Home} />
+      <Tab.Screen name={navNameList} component={List} />
+      <Tab.Screen name={navNameUser} component={User}  />
     </Tab.Navigator>
   );
 }

@@ -1,6 +1,6 @@
 import { View, Text, FlatList, Button, Pressable, Modal, Image, ScrollView } from 'react-native'
 import { React, useContext, useState, useEffect } from 'react';
-import { QueryContext } from '../data/Contexts';
+import { LanguageContext, QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar } from "react-native-paper";
 import Bookmark from '../components/Bookmark';
@@ -11,7 +11,6 @@ export default function EventList() {
 
   // This is the item which flatlist goes through
   function Item({ json }){
-    const eventName = (json.title);
     const eventIconPath = (json.Categories[0].title);
     let eventIcon = "";
     let drawerIcon = "arrow-down";
@@ -22,84 +21,95 @@ export default function EventList() {
     const openingHours = json?.activeTimeStart;
     const address = json?.meta?.streetAddress;
 
-    const language = "fin"; // Add context here
-    const [infoText1, setInfoText1] = useState("Kategoria:");
-    const [infoText2, setInfoText2] = useState("Aukiolo ajat:");
-    const [infoText3, setInfoText3] = useState("Osoite:");
-    const [infoText4, setInfoText4] = useState("Lisää tietoa");
-    const [infoText5, setInfoText5] = useState("Tietoa:");
-    const [infoText6, setInfoText6] = useState("Näytä kartalla")
+    const { language } = useContext(LanguageContext);
+    const [infoCategory, setInfoCategory] = useState("Kategoria:");
+    const [infoHours, setInfoHours] = useState("Aukioloajat:");
+    const [infoAddress, setInfoAddress] = useState("Osoite:");
+    const [infoButton, setInfoButton] = useState("Lisää tietoa");
+    const [infoTitle, setInfoTitle] = useState("");
+    const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
+    const [infoTextContent, setInfoTextContent] = useState("");
 
     useEffect(() => {
-      if (language == "eng") {
-        setInfoText1("Category:");
-        setInfoText2("Opening hours:");
-        setInfoText3("Address:");
-        setInfoText4("More info");
-        setInfoText5("Info:");
-        setInfoText6("Show on map");
-      } else if (language == "fin") {
-        setInfoText1("Kategoria:");
-        setInfoText2("Aukioloajat:");
-        setInfoText3("Osoite:");
-        setInfoText4("Lisää tietoa");
-        setInfoText5("Tietoa:");
-        setInfoText6("Näytä kartalla");
+      if (language == "en") {
+        setInfoCategory("Category:");
+        setInfoHours("Opening hours:");
+        setInfoAddress("Address:");
+        setInfoButton("More info");
+        setInfoTextHeader("Info:");
+        if (json?.i18n?.en?.title) {
+            setInfoTitle(json?.i18n?.en?.title);
+        } else if (!json?.i18n?.en?.title) {
+            setInfoTitle("Title can't be found in this language.");
+        }
+        if (json?.i18n?.en?.content) {
+            setInfoTextContent(json?.i18n?.en?.content);
+        } else if (!json?.i18n?.en?.content) {
+            setInfoTextContent("Content can't be found in this language.");
+        }
+      } else if (language == "fi") {
+        setInfoCategory("Kategoria:");
+        setInfoHours("Aukioloajat:");
+        setInfoAddress("Osoite:");
+        setInfoButton("Lisää tietoa");
+        setInfoTitle(json?.title);
+        setInfoTextHeader("Tietoa:");
+        setInfoTextContent(json?.content);
       }
-    }, [language])
+    }, [json])
 
     // Icons for every event according to category
-    if (eventIconPath == "Puut ja kasvit"){
+    if (eventIconPath == "Puut ja kasvit") {
       eventIcon = "pine-tree";
-    } else if (eventIconPath == "Taideteos"){
+    } else if (eventIconPath == "Taideteos") {
       eventIcon = "globe-model";
-    } else if (eventIconPath == "Arkkitehtuuri"){
+    } else if (eventIconPath == "Arkkitehtuuri") {
       eventIcon = "android-studio";
-    } else if (eventIconPath == "Puisto"){
+    } else if (eventIconPath == "Puisto") {
       eventIcon = "tree";
-    } else if (eventIconPath == "Patsas"){
+    } else if (eventIconPath == "Patsas") {
       eventIcon = "account";
-    } else if (eventIconPath == "Nähtävyys"){
+    } else if (eventIconPath == "Nähtävyys") {
       eventIcon = "apple-keyboard-command";
-    } else if (eventIconPath == "Ravintola"){
+    } else if (eventIconPath == "Ravintola") {
       eventIcon = "food";
-    } else if (eventIconPath == "Info"){
+    } else if (eventIconPath == "Info") {
       eventIcon = "information-variant";
-    } else if (eventIconPath == "Historiallinen kohde"){
+    } else if (eventIconPath == "Historiallinen kohde") {
       eventIcon = "bank";
-    } else if (eventIconPath == "Tapahtuma"){
+    } else if (eventIconPath == "Tapahtuma") {
       eventIcon = "account-cash";
-    } else if (eventIconPath == "Tulentekopaikka"){
+    } else if (eventIconPath == "Tulentekopaikka") {
       eventIcon = "campfire";
-    } else if (eventIconPath == "Kirkko"){
+    } else if (eventIconPath == "Kirkko") {
       eventIcon = "cross";
-    } else if (eventIconPath == "Kulttuuritalo"){
+    } else if (eventIconPath == "Kulttuuritalo") {
       eventIcon = "atom";
-    } else if (eventIconPath == "Näköalatorni"){
+    } else if (eventIconPath == "Näköalatorni") {
       eventIcon = "binoculars";
-    } else if (eventIconPath == "Kulttuuri"){
+    } else if (eventIconPath == "Kulttuuri") {
       eventIcon = "atom";
-    } else if (eventIconPath == "Galleria"){
+    } else if (eventIconPath == "Galleria") {
       eventIcon = "view-gallery";
-    } else if (eventIconPath == "Virtuaalipolku"){
+    } else if (eventIconPath == "Virtuaalipolku") {
       eventIcon = "virtual-reality";
-    } else if (eventIconPath == "Reitti"){
+    } else if (eventIconPath == "Reitti") {
       eventIcon = "apple-safari";
-    } else if (eventIconPath == "Roskakatos"){
+    } else if (eventIconPath == "Roskakatos") {
       eventIcon = "trash-can";
-    } else if (eventIconPath == "Retkeilyreitti"){
+    } else if (eventIconPath == "Retkeilyreitti") {
       eventIcon = "apple-safari";
-    } else if (eventIconPath == "Kuivakäymälä"){
+    } else if (eventIconPath == "Kuivakäymälä") {
       eventIcon = "toilet";
-    } else if (eventIconPath == "Parkkipaikka"){
+    } else if (eventIconPath == "Parkkipaikka") {
       eventIcon = "parking";
-    } else if (eventIconPath == "Liiteri"){
+    } else if (eventIconPath == "Liiteri") {
       eventIcon = "greenhouse";
-    } else if (eventIconPath == "Kirjasto"){
+    } else if (eventIconPath == "Kirjasto") {
       eventIcon = "book-open-blank-variant";
-    } else if (eventIconPath == "Laavu"){
+    } else if (eventIconPath == "Laavu") {
       eventIcon = "bed-empty";
-    } else if (eventIconPath == "Uimaranta"){
+    } else if (eventIconPath == "Uimaranta") {
       eventIcon = "swim";
     }
 
@@ -108,25 +118,24 @@ export default function EventList() {
       <Avatar.Icon {...props} icon={drawerIcon} size="40" style={styles.drawerIcon}/></Pressable>
     
     // This is for card icon to change upon opening details
-    if (elementVisible == false){
+    if (elementVisible == false) {
       drawerIcon = "arrow-up";
-    } else if (elementVisible == true){
+    } else if (elementVisible == true) {
       drawerIcon = "arrow-down";
     }
 
     return(
       <View>
           <Card style={styles.card}>
-            <Card.Title title={eventName} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
+            <Card.Title title={infoTitle} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
 
             {/* This modal is drop down from card */}
             {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
-              <Text style={styles.text}>{infoText1} {json.Categories[0].title}</Text>
-              <Text style={styles.text}>{infoText5} {json.content.length > 99 && (json.content.slice(0, 99) + "...")}
-                {json.content.length <= 99 && (json.content)}</Text>
-              <Button title={infoText4} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
-              <ShowOnMap buttonName={infoText6} item={json} navigation={navigation}/>
+              <Text style={styles.text}>{infoCategory} {json.Categories[0].title}</Text>
+              <Text style={styles.text}>{infoTextHeader} {infoTextContent.length > 99 && (infoTextContent.slice(0, 99) + "...")}
+                {infoTextContent.length <= 99 && (infoTextContent)}</Text>
+              <Button title={infoButton} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
             </Card.Content>
             ) : null}
           </Card>
@@ -138,19 +147,19 @@ export default function EventList() {
                   <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
                     <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
                   </Pressable>
-                <Text style={styles.fullDetailEventHeader}>{json.title}</Text>
+                <Text style={styles.fullDetailEventHeader}>{infoTitle}</Text>
                 <View style={styles.fullDetailEventImageView}>
                   <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
                 </View>
                 <ScrollView>
-                  <Text style={styles.fullDetailEventText}>{infoText1} {json.Categories[0].title}</Text>
+                  <Text style={styles.fullDetailEventText}>{infoCategory} {json.Categories[0].title}</Text>
                   {openingHours && (
-                    <Text style={styles.fullDetailEventText}>{infoText2} {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
+                    <Text style={styles.fullDetailEventText}>{infoHours} {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
                   )}
                   {address && (
-                    <Text style={styles.fullDetailEventText}>{infoText3} {json.meta.streetAddress}</Text>
+                    <Text style={styles.fullDetailEventText}>{infoAddress} {json.meta.streetAddress}</Text>
                   )}
-                  <Text style={styles.fullDetailEventText}>{infoText5} {json.content}</Text>
+                  <Text style={styles.fullDetailEventText}>{infoTextHeader} {infoTextContent}</Text>
                 </ScrollView>
                 <Bookmark item={json}/>
               </View>
