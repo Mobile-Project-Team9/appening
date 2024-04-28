@@ -50,7 +50,7 @@ export default function User() {
           <View style={styles.listItem}>
             <Text style={styles.textuser}>{item.title}</Text>
             <IconButton
-              icon="delete"
+              icon="heart"
               onPress={() => removeBookmark(item.id)}
             />
           </View>
