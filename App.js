@@ -8,7 +8,7 @@ import User from './screens/User';
 import fullData from './data/fullData.json';
 import { colors } from './styles/style';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 export default function App() {
   const [json, setJson] = useState(fullData);
@@ -25,7 +25,7 @@ export default function App() {
           <FilterContext.Provider value={{filtersOn, setFiltersOn, filteredJson, setFilteredJson}}>
             <LanguageContext.Provider value={{language, setLanguage}}>
               <PaperProvider>
-                  <MyTabs/>
+                  <MyTabs />
               </PaperProvider>
             </LanguageContext.Provider>
           </FilterContext.Provider>
@@ -38,7 +38,8 @@ export default function App() {
 const Tab = createMaterialBottomTabNavigator();
 
 function MyTabs() {
-  const language = "fi"; // Add context here
+
+  const {language} = useContext(LanguageContext)
   const [navNameMap, setNavNameMap] = useState("Koti");
   const [navNameList, setNavNameList] = useState("Lista");
   const [navNameUser, setNavNameUser] = useState("Käyttäjä");
