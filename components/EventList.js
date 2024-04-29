@@ -43,9 +43,15 @@ export default function EventList() {
             setInfoTitle("Title can't be found in this language.");
         }
         if (json?.i18n?.en?.content) {
-            setInfoTextContent(json?.i18n?.en?.content);
+          let infoTemp = (json?.i18n?.en?.content);
+          infoTemp = infoTemp.replaceAll("#", "");
+          infoTemp = infoTemp.replaceAll("**", "");
+          setInfoTextContent(infoTemp);  
         } else if (!json?.i18n?.en?.content) {
-            setInfoTextContent("Content can't be found in this language.");
+            let infoTemp = (json?.content);
+            infoTemp = infoTemp?.replaceAll("#", "");
+            infoTemp = infoTemp?.replaceAll("**", "");
+            setInfoTextContent("Content cannot be found in your selected language. \n \n" + infoTemp);
         }
       } else if (language == "fi") {
         setInfoCategory("Kategoria:");
@@ -54,7 +60,10 @@ export default function EventList() {
         setInfoButton("Lisää tietoa");
         setInfoTitle(json?.title);
         setInfoTextHeader("Tietoa:");
-        setInfoTextContent(json?.content);
+        let infoTemp = (json?.content);
+        infoTemp = infoTemp.replaceAll("#", "");
+        infoTemp = infoTemp.replaceAll("**", "");
+        setInfoTextContent(infoTemp);
       }
     }, [json])
 

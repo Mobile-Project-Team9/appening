@@ -22,7 +22,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const [infoTextContent, setInfoTextContent] = useState("");
 
     useEffect(() => {
-      if (language == "en") {
+        if (language == "en") {
         setInfoCategory("Category:");
         setInfoHours("Opening hours:");
         setInfoAddress("Address:");
@@ -31,12 +31,19 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
         if (selectedShot?.i18n?.en?.title) {
             setInfoTitle(selectedShot?.i18n?.en?.title);
         } else if (!selectedShot?.i18n?.en?.title) {
-            setInfoTitle("Title can't be found in this language.");
+            setInfoTitle(selectedShot?.title);
         }
+        
         if (selectedShot?.i18n?.en?.content) {
-            setInfoTextContent(selectedShot?.i18n?.en?.content);
+            let infoTemp = (selectedShot?.i18n?.en?.content);
+            infoTemp = infoTemp.replaceAll("#", "");
+            infoTemp = infoTemp.replaceAll("**", "");
+            setInfoTextContent(infoTemp);
         } else if (!selectedShot?.i18n?.en?.content) {
-            setInfoTextContent("Content can't be found in this language.");
+            let infoTemp = (selectedShot?.content);
+            infoTemp = infoTemp?.replaceAll("#", "");
+            infoTemp = infoTemp?.replaceAll("**", "");
+            setInfoTextContent("Content cannot be found in your selected language. \n \n" + infoTemp);
         }
       } else if (language == "fi") {
         setInfoCategory("Kategoria:");
@@ -45,7 +52,10 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
         setInfoButton("Lisää tietoa");
         setInfoTitle(selectedShot?.title);
         setInfoTextHeader("Tietoa:");
-        setInfoTextContent(selectedShot?.content);
+        let infoTemp = (selectedShot?.content);
+        infoTemp = infoTemp?.replaceAll("#", "");
+        infoTemp = infoTemp?.replaceAll("**", "");
+        setInfoTextContent(infoTemp);
       }
     }, [selectedShot])
 

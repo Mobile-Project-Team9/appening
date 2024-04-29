@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   loadingTextView: {
     alignItems: "center",
     justifyContent: "center",
+    height: 350
   },
 
   loadingTextMain: {

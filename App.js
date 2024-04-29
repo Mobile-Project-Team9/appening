@@ -16,7 +16,7 @@ export default function App() {
   const [filtersOn, setFiltersOn] = useState([]);
   const [filteredJson, setFilteredJson] = useState([])
   const [Login, setLogin] = useState ([]);
-  const [language, setLanguage] = useState('en')
+  const [language, setLanguage] = useState('fi')
   
   return (
     <NavigationContainer>
@@ -38,7 +38,6 @@ export default function App() {
 const Tab = createMaterialBottomTabNavigator();
 
 function MyTabs() {
-
   const {language} = useContext(LanguageContext)
   const [navNameMap, setNavNameMap] = useState("Koti");
   const [navNameList, setNavNameList] = useState("Lista");
