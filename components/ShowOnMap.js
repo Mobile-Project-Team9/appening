@@ -4,14 +4,14 @@ import { colors } from '../styles/style'
 
 /* Used for rendering location of th event on the map. */
 
-export default function ShowOnMap({buttonName, item, navigation}) {
+export default function ShowOnMap({buttonName, navigation}) {
     const showOnMap = (item) => {
-        navigation.navigate('Home', { item }); // Navigate to Home component with coordinates as props
+        navigation.navigate('Home'); // Navigate to Home component with coordinates as props
       };
 
   return (
     <View>
-      <Button title={buttonName} color={colors.secondaryColor} onPress={() => showOnMap(item)}></Button>
+      <Button title={buttonName} color={colors.secondaryColor} onPress={() => showOnMap()}></Button>
     </View>
   )
 }

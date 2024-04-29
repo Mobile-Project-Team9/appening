@@ -6,7 +6,7 @@ import { Card, Avatar } from "react-native-paper";
 import Bookmark from '../components/Bookmark';
 import ShowOnMap from './ShowOnMap';
 
-export default function EventList() {
+export default function EventList({navigation}) {
   const {json, setJson} = useContext(QueryContext);
 
   // This is the item which flatlist goes through
@@ -29,6 +29,7 @@ export default function EventList() {
     const [infoTitle, setInfoTitle] = useState("");
     const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
     const [infoTextContent, setInfoTextContent] = useState("");
+    const [mapButton, setMapButton] = useState("Näytä kartalla")
 
     useEffect(() => {
       if (language == "en") {
@@ -37,6 +38,7 @@ export default function EventList() {
         setInfoAddress("Address:");
         setInfoButton("More info");
         setInfoTextHeader("Info:");
+        setMapButton("Show On Map")
         if (json?.i18n?.en?.title) {
             setInfoTitle(json?.i18n?.en?.title);
         } else if (!json?.i18n?.en?.title) {
@@ -55,6 +57,7 @@ export default function EventList() {
         setInfoTitle(json?.title);
         setInfoTextHeader("Tietoa:");
         setInfoTextContent(json?.content);
+
       }
     }, [json])
 
@@ -136,6 +139,7 @@ export default function EventList() {
               <Text style={styles.text}>{infoTextHeader} {infoTextContent.length > 99 && (infoTextContent.slice(0, 99) + "...")}
                 {infoTextContent.length <= 99 && (infoTextContent)}</Text>
               <Button title={infoButton} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
+              <ShowOnMap buttonName={mapButton} navigation={navigation} />
             </Card.Content>
             ) : null}
           </Card>
