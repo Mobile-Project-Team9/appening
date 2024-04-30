@@ -8,7 +8,7 @@ import { styles } from '../styles/style';
 import Item from '../components/Item';
 
 export default function User() {
-  const { bookmarkList, setBookmarkList } = useContext(BookmarkContext); 
+  const { bookmarkList, setBookmarkList } = useContext(BookmarkContext);
   const [loginVisible, setLoginVisible] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
 
@@ -46,25 +46,31 @@ export default function User() {
     <View style={styles.containeruser}>
       <SectionList
         sections={[{ title: 'Bookmarks', data: bookmarkList }]}
-        keyExtractor={(item) => item.id.toString()} 
-        renderItem={({ item }) => <Item json={item}/>} 
-        
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.bookmarkContainer}>
+            <Item json={item} />
+            <IconButton
+              icon="delete"
+              onPress={() => removeBookmark(item.id)} />
+          </View>)}
+
         //renderItem={({ item }) => (
         //   <View style={styles.listItem}>
         //     <Text style={styles.textuser}>{item.title}</Text>
         //     <IconButton
         //       icon="delete"
         //       onPress={() => removeBookmark(item.id)}
-             
-          
- 
-        
+
+
+
+
         renderSectionHeader={({ section: { title } }) => (
           <View style={styles.headeruser}>
             <Text style={styles.headerTitle}>{title}</Text>
-            <Headeruser 
-              toggleLoginModal={toggleLoginModal} 
-              loginVisible={loginVisible} 
+            <Headeruser
+              toggleLoginModal={toggleLoginModal}
+              loginVisible={loginVisible}
               toggleRegisterModal={toggleRegisterModal}
               registerVisible={registerVisible}
             />

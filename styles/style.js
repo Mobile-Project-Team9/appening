@@ -232,6 +232,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
+  //User screen?
+
   Llogin: {
     backgroundColor: colors.offBlue,
     paddingHorizontal: 10,
@@ -302,6 +304,13 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 10,
     minWidth: '65%',
+  },
+
+  bookmarkContainer:{
+    
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'stretch'
   },
 
   //Search -component
