@@ -51,24 +51,22 @@ export default function Login({ visible, onClose, navigation }) {
                     <Button title="Close" onPress={onClose} />
                 </View>
             ) : (
-                <View style={styles.login}>
+                <View style={styles.container}>
                     <View style={styles.headerItem}>
                         <Text style={styles.header}>Log in</Text>
                     </View>
                     <Text style={styles.infoText}>Log in to your account</Text>
-                    <TextInput
-                        style={styles.textInput}
+                    <TextInput style={styles.textInput}
                         placeholder="Enter your email"
                         value={email}
-                        onChangeText={setEmail}
+                        onChangeText={(email) => setEmail(email.trim())}
                         keyboardType='email-address'
                         autoCapitalize='none'
                     />
-                    <TextInput
-                        style={styles.textInput}
+                    <TextInput style={styles.textInput}
                         placeholder="Enter your password"
                         value={password}
-                        onChangeText={setPassword}
+                        onChangeText={(password) => setPassword(password)}
                         secureTextEntry={true}
                     />
                     <Pressable style={styles.buttonStyle}>
