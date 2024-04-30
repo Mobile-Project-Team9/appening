@@ -31,6 +31,7 @@ export default function EventList() {
     const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
     const [infoTextContent, setInfoTextContent] = useState("");
     const [mapButton, setMapButton] = useState("Näytä kartalla");
+    const [directing, setDirecting] = useState("Koti");
 
     useEffect(() => {
       if (language == "en") {
@@ -40,6 +41,7 @@ export default function EventList() {
         setInfoButton("More info");
         setInfoTextHeader("Info:");
         setMapButton("Show On Map");
+        setDirecting("Home");
         if (json?.i18n?.en?.title) {
             setInfoTitle(json?.i18n?.en?.title);
         } else if (!json?.i18n?.en?.title) {
@@ -63,7 +65,8 @@ export default function EventList() {
         setInfoButton("Lisää tietoa");
         setInfoTitle(json?.title);
         setInfoTextHeader("Tietoa:");
-        setMapButton("Näytä kartalla")
+        setMapButton("Näytä kartalla");
+        setDirecting("Koti");
         let infoTemp = (json?.content);
         infoTemp = infoTemp.replaceAll("#", "");
         infoTemp = infoTemp.replaceAll("**", "");
@@ -149,7 +152,7 @@ export default function EventList() {
               <Text style={styles.text}>{infoTextHeader} {infoTextContent.length > 99 && (infoTextContent.slice(0, 99) + "...")}
                 {infoTextContent.length <= 99 && (infoTextContent)}</Text>
               <Button title={infoButton} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
-              <Button title={mapButton} color={colors.secondaryColor} onPress={() => navigation.navigate("Home", {item:json})}></Button>
+              <Button title={mapButton} color={colors.secondaryColor} onPress={() => navigation.navigate(directing, {item:json})}></Button>
             </Card.Content>
             ) : null}
           </Card>
