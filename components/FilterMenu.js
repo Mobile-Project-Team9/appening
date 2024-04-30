@@ -1,6 +1,6 @@
 import { View, Text, Modal, Pressable, Alert } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { styles } from '../styles/style'
+import { colors, styles } from '../styles/style'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { FilterContext, LanguageContext, QueryContext } from '../data/Contexts'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -177,7 +177,9 @@ export default function FilterMenu() {
                 transparent={true}
             >
                 <View style={styles.filterMenuContainer}>
+                    
                     <View style={styles.filterMenu}>
+                        
                         <View style={styles.filterMenuContent}>
                             <DropDownPicker 
                                 textStyle={{textTransform: 'capitalize'}}
@@ -191,6 +193,8 @@ export default function FilterMenu() {
                                 onOpen={onNatureOpen}
                                 placeholder={language === 'fi' ? 'Luonto' : 'Nature'}
                                 mode='BADGE'
+                                style={styles.filterDropDown}
+                                badgeDotColors={colors.secondaryColor}
 
                                 zIndex={3000}
                                 zIndexInverse={1000}
@@ -208,6 +212,8 @@ export default function FilterMenu() {
                                 onOpen={onCultureOpen}
                                 placeholder={language === 'fi' ? 'Kulttuuri' : 'Culture'}
                                 mode='BADGE'
+                                style={styles.filterDropDown}
+                                badgeDotColors={colors.secondaryColor}
 
                                 zIndex={2000}
                                 zIndexInverse={2000}
@@ -225,6 +231,8 @@ export default function FilterMenu() {
                                 onOpen={onUtilitiesOpen}
                                 placeholder={language === 'fi' ? 'Palvelut' : 'Utilities'}
                                 mode='BADGE'
+                                style={styles.filterDropDown}
+                                badgeDotColors={colors.secondaryColor}
 
                                 zIndex={1000}
                                 zIndexInverse={3000}

@@ -348,16 +348,23 @@ const styles = StyleSheet.create({
   filterMenuContainer: {
     flex: 1,
     flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.transparent
+     
+    
   },
 
   filterMenu: {
     flex: 1,
     flexDirection: 'column',
+    //padding:10,
   },
 
   filterMenuContent: {
-    paddingTop: 35,
-    paddingLeft: 15,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight:10,
     height: '191%',
     backgroundColor: colors.white
   },
@@ -405,6 +412,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#696969a8',
     marginTop: '55%',
     marginBottom: '22%',
+  },
+
+  filterDropDown: {
+    
+    //backgroundColor: colors.mainColor,
+    //color: colors.white,
+    marginVertical:5,
   },
 
   // Event list card
