@@ -10,12 +10,12 @@ import {initializeAuth, getReactNativePersistence} from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyByQJC4fUyElbnmBCTRuQYter3qKFlcUxY",
-  authDomain: "meaning-b74d4.firebaseapp.com",
-  projectId: "meaning-b74d4",
-  storageBucket: "meaning-b74d4.appspot.com",
-  messagingSenderId: "697655711876",
-  appId: "1:697655711876:web:47d0e47e1429be1361cad1"
+  apiKey: "AIzaSyBNV0vmQhqCaJJVxbQ_IZ-NK7tbntE1URA",
+  authDomain: "appening-12d35.firebaseapp.com",
+  projectId: "appening-12d35",
+  storageBucket: "appening-12d35.appspot.com",
+  messagingSenderId: "1076956866942",
+  appId: "1:1076956866942:web:2e7bb2c987cea716096b2f"
 };
 
 // Initialize Firebase
