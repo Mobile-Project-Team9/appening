@@ -4,10 +4,11 @@ import { LanguageContext, QueryContext } from '../data/Contexts';
 import { styles, colors } from '../styles/style';
 import { Card, Avatar } from "react-native-paper";
 import Bookmark from '../components/Bookmark';
-import ShowOnMap from './ShowOnMap';
+import { useNavigation } from '@react-navigation/native';
 
 export default function EventList() {
   const {json, setJson} = useContext(QueryContext);
+  const navigation = useNavigation();
 
   // This is the item which flatlist goes through
   function Item({ json }){
@@ -146,6 +147,7 @@ export default function EventList() {
               <Text style={styles.text}>{infoTextHeader} {infoTextContent.length > 99 && (infoTextContent.slice(0, 99) + "...")}
                 {infoTextContent.length <= 99 && (infoTextContent)}</Text>
               <Button title={infoButton} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
+              <Button title={mapButton} color={colors.secondaryColor} onPress={() => navigation.navigate("Home", {item:json})}></Button>
             </Card.Content>
             ) : null}
           </Card>

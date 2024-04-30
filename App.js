@@ -1,4 +1,4 @@
-import { PaperProvider } from 'react-native-paper';
+import { PaperProvider, useTheme } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryContext, BookmarkContext, FilterContext, LoginContext, LanguageContext } from './data/Contexts';
@@ -17,7 +17,9 @@ export default function App() {
   const [filteredJson, setFilteredJson] = useState([])
   const [Login, setLogin] = useState ([]);
   const [language, setLanguage] = useState('fi')
-  
+
+  const theme = useTheme();
+  theme.colors.secondaryContainer = colors.offBlue
   
   return (
     <NavigationContainer>
@@ -25,7 +27,7 @@ export default function App() {
         <BookmarkContext.Provider value ={{bookmarkList, setBookmarkList}}>
           <FilterContext.Provider value={{filtersOn, setFiltersOn, filteredJson, setFilteredJson}}>
             <LanguageContext.Provider value={{language, setLanguage}}>
-              <PaperProvider>
+              <PaperProvider theme={theme}>
                   <MyTabs />
               </PaperProvider>
             </LanguageContext.Provider>
@@ -58,8 +60,7 @@ function MyTabs() {
 
   return (
     <Tab.Navigator  initialRouteName={navNameMap}
-      // Still missing colour for focused icons' background color
-      activeColor= {colors.offBlue}
+      activeColor= {colors.white}
       inactiveColor= {colors.white}
       barStyle={{ backgroundColor: colors.mainColor }}
       screenOptions={({ route }) => ({
