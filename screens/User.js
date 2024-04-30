@@ -5,6 +5,7 @@ import { BookmarkContext } from '../data/Contexts';
 import Headeruser from '../components/Headeruser';
 import { IconButton } from 'react-native-paper';
 import { styles } from '../styles/style';
+import Item from '../components/Item';
 
 export default function User() {
   const { bookmarkList, setBookmarkList } = useContext(BookmarkContext); 
@@ -46,15 +47,18 @@ export default function User() {
       <SectionList
         sections={[{ title: 'Bookmarks', data: bookmarkList }]}
         keyExtractor={(item) => item.id.toString()} 
-        renderItem={({ item }) => (
-          <View style={styles.listItem}>
-            <Text style={styles.textuser}>{item.title}</Text>
-            <IconButton
-              icon="delete"
-              onPress={() => removeBookmark(item.id)}
-            />
-          </View>
-        )} 
+        renderItem={({ item }) => <Item json={item}/>} 
+        
+        //renderItem={({ item }) => (
+        //   <View style={styles.listItem}>
+        //     <Text style={styles.textuser}>{item.title}</Text>
+        //     <IconButton
+        //       icon="delete"
+        //       onPress={() => removeBookmark(item.id)}
+             
+          
+ 
+        
         renderSectionHeader={({ section: { title } }) => (
           <View style={styles.headeruser}>
             <Text style={styles.headerTitle}>{title}</Text>
