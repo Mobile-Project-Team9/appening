@@ -306,13 +306,31 @@ const styles = StyleSheet.create({
     minWidth: '65%',
   },
 
+  //User screen Bookmarklist
   bookmarkContainer:{
-    
+
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'stretch'
+    justifyContent: 'space-between', // Ensure delete icon is at the end of the row
+    alignItems: 'stretch', // Ensure items stretch vertically to fill the container
+    paddingHorizontal: 10, // Add some padding to the sides
+    borderBottomWidth: 1, // Add a border to separate items
+    borderBottomColor: 'lightgray', // Color of the border
   },
 
+  bookmarkItem :{ 
+    width: '100%', // Take up remaining space
+  alignContent: 'stretch', // Align item content vertically at the center
+  paddingHorizontal: 10, // Add some padding to the sides
+  backgroundColor: 'white'
+    
+ 
+
+  },
+  deleteIcon: {
+    justifyContent: 'center',
+    
+     // Add some margin between the item and the delete icon
+  },
   //Search -component
   searchbar: {
     backgroundColor: colors.mainColor,

@@ -49,9 +49,10 @@ export default function User() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.bookmarkContainer}>
-            <Item json={item} />
+            <Item json={item} style={styles.bookmarkItem}/>
             <IconButton
               icon="delete"
+              style={styles.deleteIcon}
               onPress={() => removeBookmark(item.id)} />
           </View>)}
 
