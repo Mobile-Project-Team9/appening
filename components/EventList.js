@@ -189,7 +189,7 @@ export default function EventList() {
   return (
     <View>
       {/* Flatlist goes through the json and make a card with a list for each event */}
-      <FlatList data={json} renderItem={({ item }) => <Item json={item}/>}/>
+      <FlatList data={json.sort((a, b) => a.title.localeCompare(b.title))} renderItem={({ item }) => <Item json={item}/>}/>
     </View>
   )
 }

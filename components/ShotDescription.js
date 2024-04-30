@@ -73,53 +73,51 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
             <Pressable onPress={handleCloseModal}>
                 <View style={styles.shortDescriptionPressableExit}></View>
             </Pressable>
-            <ScrollView contentContainerStyle={styles.modalContainer}>
-                <View>
-                    <Pressable onPress={handleCloseModal} style={styles.fullDetailEventExitPressable}>
-                        <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
-                    </Pressable>
-                    <Text style={styles.title}>{infoTitle}</Text>
-                    {imagePath && (
-                        <Image
-                            source={{ uri: imagePath }}
-                            style={styles.image}
-                        />
-                    )}
-                    {category && (
-                        <Text style={styles.infoText}>{infoCategory} {selectedShot?.Categories?.[0]?.title}</Text>
-                    )}
-                    {openingHours && (
-                        <Text style={styles.infoText}>{infoHours} {selectedShot?.ActiveTimeStart}</Text>
-                    )}
-                    <Button title={infoButton} onPress={() => setModalVisible(true)} color={colors.secondaryColor}></Button>
-                    {modalVisible && (
-                        <Modal>
-                            <View style={styles.fullDetailEventView}>
-                                <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
-                                    <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
-                                </Pressable>
-                                <Text style={styles.fullDetailEventHeader}>{infoTitle}</Text>
-                                <View style={styles.fullDetailEventImageView}>
-                                {imagePath && (
-                                    <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
-                                )}
-                                </View>
-                                <ScrollView>
-                                <Text style={styles.fullDetailEventText}>{infoCategory} {selectedShot?.Categories[0].title}</Text>
-                                {openingHours && (
-                                    <Text style={styles.fullDetailEventText}>{infoHours} {selectedShot?.activeTimeStart} - {selectedShot?.activeTimeEnd} .</Text>
-                                )}
-                                {address && (
-                                    <Text style={styles.fullDetailEventText}>{infoAddress} {selectedShot?.meta.streetAddress}</Text>
-                                )}
-                                <Text style={styles.fullDetailEventText}>{infoTextHeader} {infoTextContent}</Text>
-                                </ScrollView>
-                                <Bookmark item={selectedShot}/>
+            <View style={styles.modalContainer}>
+                <Pressable onPress={handleCloseModal} style={styles.fullDetailEventExitPressable}>
+                    <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
+                </Pressable>
+                <Text style={styles.title}>{infoTitle}</Text>
+                {imagePath && (
+                    <Image
+                        source={{ uri: imagePath }}
+                        style={styles.image}
+                    />
+                )}
+                {category && (
+                    <Text style={styles.infoText}>{infoCategory} {selectedShot?.Categories?.[0]?.title}</Text>
+                )}
+                {openingHours && (
+                    <Text style={styles.infoText}>{infoHours} {selectedShot?.ActiveTimeStart}</Text>
+                )}
+                <Button title={infoButton} onPress={() => setModalVisible(true)} color={colors.secondaryColor}></Button>
+                {modalVisible && (
+                    <Modal>
+                        <View style={styles.fullDetailEventView}>
+                            <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
+                                <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
+                            </Pressable>
+                            <Text style={styles.fullDetailEventHeader}>{infoTitle}</Text>
+                            <View style={styles.fullDetailEventImageView}>
+                            {imagePath && (
+                                <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
+                            )}
                             </View>
-                        </Modal>
-                    )}
-                </View>
-            </ScrollView>
+                            <ScrollView>
+                            <Text style={styles.fullDetailEventText}>{infoCategory} {selectedShot?.Categories[0].title}</Text>
+                            {openingHours && (
+                                <Text style={styles.fullDetailEventText}>{infoHours} {selectedShot?.activeTimeStart} - {selectedShot?.activeTimeEnd} .</Text>
+                            )}
+                            {address && (
+                                <Text style={styles.fullDetailEventText}>{infoAddress} {selectedShot?.meta.streetAddress}</Text>
+                            )}
+                            <Text style={styles.fullDetailEventText}>{infoTextHeader} {infoTextContent}</Text>
+                            </ScrollView>
+                            <Bookmark item={selectedShot}/>
+                        </View>
+                    </Modal>
+                )}
+            </View>
         </Modal>
     );
 }
