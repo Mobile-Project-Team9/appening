@@ -30,7 +30,7 @@ export default function EventList() {
     const [infoTitle, setInfoTitle] = useState("");
     const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
     const [infoTextContent, setInfoTextContent] = useState("");
-    
+    const [mapButton, setMapButton] = useState("Näytä kartalla");
 
     useEffect(() => {
       if (language == "en") {
@@ -39,6 +39,7 @@ export default function EventList() {
         setInfoAddress("Address:");
         setInfoButton("More info");
         setInfoTextHeader("Info:");
+        setMapButton("Show On Map");
         if (json?.i18n?.en?.title) {
             setInfoTitle(json?.i18n?.en?.title);
         } else if (!json?.i18n?.en?.title) {
@@ -62,6 +63,7 @@ export default function EventList() {
         setInfoButton("Lisää tietoa");
         setInfoTitle(json?.title);
         setInfoTextHeader("Tietoa:");
+        setMapButton("Näytä kartalla")
         let infoTemp = (json?.content);
         infoTemp = infoTemp.replaceAll("#", "");
         infoTemp = infoTemp.replaceAll("**", "");
