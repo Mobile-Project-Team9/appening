@@ -21,7 +21,10 @@ const HeaderUser = ({ toggleLoginModal, loginVisible, toggleRegisterModal, regis
             <Menu
                 visible={menuVisible}
                 onDismiss={closeMenu}
-                anchor={<IconButton icon="menu" onPress={openMenu} />}
+                anchor={<IconButton 
+                  icon="menu" 
+                  onPress={openMenu}
+                  iconColor='white' />}
             >
                 <Menu.Item onPress={() => {
                   if (!loginVisible) {

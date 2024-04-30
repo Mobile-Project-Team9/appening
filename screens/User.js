@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BookmarkContext } from '../data/Contexts';
 import Headeruser from '../components/Headeruser';
 import { IconButton } from 'react-native-paper';
-import { styles } from '../styles/style';
+import { colors, styles } from '../styles/style';
 import Item from '../components/Item';
 
 export default function User() {
@@ -52,6 +52,7 @@ export default function User() {
             <Item json={item} style={styles.bookmarkItem}/>
             <IconButton
               icon="delete"
+              iconColor={colors.mainColor}
               style={styles.deleteIcon}
               onPress={() => removeBookmark(item.id)} />
           </View>)}

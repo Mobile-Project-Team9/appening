@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10, // Add horizontal padding
     backgroundColor: colors.transparent, // Ensuring it doesn't block underlying components
   },
-  
+
 
   headeruser: {
     backgroundColor: colors.mainColor,
@@ -50,20 +50,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    
+
     borderBottomWidth: 1,
     borderBottomColor: colors.offBlue,
     marginHorizontal: 10,
-    
+
   },
-  
+
 
   headerTitle: {
     fontSize: 16,
     color: colors.white,
-    flex: 1, 
+    flex: 1,
   },
-  
+
   headerusersivu: {
     position: "absolute",
     right: 30,
@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
     shadowRadius: 1.5,
     elevation: 2,
   },
-  
-  
+
+
 
   containerLoading: {
     backgroundColor: colors.offBlue,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 
   //headeruser style
   containerheaderuser: {
-    flexDirection: "row",  
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 20,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: '100%',
     paddingTop: Constants.statusBarHeight + 5
-   
+
   },
 
   text: {
@@ -307,36 +307,41 @@ const styles = StyleSheet.create({
   },
 
   //User screen Bookmarklist
-  bookmarkContainer:{
+  bookmarkContainer: {
 
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between', // Ensure delete icon is at the end of the row
-    alignItems: 'stretch', // Ensure items stretch vertically to fill the container
-    paddingHorizontal: 10, // Add some padding to the sides
+    alignContent: 'stretch', 
+    width: 'auto',
+    
     borderBottomWidth: 1, // Add a border to separate items
-    borderBottomColor: 'lightgray', // Color of the border
+    borderBottomColor: 'lightgray',
+
   },
 
-  bookmarkItem :{ 
-    width: '100%', // Take up remaining space
-  alignContent: 'stretch', // Align item content vertically at the center
-  paddingHorizontal: 10, // Add some padding to the sides
-  backgroundColor: 'white'
-    
+  bookmarkItem: {
  
+    
+    //width: '100%', // Take up remaining space
+    alignContent: 'stretch', // Align item content vertically at the center
+    paddingHorizontal: 10, // Add some padding to the sides
+    
+
+
 
   },
   deleteIcon: {
-    justifyContent: 'center',
+    alignSelf: 'flex-end',
     
-     // Add some margin between the item and the delete icon
+
+    // Add some margin between the item and the delete icon
   },
   //Search -component
   searchbar: {
     backgroundColor: colors.mainColor,
     marginTop: 10,
-    marginLeft:10,
-    marginRight:10
+    marginLeft: 10,
+    marginRight: 10
   },
 
   //FilterMenu-component
@@ -492,7 +497,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText3: {
-    color:  colors.white,
+    color: colors.white,
     fontSize: 16,
   },
 
