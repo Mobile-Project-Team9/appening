@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: colors.transparent,
+    //backgroundColor: colors.transparent,
     //backgroundColor: 'orange',
          
   },

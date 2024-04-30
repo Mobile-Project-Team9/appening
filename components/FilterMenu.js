@@ -181,12 +181,12 @@ export default function FilterMenu() {
                 <View style={styles.filterMenuContainer}>
 
                     <View style={styles.filterMenu}>
-
+                    
 
                         <View style={styles.filterMenuContent}>
-                            <Pressable style={styles.fullDetailEventExitPressable} onPress={() => setModalVisible(!modalVisible)}>
-                                <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon} />
-                            </Pressable>
+                        <Pressable style={styles.fullDetailEventExitPressable} onPress={() => setModalVisible(!modalVisible)}>
+                    <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon} />
+                        </Pressable>
                             <DropDownPicker
                                 textStyle={{ textTransform: 'capitalize' }}
                                 multiple={true}
@@ -254,7 +254,7 @@ export default function FilterMenu() {
                         </Pressable>
                     </View>
                     <View style={styles.overlayPressable}>
-                        <Pressable onPress={() => setModalVisible(!modalVisible)} />
+                        <Pressable  onPress={() => setModalVisible(!modalVisible)} />
                     </View>
 
                 </View>
