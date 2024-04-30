@@ -5,15 +5,16 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { FilterContext, LanguageContext, QueryContext } from '../data/Contexts'
 import DropDownPicker from 'react-native-dropdown-picker'
 import fullData from '../data/fullData.json';
+import { Avatar } from 'react-native-paper'
 //import Language from './Filter/language'
 
 
 
 export default function FilterMenu() {
-    const {json, setJson} = useContext(QueryContext)
-    const {filtersOn, setFiltersOn} = useContext(FilterContext)
-    const {filteredJson, setFilteredJson} = useContext(FilterContext)
-    const {language} = useContext(LanguageContext)
+    const { json, setJson } = useContext(QueryContext)
+    const { filtersOn, setFiltersOn } = useContext(FilterContext)
+    const { filteredJson, setFilteredJson } = useContext(FilterContext)
+    const { language } = useContext(LanguageContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState([])
@@ -28,7 +29,7 @@ export default function FilterMenu() {
     const [cultureOpen, setCultureOpen] = useState(false)
     const [utilitiesOpen, setUtilitiesOpen] = useState(false)
 
-    
+
 
     const onNatureOpen = () => {
         setCultureOpen(false)
@@ -51,7 +52,7 @@ export default function FilterMenu() {
         let jsonLength = Object.keys(fullData).length
 
         for (let i = 0; i < jsonLength; i++) {
-            if (!categoryList.includes(fullData[i].Categories[0].title)){
+            if (!categoryList.includes(fullData[i].Categories[0].title)) {
                 categoryList.push(fullData[i].Categories[0].title)
             }
         }
@@ -59,7 +60,7 @@ export default function FilterMenu() {
         setCategories(categoryList)
 
         for (let i = 0; i < jsonLength; i++) {
-            if (!categoryListEN.includes(fullData[i].Categories[0].icon.slice(9))){
+            if (!categoryListEN.includes(fullData[i].Categories[0].icon.slice(9))) {
                 categoryListEN.push(fullData[i].Categories[0].icon.slice(9))
             }
         }
@@ -79,7 +80,7 @@ export default function FilterMenu() {
         let categoriesLength = categories.length
 
         for (let i = 0; i < categoriesLength; i++) {
-            items.push({label: categories[i], value: categories[i].toLowerCase()})
+            items.push({ label: categories[i], value: categories[i].toLowerCase() })
 
             if (categoriesEN[i] === 'ked-3-active') {
                 categoriesEN[i] = 'sightseeing'
@@ -88,11 +89,11 @@ export default function FilterMenu() {
                 categoriesEN[i] = 'route'
             }
 
-            itemsEN.push({label: categoriesEN[i].replaceAll("-", ' '), value: categories[i].toLowerCase()})
+            itemsEN.push({ label: categoriesEN[i].replaceAll("-", ' '), value: categories[i].toLowerCase() })
         }
 
         for (let i = 0; i < items.length; i++) {
-            if (items[i].value === 'puut ja kasvit' || items[i].value === 'puisto' || items[i].value === 'retkeilyreitti' || items[i].value === 'tulentekopaikka' || items[i].value === 'näköalatorni' || items[i].value === 'kuivakäymälä' ||items[i].value === 'liiteri' || items[i].value === 'laavu' || items[i].value === 'uimaranta') {
+            if (items[i].value === 'puut ja kasvit' || items[i].value === 'puisto' || items[i].value === 'retkeilyreitti' || items[i].value === 'tulentekopaikka' || items[i].value === 'näköalatorni' || items[i].value === 'kuivakäymälä' || items[i].value === 'liiteri' || items[i].value === 'laavu' || items[i].value === 'uimaranta') {
                 nature.push(items[i])
             }
             else if (items[i].value === 'taideteos' || items[i].value === 'arkkitehtuuri' || items[i].value === 'patsas' || items[i].value === 'nähtävyys' || items[i].value === 'historiallinen kohde' || items[i].value === 'tapahtuma' || items[i].value === 'kirkko' || items[i].value === 'kulttuuritalo' || items[i].value === 'kulttuuri' || items[i].value === 'galleria' || items[i].value === 'virtuaalipolku' || items[i].value === 'reitti' || items[i].value === 'kirjasto') {
@@ -102,7 +103,7 @@ export default function FilterMenu() {
                 utilities.push(items[i])
             }
 
-            if (itemsEN[i].value === 'puut ja kasvit' || itemsEN[i].value === 'puisto' || itemsEN[i].value === 'retkeilyreitti' || itemsEN[i].value === 'tulentekopaikka' || itemsEN[i].value === 'näköalatorni' || itemsEN[i].value === 'kuivakäymälä' ||itemsEN[i].value === 'liiteri' || itemsEN[i].value === 'laavu' || itemsEN[i].value === 'uimaranta') {
+            if (itemsEN[i].value === 'puut ja kasvit' || itemsEN[i].value === 'puisto' || itemsEN[i].value === 'retkeilyreitti' || itemsEN[i].value === 'tulentekopaikka' || itemsEN[i].value === 'näköalatorni' || itemsEN[i].value === 'kuivakäymälä' || itemsEN[i].value === 'liiteri' || itemsEN[i].value === 'laavu' || itemsEN[i].value === 'uimaranta') {
                 natureEN.push(itemsEN[i])
             }
             else if (itemsEN[i].value === 'taideteos' || itemsEN[i].value === 'arkkitehtuuri' || itemsEN[i].value === 'patsas' || itemsEN[i].value === 'nähtävyys' || itemsEN[i].value === 'historiallinen kohde' || itemsEN[i].value === 'tapahtuma' || itemsEN[i].value === 'kirkko' || itemsEN[i].value === 'kulttuuritalo' || itemsEN[i].value === 'kulttuuri' || itemsEN[i].value === 'galleria' || itemsEN[i].value === 'virtuaalipolku' || itemsEN[i].value === 'reitti' || itemsEN[i].value === 'kirjasto') {
@@ -139,11 +140,11 @@ export default function FilterMenu() {
     }, [categories])
 
     let tempData = []
-    useEffect(() => {  
+    useEffect(() => {
         let dataLength = Object.keys(fullData).length
 
         if (selectedFilters.length !== 0) {
-            for (let i = 0; i < dataLength; i++){
+            for (let i = 0; i < dataLength; i++) {
                 let categoryLowercase = fullData[i].Categories[0].title.toLowerCase()
 
                 if (selectedFilters.some(filter => filter === categoryLowercase) && !tempData.includes(fullData[i])) {
@@ -160,9 +161,9 @@ export default function FilterMenu() {
             setFiltersOn([])
             tempData = []
         }
-        
+
     }, [selectedFilters])
-    
+
 
 
 
@@ -175,14 +176,19 @@ export default function FilterMenu() {
                     setModalVisible(!modalVisible)
                 }}
                 transparent={true}
+                style={styles.filterModal}
             >
                 <View style={styles.filterMenuContainer}>
-                    
+
                     <View style={styles.filterMenu}>
-                        
+
+
                         <View style={styles.filterMenuContent}>
-                            <DropDownPicker 
-                                textStyle={{textTransform: 'capitalize'}}
+                            <Pressable style={styles.fullDetailEventExitPressable} onPress={() => setModalVisible(!modalVisible)}>
+                                <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon} />
+                            </Pressable>
+                            <DropDownPicker
+                                textStyle={{ textTransform: 'capitalize' }}
                                 multiple={true}
                                 open={natureOpen}
                                 value={selectedFilters}
@@ -200,8 +206,8 @@ export default function FilterMenu() {
                                 zIndexInverse={1000}
                             />
 
-                            <DropDownPicker 
-                                textStyle={{textTransform: 'capitalize'}}
+                            <DropDownPicker
+                                textStyle={{ textTransform: 'capitalize' }}
                                 multiple={true}
                                 open={cultureOpen}
                                 value={selectedFilters}
@@ -219,8 +225,8 @@ export default function FilterMenu() {
                                 zIndexInverse={2000}
                             />
 
-                            <DropDownPicker 
-                                textStyle={{textTransform: 'capitalize'}}
+                            <DropDownPicker
+                                textStyle={{ textTransform: 'capitalize' }}
                                 multiple={true}
                                 open={utilitiesOpen}
                                 value={selectedFilters}
@@ -237,22 +243,25 @@ export default function FilterMenu() {
                                 zIndex={1000}
                                 zIndexInverse={3000}
                             />
-                            
-                            
+
+
                         </View>
-                        <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Sulje valikko' : 'Close menu'}</Text>
-                        </Pressable>
+                        {/* <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
+                            <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Sulje valikko' : 'Close menu'}</Text>
+                        </Pressable> */}
                         <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
-                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Tyhjennä valinnat' : 'Clear filters'}</Text>
+                            <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Tyhjennä valinnat' : 'Clear filters'}</Text>
                         </Pressable>
                     </View>
-                    <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />
+                    <View style={styles.overlayPressable}>
+                        <Pressable onPress={() => setModalVisible(!modalVisible)} />
+                    </View>
+
                 </View>
             </Modal>
-            
+
             <Pressable style={styles.filterButton} onPress={() => setModalVisible(true)}>
-                <MaterialCommunityIcons 
+                <MaterialCommunityIcons
                     name='filter-menu-outline'
                     size={24}
                     color='#fff'

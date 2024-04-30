@@ -345,19 +345,31 @@ const styles = StyleSheet.create({
   },
 
   //FilterMenu-component
+  filterModal: {
+    //position: 'absolute',
+    top: Constants.statusBarHeight,
+    backgroundColor: colors.secondaryColor,
+    
+         
+  },
+
   filterMenuContainer: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.transparent
-     
-    
+    justifyContent: 'flex-start',
+    backgroundColor: colors.transparent,
+    //backgroundColor: 'orange',
+         
   },
 
+
   filterMenu: {
-    flex: 1,
+    flex: 0.6,
     flexDirection: 'column',
+    backgroundColor: colors.white,
+    justifyContent:'space-between'
+    
     //padding:10,
   },
 
@@ -365,8 +377,28 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight:10,
-    height: '191%',
-    backgroundColor: colors.white
+    //height: '191%',
+    backgroundColor: colors.white,
+    
+  },
+
+  
+  overlayPressable: {
+    flex: 0.5,
+    //backgroundColor: '#696969a8',
+    backgroundColor: 'red',
+    zIndex: 2,
+    //marginTop: '55%',
+    //marginBottom: '22%',
+    //position: 'absolute',
+    
+  },
+
+  filterDropDown: {
+    
+    //backgroundColor: colors.mainColor,
+    //color: colors.white,
+    marginBottom:5,
   },
 
   filterButton: {
@@ -383,8 +415,8 @@ const styles = StyleSheet.create({
   hideMenuButton: {
     width: 105,
     height: 55,
-    marginTop: -65,
-    marginLeft: 15,
+    //marginTop: -65,
+    //marginLeft: 15,
     backgroundColor: colors.mainColor,
     alignItems: 'center',
     justifyContent: 'center',
@@ -392,14 +424,16 @@ const styles = StyleSheet.create({
   },
 
   clearFiltersButton: {
-    width: 105,
-    height: 55,
-    marginTop: -55,
-    marginRight: 15,
-    backgroundColor: colors.mainColor,
+    //width: 105,
+    //height: 55,
+    //marginTop: -55,
+    //marginRight: 15,
+    margin: 10,
+    padding: 10,
+    backgroundColor: colors.secondaryColor,
     alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     borderRadius: 15,
   },
 
@@ -407,19 +441,6 @@ const styles = StyleSheet.create({
     color: colors.white
   },
 
-  overlayPressable: {
-    flex: 1,
-    backgroundColor: '#696969a8',
-    marginTop: '55%',
-    marginBottom: '22%',
-  },
-
-  filterDropDown: {
-    
-    //backgroundColor: colors.mainColor,
-    //color: colors.white,
-    marginVertical:5,
-  },
 
   // Event list card
   card: {
