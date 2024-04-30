@@ -29,6 +29,7 @@ export default function EventList() {
     const [infoTitle, setInfoTitle] = useState("");
     const [infoTextHeader, setInfoTextHeader] = useState("Tietoa:");
     const [infoTextContent, setInfoTextContent] = useState("");
+    
 
     useEffect(() => {
       if (language == "en") {
