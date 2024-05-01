@@ -17,7 +17,7 @@ const INITIAL_LONGITUDE = 25.4800;
 const INITIAL_LATITUDE_DELTA = 0.0922;
 const INITIAL_LONGITUDE_DELTA = 0.0421;
 
-export default function Home() {
+export default function Home({ route }) {
   const { json } = useContext(QueryContext)
 
   const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
@@ -27,14 +27,21 @@ export default function Home() {
   const [selectedShot, setSelectedShot] = useState(null); // Track selected shot for modal
   const [modalVisible, setModalVisible] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState(fullData); // for searching
-  
+
 
   const { language } = useContext(LanguageContext);
   const [alertButton, setAlertButton] = useState("Ok");
   const [alertHeader, setAlertHeader] = useState("Virhe on tapahtunut");
   const [alertContent, setAlertContent] = useState("Sinun sijaintia ei voitu saavuttaa.");
 
- 
+  const [mapRegion, setMapRegion] = useState({
+    latitude: INITIAL_LATITUDE,
+    longitude: INITIAL_LONGITUDE,
+    latitudeDelta: INITIAL_LATITUDE_DELTA,
+    longitudeDelta: INITIAL_LONGITUDE_DELTA
+  });
+
+
   useEffect(() => {
     if (language == "en") {
       setAlertButton("Ok");
@@ -63,7 +70,8 @@ export default function Home() {
       }
       catch (error) {
         Alert.alert(alertHeader, alertContent, [{
-            text: alertButton, style: "cancel",}
+          text: alertButton, style: "cancel",
+        }
         ]);
         setIsLoading(false);
       }
@@ -81,13 +89,38 @@ export default function Home() {
     setFilteredLocations(json)
   }, [json])
 
+  useEffect(() => {
+    console.log(route.params);
+    if (route.params && route.params.item) {
+      // If item parameter is passed, set selectedShot to the passed item
+      setSelectedShot(route.params.item);
+
+      // Set the map region to focus on the selected event location
+      setLatitude(route.params.item.geo.coordinates[0]);
+      setLongitude(route.params.item.geo.coordinates[1]);
+
+      // Calculate the difference between the initial latitude and the selected location's latitude
+    const latitudeDelta = Math.abs(INITIAL_LATITUDE - route.params.item.geo.coordinates[0]) * 0.05;
+
+    // Calculate the difference between the initial longitude and the selected location's longitude
+    const longitudeDelta = Math.abs(INITIAL_LONGITUDE - route.params.item.geo.coordinates[1]) * 0.05;
+
+    setMapRegion({
+      latitude: route.params.item.geo.coordinates[0],
+      longitude: route.params.item.geo.coordinates[1],
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta
+    });
+    }
+  }, [route.params]);
+
   const handleMarkerPress = (shot) => {
     setSelectedShot(shot);
     setModalVisible(true);
   }
 
   if (isLoading) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
   else {
     return (
@@ -95,12 +128,9 @@ export default function Home() {
 
         <MapView
           style={styles.map}
-          initialRegion={{
-            latitude: INITIAL_LATITUDE,
-            longitude: INITIAL_LONGITUDE,
-            latitudeDelta: INITIAL_LATITUDE_DELTA,
-            longitudeDelta: INITIAL_LONGITUDE_DELTA
-          }}
+          region={mapRegion}
+          onRegionChange={() => { }}
+          onRegionChangeComplete={() => { }}
           clusterColor={colors.secondaryColor}
           showsUserLocation={true}
         >
@@ -114,6 +144,8 @@ export default function Home() {
               return null;
             }
 
+            const markerColor = location.id === selectedShot?.id ? colors.mainColor : colors.secondaryColor;
+
             // Render marker for valid location
             return (
               <Marker
@@ -123,7 +155,7 @@ export default function Home() {
                   latitude: latitude,
                   longitude: longitude
                 }}
-                pinColor={colors.secondaryColor}
+                pinColor={markerColor}
                 onPress={() => handleMarkerPress(location)}
               />
             );
