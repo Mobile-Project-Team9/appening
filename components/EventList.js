@@ -7,11 +7,11 @@ import Bookmark from '../components/Bookmark';
 import { useNavigation } from '@react-navigation/native';
 
 export default function EventList() {
-  const {json, setJson} = useContext(QueryContext);
+  const { json, setJson } = useContext(QueryContext);
   const navigation = useNavigation();
 
   // This is the item which flatlist goes through
-  function Item({ json }){
+  function Item({ json }) {
     const eventIconPath = (json.Categories[0].title);
     let eventIcon = "";
     let drawerIcon = "arrow-down";
@@ -43,20 +43,20 @@ export default function EventList() {
         setMapButton("Show On Map");
         setDirecting("Home");
         if (json?.i18n?.en?.title) {
-            setInfoTitle(json?.i18n?.en?.title);
+          setInfoTitle(json?.i18n?.en?.title);
         } else if (!json?.i18n?.en?.title) {
-            setInfoTitle("Title can't be found in this language.");
+          setInfoTitle("Title can't be found in this language.");
         }
         if (json?.i18n?.en?.content) {
           let infoTemp = (json?.i18n?.en?.content);
           infoTemp = infoTemp.replaceAll("#", "");
           infoTemp = infoTemp.replaceAll("**", "");
-          setInfoTextContent(infoTemp);  
+          setInfoTextContent(infoTemp);
         } else if (!json?.i18n?.en?.content) {
-            let infoTemp = (json?.content);
-            infoTemp = infoTemp?.replaceAll("#", "");
-            infoTemp = infoTemp?.replaceAll("**", "");
-            setInfoTextContent("Content cannot be found in your selected language. \n \n" + infoTemp);
+          let infoTemp = (json?.content);
+          infoTemp = infoTemp?.replaceAll("#", "");
+          infoTemp = infoTemp?.replaceAll("**", "");
+          setInfoTextContent("Content cannot be found in your selected language. \n \n" + infoTemp);
         }
       } else if (language == "fi") {
         setInfoCategory("Kategoria:");
@@ -129,10 +129,10 @@ export default function EventList() {
       eventIcon = "swim";
     }
 
-    const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon}/>
+    const leftContent = props => <Avatar.Icon {...props} icon={eventIcon} color={colors.white} style={styles.cardIcon} />
     const rightContent = props => <Pressable onPress={() => setElementVisible(!elementVisible)} style={styles.drawerIconPressable}>
-      <Avatar.Icon {...props} icon={drawerIcon} size="40" style={styles.drawerIcon}/></Pressable>
-    
+      <Avatar.Icon {...props} icon={drawerIcon} size="40" style={styles.drawerIcon} /></Pressable>
+
     // This is for card icon to change upon opening details
     if (elementVisible == false) {
       drawerIcon = "arrow-up";
@@ -140,48 +140,51 @@ export default function EventList() {
       drawerIcon = "arrow-down";
     }
 
-    return(
+    return (
       <View>
-          <Card style={styles.card}>
-            <Card.Title title={infoTitle} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
+        <Card style={styles.card}>
+          <Card.Title title={infoTitle} left={leftContent} right={rightContent} titleStyle={styles.cardText} />
 
-            {/* This modal is drop down from card */}
-            {elementVisible ? (
+          {/* This modal is drop down from card */}
+          {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
               <Text style={styles.text}>{infoCategory} {json.Categories[0].title}</Text>
               <Text style={styles.text}>{infoTextHeader} {infoTextContent.length > 99 && (infoTextContent.slice(0, 99) + "...")}
                 {infoTextContent.length <= 99 && (infoTextContent)}</Text>
-              <Button title={infoButton} onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
-              <Button title={mapButton} color={colors.secondaryColor} onPress={() => navigation.navigate(directing, {item:json})}></Button>
-            </Card.Content>
-            ) : null}
-          </Card>
-
-          {/* This modal is full detail event page */}
-          {modalVisible && (
-            <Modal>
-              <View style={styles.fullDetailEventView}>
-                  <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
-                    <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon}/>
-                  </Pressable>
-                <Text style={styles.fullDetailEventHeader}>{infoTitle}</Text>
-                <View style={styles.fullDetailEventImageView}>
-                  <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }}/>
-                </View>
-                <ScrollView>
-                  <Text style={styles.fullDetailEventText}>{infoCategory} {json.Categories[0].title}</Text>
-                  {openingHours && (
-                    <Text style={styles.fullDetailEventText}>{infoHours} {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
-                  )}
-                  {address && (
-                    <Text style={styles.fullDetailEventText}>{infoAddress} {json.meta.streetAddress}</Text>
-                  )}
-                  <Text style={styles.fullDetailEventText}>{infoTextHeader} {infoTextContent}</Text>
-                </ScrollView>
-                <Bookmark item={json}/>
+              <View style={styles.cardButtonContainer}>
+                <Button title={infoButton}  onPress={() => setModalVisible(!modalVisible)} color={colors.secondaryColor}></Button>
+                <Button title={mapButton} color={colors.secondaryColor} onPress={() => navigation.navigate(directing, { item: json })}></Button>
               </View>
-            </Modal>
-          )}
+
+            </Card.Content>
+          ) : null}
+        </Card>
+
+        {/* This modal is full detail event page */}
+        {modalVisible && (
+          <Modal>
+            <View style={styles.fullDetailEventView}>
+              <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.fullDetailEventExitPressable}>
+                <Avatar.Icon icon="close" size="40" style={styles.fullDetailEventExitIcon} />
+              </Pressable>
+              <Text style={styles.fullDetailEventHeader}>{infoTitle}</Text>
+              <View style={styles.fullDetailEventImageView}>
+                <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }} />
+              </View>
+              <ScrollView>
+                <Text style={styles.fullDetailEventText}>{infoCategory} {json.Categories[0].title}</Text>
+                {openingHours && (
+                  <Text style={styles.fullDetailEventText}>{infoHours} {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
+                )}
+                {address && (
+                  <Text style={styles.fullDetailEventText}>{infoAddress} {json.meta.streetAddress}</Text>
+                )}
+                <Text style={styles.fullDetailEventText}>{infoTextHeader} {infoTextContent}</Text>
+              </ScrollView>
+              <Bookmark item={json} />
+            </View>
+          </Modal>
+        )}
       </View>
     )
   }
@@ -189,7 +192,7 @@ export default function EventList() {
   return (
     <View>
       {/* Flatlist goes through the json and make a card with a list for each event */}
-      <FlatList data={json.sort((a, b) => a.title.localeCompare(b.title))} renderItem={({ item }) => <Item json={item}/>}/>
+      <FlatList data={json.sort((a, b) => a.title.localeCompare(b.title))} renderItem={({ item }) => <Item json={item} />} />
     </View>
   )
 }

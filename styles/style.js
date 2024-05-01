@@ -476,6 +476,16 @@ const styles = StyleSheet.create({
     color: colors.white
   },
 
+  cardButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop:5,
+  },
+
+  cardButton:{
+    borderRadius: 10,
+  },
+
   cardIcon: {
     backgroundColor: colors.secondaryColor
   },
