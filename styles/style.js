@@ -311,28 +311,28 @@ const styles = StyleSheet.create({
 
     flexDirection: 'column',
     justifyContent: 'space-between', // Ensure delete icon is at the end of the row
-    alignContent: 'stretch', 
+    alignContent: 'stretch',
     width: 'auto',
-    
+
     borderBottomWidth: 1, // Add a border to separate items
     borderBottomColor: 'lightgray',
 
   },
 
   bookmarkItem: {
- 
-    
+
+
     //width: '100%', // Take up remaining space
     alignContent: 'stretch', // Align item content vertically at the center
     paddingHorizontal: 10, // Add some padding to the sides
-    
+
 
 
 
   },
   deleteIcon: {
     alignSelf: 'flex-end',
-    
+
 
     // Add some margin between the item and the delete icon
   },
@@ -348,57 +348,66 @@ const styles = StyleSheet.create({
   filterModal: {
     //position: 'absolute',
     top: Constants.statusBarHeight,
-    backgroundColor: colors.secondaryColor,
-    
-         
+    //backgroundColor: colors.secondaryColor,
+
+
   },
 
   filterMenuContainer: {
-    flex: 1,
+    flex: 0.9,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
     //backgroundColor: colors.transparent,
     //backgroundColor: 'orange',
-         
+    //zIndex:1
+
   },
 
 
   filterMenu: {
     flex: 0.6,
     flexDirection: 'column',
-    backgroundColor: colors.white,
-    justifyContent:'space-between'
-    
+    backgroundColor: colors.mainColor,
+    justifyContent: 'space-between'
+
     //padding:10,
   },
 
   filterMenuContent: {
     paddingTop: 10,
     paddingLeft: 10,
-    paddingRight:10,
+    paddingRight: 10,
     //height: '191%',
-    backgroundColor: colors.white,
-    
+    backgroundColor: colors.mainColor,
+
   },
 
-  
+
   overlayPressable: {
-    flex: 0.5,
-    //backgroundColor: '#696969a8',
-    backgroundColor: 'red',
-    zIndex: 2,
+    //flex: 0.5,
+    backgroundColor: '#696969a8',
+    //backgroundColor: colors.transparent,
+    //alignSelf: 'flex-start',
+    //zIndex: 3,
     //marginTop: '55%',
     //marginBottom: '22%',
-    //position: 'absolute',
+    position: 'absolute',
     
+    top: '60%',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    //backgroundColor: 'red',
+
+
   },
 
   filterDropDown: {
-    
+
     //backgroundColor: colors.mainColor,
     //color: colors.white,
-    marginBottom:5,
+    marginBottom: 5,
   },
 
   filterButton: {
@@ -413,14 +422,16 @@ const styles = StyleSheet.create({
   },
 
   hideMenuButton: {
-    width: 105,
-    height: 55,
-    //marginTop: -65,
-    //marginLeft: 15,
     backgroundColor: colors.mainColor,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 15,
+    color: 'white',
+    // width: 105,
+    // height: 55,
+    // //marginTop: -65,
+    // //marginLeft: 15,
+    // backgroundColor: colors.mainColor,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // borderRadius: 15,
   },
 
   clearFiltersButton: {
