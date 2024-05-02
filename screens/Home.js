@@ -28,7 +28,6 @@ export default function Home({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState(fullData); // for searching
 
-
   const { language } = useContext(LanguageContext);
   const [alertButton, setAlertButton] = useState("Ok");
   const [alertHeader, setAlertHeader] = useState("Virhe on tapahtunut");
@@ -40,7 +39,6 @@ export default function Home({ route }) {
     latitudeDelta: INITIAL_LATITUDE_DELTA,
     longitudeDelta: INITIAL_LONGITUDE_DELTA
   });
-
 
   useEffect(() => {
     if (language == "en") {
@@ -150,7 +148,7 @@ export default function Home({ route }) {
             return (
               <Marker
                 key={location.id}
-                title={location.title}
+                title={language === "en" ? "Selected marker" : "Valitsemasi kohde"}
                 coordinate={{
                   latitude: latitude,
                   longitude: longitude

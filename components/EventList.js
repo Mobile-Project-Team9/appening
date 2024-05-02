@@ -23,7 +23,8 @@ export default function EventList() {
     const address = json?.meta?.streetAddress;
 
     const { language } = useContext(LanguageContext);
-    const [infoCategory, setInfoCategory] = useState("Kategoria:");
+    const [infoCategoryHeader, setInfoCategoryHeader] = useState("Kategoria:");
+    const [infoCategoryLabel, setInfocategoryLabel] = useState("");
     const [infoHours, setInfoHours] = useState("Aukioloajat:");
     const [infoAddress, setInfoAddress] = useState("Osoite:");
     const [infoButton, setInfoButton] = useState("Lisää tietoa");
@@ -35,7 +36,61 @@ export default function EventList() {
 
     useEffect(() => {
       if (language == "en") {
-        setInfoCategory("Category:");
+        setInfoCategoryHeader("Category:");
+        
+        // Englannin kieliset kategorian nimet
+        if (eventIconPath == "Puut ja kasvit") {
+          setInfocategoryLabel("Trees and nature");
+        } else if (eventIconPath == "Taideteos") {
+          setInfocategoryLabel("Art piece");
+        } else if (eventIconPath == "Arkkitehtuuri") {
+          setInfocategoryLabel("Architecture");
+        } else if (eventIconPath == "Puisto") {
+          setInfocategoryLabel("Park");
+        } else if (eventIconPath == "Patsas") {
+          setInfocategoryLabel("Statue");
+        } else if (eventIconPath == "Nähtävyys") {
+          setInfocategoryLabel("Attraction");
+        } else if (eventIconPath == "Ravintola") {
+          setInfocategoryLabel("Restaurant");
+        } else if (eventIconPath == "Info") {
+          setInfocategoryLabel("Info");
+        } else if (eventIconPath == "Historiallinen kohde") {
+          setInfocategoryLabel("Historical place");
+        } else if (eventIconPath == "Tapahtuma") {
+          setInfocategoryLabel("Event");
+        } else if (eventIconPath == "Tulentekopaikka") {
+          setInfocategoryLabel("Fireplace");
+        } else if (eventIconPath == "Kirkko") {
+          setInfocategoryLabel("Church");
+        } else if (eventIconPath == "Kulttuuritalo") {
+          setInfocategoryLabel("Cultural center");
+        } else if (eventIconPath == "Näköalatorni") {
+          setInfocategoryLabel("Observation tower");
+        } else if (eventIconPath == "Kulttuuri") {
+          setInfocategoryLabel("Culture");
+        } else if (eventIconPath == "Galleria") {
+          setInfocategoryLabel("Gallery");
+        } else if (eventIconPath == "Virtuaalipolku") {
+          setInfocategoryLabel("Virtual path");
+        } else if (eventIconPath == "Reitti") {
+          setInfocategoryLabel("Route");
+        } else if (eventIconPath == "Roskakatos") {
+          setInfocategoryLabel("Garbage shed");
+        } else if (eventIconPath == "Retkeilyreitti") {
+          setInfocategoryLabel("Hiking trail");
+        } else if (eventIconPath == "Kuivakäymälä") {
+          setInfocategoryLabel("Outhouse");
+        } else if (eventIconPath == "Parkkipaikka") {
+          setInfocategoryLabel("Parking lot");
+        } else if (eventIconPath == "Liiteri") {
+          setInfocategoryLabel("Shed");
+        } else if (eventIconPath == "Kirjasto") {
+          setInfocategoryLabel("Lean-to");
+        } else if (eventIconPath == "Uimaranta") {
+          setInfocategoryLabel("Beach");
+        }
+
         setInfoHours("Opening hours:");
         setInfoAddress("Address:");
         setInfoButton("More info");
@@ -59,7 +114,8 @@ export default function EventList() {
           setInfoTextContent("Content cannot be found in your selected language. \n \n" + infoTemp);
         }
       } else if (language == "fi") {
-        setInfoCategory("Kategoria:");
+        setInfoCategoryHeader("Kategoria:");
+        setInfocategoryLabel(json.Categories[0].title);
         setInfoHours("Aukioloajat:");
         setInfoAddress("Osoite:");
         setInfoButton("Lisää tietoa");
@@ -148,7 +204,7 @@ export default function EventList() {
           {/* This modal is drop down from card */}
           {elementVisible ? (
             <Card.Content style={styles.cardUnder}>
-              <Text style={styles.text}>{infoCategory} {json.Categories[0].title}</Text>
+              <Text style={styles.text}>{infoCategoryHeader} {infoCategoryLabel}</Text>
               <Text style={styles.text}>{infoTextHeader} {infoTextContent.length > 99 && (infoTextContent.slice(0, 99) + "...")}
                 {infoTextContent.length <= 99 && (infoTextContent)}</Text>
               <View style={styles.cardButtonContainer}>
@@ -172,7 +228,7 @@ export default function EventList() {
                 <Image style={styles.fullDetailEventImage} source={{ uri: imagePath }} />
               </View>
               <ScrollView>
-                <Text style={styles.fullDetailEventText}>{infoCategory} {json.Categories[0].title}</Text>
+                <Text style={styles.fullDetailEventText}>{infoCategoryHeader} {infoCategoryLabel}</Text>
                 {openingHours && (
                   <Text style={styles.fullDetailEventText}>{infoHours} {json.activeTimeStart} - {json.activeTimeEnd} .</Text>
                 )}

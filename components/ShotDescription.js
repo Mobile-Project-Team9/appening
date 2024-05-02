@@ -7,13 +7,15 @@ import { LanguageContext } from '../data/Contexts';
 
 const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
     const [modalVisible, setModalVisible] = useState(false);
+    const eventIconPath = (selectedShot?.Categories[0]?.title);
     const imagePath = selectedShot?.Media?.[0]?.path;
     const openingHours = selectedShot?.activeTimeStart;
     const address = selectedShot?.meta?.streetAddress;
     const category = selectedShot?.Categories[0].title;
 
     const { language } = useContext(LanguageContext);
-    const [infoCategory, setInfoCategory] = useState("Kategoria:");
+    const [infoCategoryHeader, setInfoCategoryHeader] = useState("Kategoria:");
+    const [infoCategoryLabel, setInfocategoryLabel] = useState("");
     const [infoHours, setInfoHours] = useState("Aukioloajat:");
     const [infoAddress, setInfoAddress] = useState("Osoite:");
     const [infoButton, setInfoButton] = useState("Lisää tietoa");
@@ -23,7 +25,61 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
 
     useEffect(() => {
         if (language == "en") {
-        setInfoCategory("Category:");
+        setInfoCategoryHeader("Category:");
+
+        // Englannin kieliset kategorian nimet
+        if (eventIconPath == "Puut ja kasvit") {
+            setInfocategoryLabel("Trees and nature");
+            } else if (eventIconPath == "Taideteos") {
+            setInfocategoryLabel("Art piece");
+            } else if (eventIconPath == "Arkkitehtuuri") {
+            setInfocategoryLabel("Architecture");
+            } else if (eventIconPath == "Puisto") {
+            setInfocategoryLabel("Park");
+            } else if (eventIconPath == "Patsas") {
+            setInfocategoryLabel("Statue");
+            } else if (eventIconPath == "Nähtävyys") {
+            setInfocategoryLabel("Attraction");
+            } else if (eventIconPath == "Ravintola") {
+            setInfocategoryLabel("Restaurant");
+            } else if (eventIconPath == "Info") {
+            setInfocategoryLabel("Info");
+            } else if (eventIconPath == "Historiallinen kohde") {
+            setInfocategoryLabel("Historical place");
+            } else if (eventIconPath == "Tapahtuma") {
+            setInfocategoryLabel("Event");
+            } else if (eventIconPath == "Tulentekopaikka") {
+            setInfocategoryLabel("Fireplace");
+            } else if (eventIconPath == "Kirkko") {
+            setInfocategoryLabel("Church");
+            } else if (eventIconPath == "Kulttuuritalo") {
+            setInfocategoryLabel("Cultural center");
+            } else if (eventIconPath == "Näköalatorni") {
+            setInfocategoryLabel("Observation tower");
+            } else if (eventIconPath == "Kulttuuri") {
+            setInfocategoryLabel("Culture");
+            } else if (eventIconPath == "Galleria") {
+            setInfocategoryLabel("Gallery");
+            } else if (eventIconPath == "Virtuaalipolku") {
+            setInfocategoryLabel("Virtual path");
+            } else if (eventIconPath == "Reitti") {
+            setInfocategoryLabel("Route");
+            } else if (eventIconPath == "Roskakatos") {
+            setInfocategoryLabel("Garbage shed");
+            } else if (eventIconPath == "Retkeilyreitti") {
+            setInfocategoryLabel("Hiking trail");
+            } else if (eventIconPath == "Kuivakäymälä") {
+            setInfocategoryLabel("Outhouse");
+            } else if (eventIconPath == "Parkkipaikka") {
+            setInfocategoryLabel("Parking lot");
+            } else if (eventIconPath == "Liiteri") {
+            setInfocategoryLabel("Shed");
+            } else if (eventIconPath == "Kirjasto") {
+            setInfocategoryLabel("Lean-to");
+            } else if (eventIconPath == "Uimaranta") {
+            setInfocategoryLabel("Beach");
+            }
+
         setInfoHours("Opening hours:");
         setInfoAddress("Address:");
         setInfoButton("More info");
@@ -46,7 +102,8 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
             setInfoTextContent("Content cannot be found in your selected language. \n \n" + infoTemp);
         }
       } else if (language == "fi") {
-        setInfoCategory("Kategoria:");
+        setInfoCategoryHeader("Kategoria:");
+        setInfocategoryLabel(selectedShot?.Categories[0].title);
         setInfoHours("Aukioloajat:");
         setInfoAddress("Osoite:");
         setInfoButton("Lisää tietoa");
@@ -85,7 +142,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                     />
                 )}
                 {category && (
-                    <Text style={styles.infoText}>{infoCategory} {selectedShot?.Categories?.[0]?.title}</Text>
+                    <Text style={styles.infoText}>{infoCategoryHeader} {infoCategoryLabel}</Text>
                 )}
                 {openingHours && (
                     <Text style={styles.infoText}>{infoHours} {selectedShot?.ActiveTimeStart}</Text>
@@ -104,7 +161,7 @@ const ShotDescription = ({ visible, onRequestClose, selectedShot }) => {
                             )}
                             </View>
                             <ScrollView>
-                            <Text style={styles.fullDetailEventText}>{infoCategory} {selectedShot?.Categories[0].title}</Text>
+                            <Text style={styles.fullDetailEventText}>{infoCategoryHeader} {infoCategoryLabel}</Text>
                             {openingHours && (
                                 <Text style={styles.fullDetailEventText}>{infoHours} {selectedShot?.activeTimeStart} - {selectedShot?.activeTimeEnd} .</Text>
                             )}
