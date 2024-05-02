@@ -34,7 +34,7 @@ const HeaderUser = ({ toggleLoginModal, loginVisible, toggleRegisterModal, regis
                     }
                   }
                   closeMenu();
-                }} title="Login" />
+                }} title={language === 'fi' ? 'Kirjaudu' : 'Login'} />
                 <Menu.Item onPress={() => {
                     if (!registerVisible) {
                       toggleRegisterModal();
@@ -43,7 +43,7 @@ const HeaderUser = ({ toggleLoginModal, loginVisible, toggleRegisterModal, regis
                       }
                     }
                     closeMenu(); 
-                }} title="Register" />
+                }} title={language === 'fi' ? 'Luo tili' : 'Register'} />
                 <Divider />
 
                 

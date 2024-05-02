@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { View, SectionList, Text, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { BookmarkContext } from '../data/Contexts';
+import { BookmarkContext, LanguageContext } from '../data/Contexts';
 import Headeruser from '../components/Headeruser';
 import { IconButton } from 'react-native-paper';
 import { colors, styles } from '../styles/style';
@@ -9,6 +9,7 @@ import Item from '../components/Item';
 
 export default function User() {
   const { bookmarkList, setBookmarkList } = useContext(BookmarkContext);
+  const { language } = useContext(LanguageContext)
   const [loginVisible, setLoginVisible] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
 
@@ -22,7 +23,7 @@ export default function User() {
       await AsyncStorage.setItem('bookmarkList', JSON.stringify(newBookmarkList));
       setBookmarkList(newBookmarkList);
     } catch (error) {
-      console.error('Error updating bookmark list:', error);
+      console.error(language === 'fi' ? 'Virhe päivittäessä kirjanmerkit: ' : 'Error updating bookmark list: ', error);
     }
   };
 
@@ -35,7 +36,7 @@ export default function User() {
           setBookmarkList(JSON.parse(storedBookmarkList));
         }
       } catch (error) {
-        console.error('Error loading bookmark list:', error);
+        console.error(language === 'fi' ? 'Virhe ladattaessa kirjanmerkit: ' : 'Error loading bookmark list: ', error);
       }
     };
 
@@ -45,7 +46,7 @@ export default function User() {
   return (
     <View style={styles.containeruser}>
       <SectionList
-        sections={[{ title: 'Bookmarks', data: bookmarkList }]}
+        sections={[{ title: language === 'fi' ? 'Kirjanmerkit' :  'Bookmarks', data: bookmarkList }]}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.bookmarkContainer}>
