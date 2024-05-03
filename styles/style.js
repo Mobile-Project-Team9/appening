@@ -452,6 +452,11 @@ const styles = StyleSheet.create({
     color: colors.white
   },
 
+  filterButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
 
   // Event list card
   card: {

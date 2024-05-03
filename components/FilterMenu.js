@@ -184,9 +184,9 @@ export default function FilterMenu() {
 
 
                         <View style={styles.filterMenuContent}>
-                            <Pressable style={styles.fullDetailEventExitPressable} onPress={() => setModalVisible(!modalVisible)}>
+                            {/* <Pressable style={styles.fullDetailEventExitPressable} onPress={() => setModalVisible(!modalVisible)}>
                                 <Avatar.Icon icon="close" size="40" style={styles.hideMenuButton} />
-                            </Pressable>
+                            </Pressable> */}
                             <DropDownPicker
                                 textStyle={{ textTransform: 'capitalize' }}
                                 multiple={true}
@@ -246,12 +246,14 @@ export default function FilterMenu() {
 
 
                         </View>
-                        {/* <Pressable style={styles.hideMenuButton} onPress={() => setModalVisible(!modalVisible)}>
-                            <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Sulje valikko' : 'Close menu'}</Text>
-                        </Pressable> */}
-                        <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
-                            <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Tyhjennä valinnat' : 'Clear filters'}</Text>
-                        </Pressable>
+                        <View style={styles.filterButtonContainer}>
+                            <Pressable style={styles.clearFiltersButton} onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Sulje valikko' : 'Close menu'}</Text>
+                            </Pressable>
+                            <Pressable style={styles.clearFiltersButton} onPress={() => setSelectedFilters([])}>
+                                <Text style={styles.hideMenuButtonText}>{language === 'fi' ? 'Tyhjennä valinnat' : 'Clear filters'}</Text>
+                            </Pressable>
+                        </View>
                     </View>
 
                     <Pressable style={styles.overlayPressable} onPress={() => setModalVisible(!modalVisible)} />
